@@ -96,7 +96,6 @@ public class UserDAO implements UserDAOInterface {
         return null;
     }
 
-    // TODO placeholder implementation
     @Override
     public List<UserBean> getUsersWithFilter(Filter f) {
         Connection conn = DatabaseUtility.getConnection();
@@ -117,7 +116,7 @@ public class UserDAO implements UserDAOInterface {
                 result.add(newUserBean);
             }
         }catch (SQLException e){
-
+            e.printStackTrace();
         }finally {
             DatabaseUtility.closeConnection(conn);
         }
