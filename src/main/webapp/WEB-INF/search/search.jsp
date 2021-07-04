@@ -36,6 +36,8 @@
             <% } %>
         </div>
     </div>
+
+    <a href="/home" class="Return"> Return</a>
 </body>
 
 </html>

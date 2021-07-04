@@ -5,10 +5,17 @@ html, body{
 
 .search_container {
     display: block;
-    width: 40%;
+    width: 50%;
     margin: 0 auto;
 }
 
 .searchField{
-    width: 70%;
+    width: 50rem;
+}
+
+.return{
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding: 0.3rem;
 }
