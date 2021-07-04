@@ -8,14 +8,4 @@
   <listener>
     <listener-class>servlets.ContextListener</listener-class>
   </listener>
-
-  <servlet>
-    <servlet-name>RegisterServlet</servlet-name>
-    <servlet-class>servlets.register.RegisterServlet</servlet-class>
-  </servlet>
-  
-  <servlet-mapping>
-    <servlet-name>RegisterServlet</servlet-name>
-    <url-pattern>/register-attempt</url-pattern>
-  </servlet-mapping>
 </web-app>
