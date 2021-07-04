@@ -4,4 +4,8 @@
 
 <web-app>
   <display-name>Project Webapp</display-name>
+  
+  <listener>
+    <listener-class>servlets.ContextListener</listener-class>
+  </listener>
 </web-app>
