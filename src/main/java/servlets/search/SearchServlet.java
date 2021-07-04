@@ -26,9 +26,7 @@ public class SearchServlet extends HttpServlet {
         //}
 
         String query = getQuery(req);
-
-        UserDAOInterface userDao = (UserDAOInterface) req.getServletContext().getAttribute("");
-        
+        UserDAOInterface userDao = (UserDAOInterface) req.getServletContext().getAttribute(UserDAO.USER_DAO_ATTR);
         SearchResults results = getResults(userDao, query);
 
         req.setAttribute(RESULTS_ATTRIBUTE, results);

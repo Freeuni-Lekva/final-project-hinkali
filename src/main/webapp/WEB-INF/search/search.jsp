@@ -8,28 +8,34 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page isELIgnored="false" %>
 <% SearchResults results = (SearchResults) request.getAttribute(SearchServlet.RESULTS_ATTRIBUTE); %>
-        <html>
+<html>
+
 <head>
     <title>Search Users</title>
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/search.css">
 </head>
+
 <body>
-<form method="get">
-    <label>
-        <input type="text" name="search_field" placeholder="Search..." class="searchField">
-    </label>
-    <input type="submit" name="search_button" value="Search" class="searchBtn">
-</form>
+    <div class="search_container">
+        <form method="get">
+            <label>
+                <input type="text" name="search_field" placeholder="Search..." class="searchField">
+            </label>
+            <input type="submit" name="search_button" value="Go" class="searchBtn">
+        </form>
 
-<div class="resultList">
-    <% for (UserBean user : results.getResultList()) { %>
-        <div class="user">
-            <p><%=user.getUsername()%></p>
-            <p><%=user.getName()%></p>
-            <p><%=user.getSurname()%></p>
+        <div class="resultList">
+            <% for (UserBean user : results.getResultList()) { %>
+            <div class="user">
+                <p><%=user.getUsername()%></p>
+                <p><%=user.getName()%></p>
+                <p><%=user.getSurname()%></p>
+            </div>
+            <% } %>
         </div>
-    <% } %>
-</div>
-
+    </div>
 </body>
+
 </html>
