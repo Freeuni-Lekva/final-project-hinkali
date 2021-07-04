@@ -1,6 +1,7 @@
 package dao.interfaces;
 
 import commons.beans.UserBean;
+import java.util.List;
 
 public interface UserDAOInterface {
 
@@ -11,4 +12,6 @@ public interface UserDAOInterface {
     UserBean getUserById(int id);
 
     boolean removeUser(int id);
+
+    public List<UserBean> getUsersWithFilter(Filter f);
 }

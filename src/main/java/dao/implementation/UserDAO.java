@@ -2,9 +2,11 @@ package dao.implementation;
 
 import commons.beans.UserBean;
 import dao.DatabaseUtility;
+import dao.interfaces.Filter;
 import dao.interfaces.UserDAOInterface;
-
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserDAO implements UserDAOInterface {
 
@@ -109,5 +111,31 @@ public class UserDAO implements UserDAOInterface {
             DatabaseUtility.closeConnection(conn);
         }
         return false;
+    }
+
+    public List<UserBean> getUsersWithFilter(Filter f) {
+        Connection conn = DatabaseUtility.getConnection();
+        List<UserBean> result = new ArrayList<>();
+
+        try {
+            String statement = "SELECT * FROM users " + f.format();
+            pstmt = conn.prepareStatement(statement);
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()){
+                int userid = rs.getInt("userid");
+                String username = rs.getString("username");
+                String name = rs.getString("name");
+                String surname = rs.getString("surname");
+                //String password = rs.getString("password");
+                //Date birthday = rs.getDate("birthday");
+                UserBean newUserBean = new UserBean(userid, username, name, surname, "", null);
+                result.add(newUserBean);
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }finally {
+            DatabaseUtility.closeConnection(conn);
+        }
+        return result;
     }
 }
