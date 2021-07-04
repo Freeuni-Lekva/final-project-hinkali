@@ -13,6 +13,7 @@ public class StringFilter implements Filter {
 
     @Override
     public String format() {
-        return "'" + columnLabel + "' LIKE " + "'" + filter + "' ";
+        if (columnLabel.isEmpty() || filter.isEmpty()) return "";
+        return columnLabel + " LIKE " + "'%" + filter + "%'";
     }
 }
