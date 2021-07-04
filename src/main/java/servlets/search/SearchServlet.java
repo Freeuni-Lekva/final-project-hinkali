@@ -28,6 +28,8 @@ public class SearchServlet extends HttpServlet {
         String query = getQuery(req);
         UserDAOInterface userDao = (UserDAOInterface) req.getServletContext().getAttribute(UserDAO.USER_DAO_ATTR);
         SearchResults results = getResults(userDao, query);
+        results.addEntry(new UserBean("abcd", "aa", "bb", "jj", null));
+        results.addEntry(new UserBean("cuno", "2", "22", "jj", null));
 
         req.setAttribute(RESULTS_ATTRIBUTE, results);
         req.getRequestDispatcher("/WEB-INF/search/search.jsp").forward(req, resp);

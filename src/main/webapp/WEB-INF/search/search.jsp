@@ -18,25 +18,31 @@
 </head>
 
 <body>
-    <div class="search_container">
         <form method="get">
-            <label>
-                <input type="text" name="search_field" placeholder="Search..." class="searchField">
-            </label>
-            <input type="submit" name="search_button" value="Go" class="searchBtn">
+            <div "inputs">
+                <label>
+                    <input type="text" name="search_field" placeholder="Search..." class="searchField">
+                </label>
+                <input type="submit" name="search_button" value="Go" class="searchBtn">
+            </div>
         </form>
 
-        <div class="resultList">
+        <ul class="resultList">
             <% for (UserBean user : results.getResultList()) { %>
-            <div class="user">
-                <p><%=user.getUsername()%></p>
-                <p><%=user.getName()%></p>
-                <p><%=user.getSurname()%></p>
-            </div>
+            <li class="user">
+                <p>
+                    <strong>
+                        <%=user.getUsername()%>
+                    </strong>
+                    <hr>
+                    <i class="italics">
+                    <%=user.getName()%>
+                    <%=user.getSurname()%>
+                    </i>
+                </p>
+            </li>
             <% } %>
-        </div>
-    </div>
-
+        </ul>
     <a href="/home" class="Return"> Return</a>
 </body>
 
