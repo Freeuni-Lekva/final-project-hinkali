@@ -1,6 +1,9 @@
 package servlets.search;
 
 import commons.beans.UserBean;
+import dao.implementation.UserDAO;
+import dao.interfaces.UserDAOInterface;
+import model.SearchResults;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,19 +15,29 @@ import java.util.ArrayList;
 
 @WebServlet("/search")
 public class SearchServlet extends HttpServlet {
-    public static final String SEARCH_SERVLET_PARAMETER = "query";
+    public static final String SEARCH_SERVLET_PARAMETER = "search_field";
     public static final String RESULTS_ATTRIBUTE = "results";
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//        if (req.getSession().getAttribute(UserBean.USER_ATTR) == null){
-//            resp.sendRedirect("/");
-//            return;
-//        }
+        //if (req.getSession().getAttribute(UserBean.USER_ATTR) == null){
+        //    resp.sendRedirect("/");
+        //    return;
+        //}
+
         String query = getQuery(req);
-        // dao.getUsers(new Filter(query))
-        req.setAttribute(RESULTS_ATTRIBUTE, new SearchResults(new ArrayList<>()));
+
+        UserDAOInterface userDao = (UserDAOInterface) req.getServletContext().getAttribute("");
+        
+        SearchResults results = getResults(userDao, query);
+
+        req.setAttribute(RESULTS_ATTRIBUTE, results);
         req.getRequestDispatcher("/WEB-INF/search/search.jsp").forward(req, resp);
+    }
+
+    private SearchResults getResults(UserDAOInterface userDao, String query) {
+
+        return new SearchResults();
     }
 
     private String getQuery(HttpServletRequest req) {

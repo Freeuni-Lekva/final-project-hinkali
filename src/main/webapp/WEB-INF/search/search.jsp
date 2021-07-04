@@ -1,4 +1,4 @@
-<%@ page import="servlets.search.SearchResults" %>
+<%@ page import="model.SearchResults" %>
 <%@ page import="servlets.search.SearchServlet" %>
 <%@ page import="commons.beans.UserBean" %><%--
   Created by IntelliJ IDEA.
@@ -18,7 +18,7 @@
     <label>
         <input type="text" name="search_field" placeholder="Search..." class="searchField">
     </label>
-    <input type="button" name="search_button" value="Search" class="searchBtn">
+    <input type="submit" name="search_button" value="Search" class="searchBtn">
 </form>
 
 <div class="resultList">
@@ -28,7 +28,6 @@
             <p><%=user.getName()%></p>
             <p><%=user.getSurname()%></p>
         </div>
-
     <% } %>
 </div>
 
