@@ -6,14 +6,14 @@ import java.util.Set;
 
 public interface FriendDaoInterface {
 
-    public boolean sendFriendRequest(int senderId, int receiverId);
+     boolean sendFriendRequest(int senderId, int receiverId);
 
-    public boolean acceptFriendRequest(int senderId, int receiverId);
+     boolean acceptFriendRequest(int senderId, int receiverId);
 
-    public boolean rejectFriendRequest(int senderId, int receiverId);
+     boolean rejectFriendRequest(int senderId, int receiverId);
 
-    public boolean unfriend(int senderId, int receiverId);
+     boolean unfriend(int senderId, int receiverId);
 
-    public Set<Integer> friendIdList(int userId);
+     Set<Integer> friendIdList(int userId);
 
 }
