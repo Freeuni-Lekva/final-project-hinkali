@@ -8,6 +8,8 @@ import java.sql.*;
 
 public class UserDAO implements UserDAOInterface {
 
+    public static final String USER_DAO_ATTR = "users";
+
     private PreparedStatement pstmt;
 
     public UserDAO() {}
@@ -79,8 +81,7 @@ public class UserDAO implements UserDAOInterface {
                 String surname = rs.getString("surname");
                 String password = rs.getString("password");
                 Date birthday = rs.getDate("birthday");
-                UserBean user = new UserBean(id, username, name, surname, password, birthday);
-                return user;
+                return new UserBean(id, username, name, surname, password, birthday);
             } else
                 return null;
         } catch (SQLException e) {
