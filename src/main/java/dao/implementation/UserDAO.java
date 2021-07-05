@@ -4,8 +4,6 @@ import commons.beans.UserBean;
 import dao.DatabaseUtility;
 import dao.interfaces.Filter;
 import dao.interfaces.UserDAOInterface;
-
-import javax.xml.registry.infomodel.User;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -38,6 +36,8 @@ public class UserDAO implements UserDAOInterface {
                 user.setId(rs.getInt(1));
                 return true;
             }
+        } catch (SQLIntegrityConstraintViolationException e) {
+            return false;
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -97,12 +97,28 @@ public class UserDAO implements UserDAOInterface {
     }
 
     @Override
+    public boolean removeUser(int id) {
+        Connection conn = DatabaseUtility.getConnection();
+        try {
+            String sql = "DELETE FROM users WHERE userid = ?;";
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, id);
+            int numDeleted = pstmt.executeUpdate();
+            return numDeleted == 1;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DatabaseUtility.closeConnection(conn);
+        }
+        return false;
+    }
+
     public List<UserBean> getUsersWithFilter(Filter f) {
         Connection conn = DatabaseUtility.getConnection();
         List<UserBean> result = new ArrayList<>();
 
         try {
-            String statement = "SELECT * FROM users" + f.format();
+            String statement = "SELECT * FROM users " + f.format();
             pstmt = conn.prepareStatement(statement);
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()){
@@ -120,7 +136,6 @@ public class UserDAO implements UserDAOInterface {
         }finally {
             DatabaseUtility.closeConnection(conn);
         }
-
         return result;
     }
 }
