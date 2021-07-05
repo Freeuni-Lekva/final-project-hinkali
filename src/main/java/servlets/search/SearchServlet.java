@@ -1,8 +1,11 @@
 package servlets.search;
 
 import commons.beans.UserBean;
-import dao.implementation.NoFilter;
+import dao.implementation.filters.NoFilter;
 import dao.implementation.UserDAO;
+import dao.implementation.filters.OrFilter;
+import dao.implementation.filters.StringFilter;
+import dao.interfaces.Filter;
 import dao.interfaces.UserDAOInterface;
 import model.SearchResults;
 
@@ -14,6 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.StringTokenizer;
 
 @WebServlet("/search")
 public class SearchServlet extends HttpServlet {
@@ -39,10 +43,25 @@ public class SearchServlet extends HttpServlet {
         req.getRequestDispatcher("/WEB-INF/search/search.jsp").forward(req, resp);
     }
 
-    // TODO placeholder implementation
     private SearchResults getResults(UserDAOInterface userDao, String query) {
-        List<UserBean> users = userDao.getUsersWithFilter(new NoFilter());
+        if (query.isEmpty()) return new SearchResults();
+
+        OrFilter orFilter = new OrFilter();
+        StringTokenizer tk = new StringTokenizer(query);
+        while (tk.hasMoreTokens()){
+            orFilter.addFilter(buildFilterFromToken(tk.nextToken()));
+        }
+        System.out.println(orFilter.format());
+        List<UserBean> users = userDao.getUsersWithFilter(orFilter);
         return new SearchResults(users);
+    }
+
+    private Filter buildFilterFromToken(String nextToken) {
+        List<Filter> filterList = new ArrayList<>();
+        filterList.add(new StringFilter("username", nextToken));
+        filterList.add(new StringFilter("name", nextToken));
+        filterList.add(new StringFilter("surname", nextToken));
+        return new OrFilter(filterList);
     }
 
     private String getQuery(HttpServletRequest req) {
