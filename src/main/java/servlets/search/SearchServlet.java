@@ -32,6 +32,10 @@ public class SearchServlet extends HttpServlet {
         //}
 
         String query = getQuery(req).trim();
+        if (query.length() <= 2 && req.getParameter("search_button") != null){
+            req.getRequestDispatcher("/WEB-INF/search/search_error.html").forward(req, resp);
+            return;
+        }
         UserDAOInterface userDao = (UserDAOInterface) req.getServletContext().getAttribute(UserDAO.USER_DAO_ATTR);
         SearchResults results = getResults(userDao, query);
 
@@ -49,7 +53,9 @@ public class SearchServlet extends HttpServlet {
         OrFilter orFilter = new OrFilter();
         StringTokenizer tk = new StringTokenizer(query);
         while (tk.hasMoreTokens()){
-            orFilter.addFilter(buildFilterFromToken(tk.nextToken()));
+            String currToken = tk.nextToken();
+            if (currToken.length() <= 2) continue;
+            orFilter.addFilter(buildFilterFromToken(currToken));
         }
         System.out.println(orFilter.format());
         List<UserBean> users = userDao.getUsersWithFilter(orFilter);

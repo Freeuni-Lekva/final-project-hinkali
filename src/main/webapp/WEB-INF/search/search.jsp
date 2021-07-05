@@ -18,7 +18,7 @@
 </head>
 
 <body>
-    <div "inputs">
+    <div class="inputs">
         <form method="get">
             <label>
                 <input type="text" name="search_field" placeholder="Search..." class="searchField">
