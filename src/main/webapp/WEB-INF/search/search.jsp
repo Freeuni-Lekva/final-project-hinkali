@@ -27,12 +27,12 @@
         </form>
     </div>
 
-        <% if(!results.getResultList().isEmpty() || request.getParameter("search_button")
+    <% if(!results.getResultList().isEmpty() || request.getParameter("search_button")
             != null){ %>
-            <label class="numFound">
-                Found <%= results.getResultList().size() %> user(s)
-            </label>
-        <% } %>
+    <label class="numFound">
+        Found <%= results.getResultList().size() %> user(s)
+    </label>
+    <% } %>
 
     <ul class="resultList">
         <% for (UserBean user : results.getResultList()) { %>
