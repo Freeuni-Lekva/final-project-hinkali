@@ -11,9 +11,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.sql.Date;
 
 @WebServlet("/register-attempt")
@@ -34,7 +31,8 @@ public class RegisterServlet extends HttpServlet {
         String name = req.getParameter("name");
         String surname = req.getParameter("surname");
         String password = req.getParameter("password");
-        Date date = Date.valueOf(req.getParameter("birthday"));
+        String dateString = req.getParameter("birthday");
+        Date date = (dateString.equals("")) ? null : Date.valueOf(dateString);
         String hash = UserUtility.generateHash(password);
         UserBean user = new UserBean(username, name, surname, hash, date);
         String state = SUCCESS_STR;
