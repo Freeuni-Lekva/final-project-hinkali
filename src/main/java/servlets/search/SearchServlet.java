@@ -1,7 +1,6 @@
 package servlets.search;
 
 import commons.beans.UserBean;
-import dao.implementation.filters.NoFilter;
 import dao.implementation.UserDAO;
 import dao.implementation.filters.OrFilter;
 import dao.implementation.filters.StringFilter;
@@ -32,19 +31,23 @@ public class SearchServlet extends HttpServlet {
         //}
 
         String query = getQuery(req).trim();
-        if (query.length() <= 2 && req.getParameter("search_button") != null){
-            req.getRequestDispatcher("/WEB-INF/search/search_error.html").forward(req, resp);
-            return;
-        }
+
+        // under 3 chars
+        if (isInvalidQuery(req, resp, query)) return;
+
         UserDAOInterface userDao = (UserDAOInterface) req.getServletContext().getAttribute(UserDAO.USER_DAO_ATTR);
         SearchResults results = getResults(userDao, query);
 
-        // for quick testing
-        //results.addEntry(new UserBean("abcd", "aa", "bb", "jj", null));
-        //results.addEntry(new UserBean("cuno", "2", "22", "jj", null));
-
         req.setAttribute(RESULTS_ATTRIBUTE, results);
         req.getRequestDispatcher("/WEB-INF/search/search.jsp").forward(req, resp);
+    }
+
+    private boolean isInvalidQuery(HttpServletRequest req, HttpServletResponse resp, String query) throws ServletException, IOException {
+        if (query.length() <= 2 && req.getParameter("search_button") != null) {
+            req.getRequestDispatcher("/WEB-INF/search/search_error.html").forward(req, resp);
+            return true;
+        }
+        return false;
     }
 
     private SearchResults getResults(UserDAOInterface userDao, String query) {
@@ -52,7 +55,7 @@ public class SearchServlet extends HttpServlet {
 
         OrFilter orFilter = new OrFilter();
         StringTokenizer tk = new StringTokenizer(query);
-        while (tk.hasMoreTokens()){
+        while (tk.hasMoreTokens()) {
             String currToken = tk.nextToken();
             if (currToken.length() <= 2) continue;
             orFilter.addFilter(buildFilterFromToken(currToken));
