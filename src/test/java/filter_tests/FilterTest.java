@@ -54,7 +54,7 @@ public class FilterTest {
 
     @Test
     public void testCombinedFiltersAdvanced(){
-        String expectedA = "username LIKE '%testuser%' AND name LIKE '%testname%'";
+        String expectedA = "(username LIKE '%testuser%') AND (name LIKE '%testname%')";
         List<Filter> miscFilters = new ArrayList<>();
         miscFilters.add(new NoFilter());
         miscFilters.add(new StringFilter("username", "testuser"));
@@ -62,7 +62,7 @@ public class FilterTest {
         Filter andFilter = new AndFilter(miscFilters);
         assertEquals(expectedA, andFilter.format());
 
-        String expectedB = "surname LIKE '%testsurname%' OR random LIKE '%random%'";
+        String expectedB = "(surname LIKE '%testsurname%') OR (random LIKE '%random%')";
         List<Filter> extraFilters = new ArrayList<>();
         extraFilters.add(new NoFilter());
         extraFilters.add(new StringFilter("surname", "testsurname"));
@@ -70,7 +70,7 @@ public class FilterTest {
         Filter orFilter = new OrFilter(extraFilters);
         assertEquals(expectedB, orFilter.format());
 
-        String expectedC = expectedA + " OR " + expectedB;
+        String expectedC = "(" + expectedA + ") OR (" + expectedB + ")";
         List<Filter> combine = new ArrayList<>();
         combine.add(andFilter);
         combine.add(orFilter);

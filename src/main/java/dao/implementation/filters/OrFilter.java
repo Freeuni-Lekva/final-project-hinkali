@@ -26,7 +26,7 @@ public class OrFilter implements Filter{
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < filterList.size(); i++) {
             if (filterList.get(i).format().isEmpty()) continue;
-            sb.append(filterList.get(i).format());
+            sb.append("(").append(filterList.get(i).format()).append(")");
             if (i < filterList.size() - 1) sb.append(" OR ");
         }
 
