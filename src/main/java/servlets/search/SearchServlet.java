@@ -1,7 +1,7 @@
 package servlets.search;
 
 import commons.beans.UserBean;
-import dao.implementation.NoFilter;
+import dao.implementation.filters.NoFilter;
 import dao.implementation.UserDAO;
 import dao.interfaces.UserDAOInterface;
 import model.SearchResults;
@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet("/search")

@@ -1,4 +1,4 @@
-package dao.implementation;
+package dao.implementation.filters;
 
 import dao.interfaces.Filter;
 

@@ -1,9 +1,9 @@
 package filter_tests;
 
-import dao.implementation.AndFilter;
-import dao.implementation.NoFilter;
-import dao.implementation.OrFilter;
-import dao.implementation.StringFilter;
+import dao.implementation.filters.AndFilter;
+import dao.implementation.filters.NoFilter;
+import dao.implementation.filters.OrFilter;
+import dao.implementation.filters.StringFilter;
 import dao.interfaces.Filter;
 import org.junit.Test;
 
