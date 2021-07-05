@@ -27,7 +27,8 @@
         </form>
     </div>
 
-        <% if(!results.getResultList().isEmpty()){ %>
+        <% if(!results.getResultList().isEmpty() || request.getParameter("search_button")
+            != null){ %>
             <label class="numFound">
                 Found <%= results.getResultList().size() %> user(s)
             </label>
