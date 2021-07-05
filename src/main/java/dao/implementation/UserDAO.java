@@ -118,7 +118,9 @@ public class UserDAO implements UserDAOInterface {
         List<UserBean> result = new ArrayList<>();
 
         try {
-            String statement = "SELECT * FROM users " + f.format();
+            String query = f.format();
+            if (!query.isEmpty()) query = " WHERE " + query;
+            String statement = "SELECT * FROM users" + query;
             pstmt = conn.prepareStatement(statement);
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()){
