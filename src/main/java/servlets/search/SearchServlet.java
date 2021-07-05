@@ -57,7 +57,9 @@ public class SearchServlet extends HttpServlet {
             if (currToken.length() <= 2) continue;
             orFilter.addFilter(buildFilterFromToken(currToken));
         }
-        System.out.println(orFilter.format());
+
+        if (orFilter.format().isEmpty()) return new SearchResults();
+
         List<UserBean> users = userDao.getUsersWithFilter(orFilter);
         return new SearchResults(users);
     }
