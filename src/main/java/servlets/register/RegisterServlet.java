@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.Date;
 
-@WebServlet("/register-attempt")
+@WebServlet("/register")
 public class RegisterServlet extends HttpServlet {
 
     public static final String SUCCESS_STR = "success";
@@ -21,7 +21,7 @@ public class RegisterServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        
+        req.getRequestDispatcher("register.html").forward(req, resp);
     }
 
     @Override
