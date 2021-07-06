@@ -4,6 +4,8 @@ import commons.beans.UserBean;
 import dao.DatabaseUtility;
 import dao.interfaces.Filter;
 import dao.interfaces.UserDAOInterface;
+import model.UserUtility;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,9 +26,9 @@ public class UserDAO implements UserDAOInterface {
             String sql = "INSERT INTO users (username, name, surname, password, birthday) VALUES (?, ?, ?, ?, ?);";
             pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             pstmt.setString(1, user.getUsername());
-            pstmt.setString(2, user.getName());
-            pstmt.setString(3, user.getSurname());
-            pstmt.setString(4, user.getPassword());
+            pstmt.setString(2, UserUtility.capitalizeFirstLetter(user.getName()));
+            pstmt.setString(3, UserUtility.capitalizeFirstLetter(user.getSurname()));
+            pstmt.setString(4, UserUtility.generateHash(user.getPassword()));
             pstmt.setDate(5, user.getBirthday());
             int numInserted = pstmt.executeUpdate();
             if (numInserted == 1) {
@@ -53,7 +55,7 @@ public class UserDAO implements UserDAOInterface {
             String sql = "SELECT * FROM users WHERE username = ? AND password = ?;";
             pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, username);
-            pstmt.setString(2, password);
+            pstmt.setString(2, UserUtility.generateHash(password));
             ResultSet rs = pstmt.executeQuery();
             if (rs.next()) {
                 int id = rs.getInt("userid");
