@@ -33,8 +33,7 @@ public class RegisterServlet extends HttpServlet {
         String password = req.getParameter("password");
         String dateString = req.getParameter("birthday");
         Date date = (dateString.equals("")) ? null : Date.valueOf(dateString);
-        String hash = UserUtility.generateHash(password);
-        UserBean user = new UserBean(username, name, surname, hash, date);
+        UserBean user = new UserBean(username, name, surname, password, date);
         String state = SUCCESS_STR;
         if (userDao.addUser(user)) {
             req.getSession().setAttribute(UserBean.USER_ATTR, user.getId());
