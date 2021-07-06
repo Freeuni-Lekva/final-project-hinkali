@@ -2,7 +2,7 @@ html,
 body {
     margin: 0;
     padding: 0;
-    background-color: #222;
+    background-color: #212121;
 }
 
 .search {
@@ -18,12 +18,19 @@ body {
     border: 0 solid black;
     border-radius: .2rem;
     margin: 0 auto;
-    background-color: gainsboro;
+    background-color:#6d6d6d;
+    color: #eeeeee;
     text-indent: 0.8rem;
 }
 
 .searchField:focus{
     color: black;
+    background-color: #E1E2E1;
+}
+
+.searchField:hover{
+    color: black;
+    background-color: #E1E2E1;
 }
 
 .searchBtn {
@@ -38,7 +45,7 @@ body {
     height: 4em;
     position: fixed;
     display: flex;
-    background-color: #161616;
+    background-color: #1b1b1b;
     justify-content: center;
     box-shadow: 0 0.01em .5em -.3em grey;
 }
@@ -57,7 +64,11 @@ body {
 
     border: 0;
     border-radius: .2rem;
-    background-color: gainsboro;
+    background-color: #6d6d6d;
+}
+
+.return_link:hover{
+    background-color: #E1E2E1;
 }
 
 .return_wrapper {
@@ -85,7 +96,7 @@ body {
 .resultOutput {
     column-count: 2;
     column-gap: 2rem;
-    margin-top: 3rem;
+    margin-top: 2rem;
     width: 100%;
 }
 
@@ -110,7 +121,7 @@ body {
     text-align: left;
     align-items: center;
     justify-content: left;
-    background-color: gainsboro;
+    background-color: #E1E2E1;
 }
 
 .svg {
