@@ -18,31 +18,30 @@
 </head>
 
 <body>
+    <div "inputs">
         <form method="get">
-            <div "inputs">
-                <label>
-                    <input type="text" name="search_field" placeholder="Search..." class="searchField">
-                </label>
-                <input type="submit" name="search_button" value="Go" class="searchBtn">
-            </div>
+            <label>
+                <input type="text" name="search_field" placeholder="Search..." class="searchField">
+            </label>
+            <input type="submit" name="search_button" value="Go" class="searchBtn">
         </form>
+    </div>
 
-        <ul class="resultList">
-            <% for (UserBean user : results.getResultList()) { %>
-            <li class="user">
-                <p>
-                    <strong>
-                        <%=user.getUsername()%>
-                    </strong>
-                    <hr>
-                    <i class="italics">
-                    <%=user.getName()%>
-                    <%=user.getSurname()%>
-                    </i>
-                </p>
-            </li>
-            <% } %>
-        </ul>
+        <% if(!results.getResultList().isEmpty() || request.getParameter("search_button")
+            != null){ %>
+            <label class="numFound">
+                Found <%= results.getResultList().size() %> user(s)
+            </label>
+        <% } %>
+
+    <ul class="resultList">
+        <% for (UserBean user : results.getResultList()) { %>
+        <li class="user">
+            <label>Username: <%= user.getUsername()%>, Name: <%= user.getName() %>, Surname:
+                <%= user.getSurname() %></label>
+        </li>
+        <% } %>
+    </ul>
     <a href="/home" class="Return"> Return</a>
 </body>
 
