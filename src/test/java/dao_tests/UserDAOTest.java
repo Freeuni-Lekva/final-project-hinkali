@@ -2,7 +2,7 @@ package dao_tests;
 
 import commons.beans.UserBean;
 import dao.implementation.UserDAO;
-import dao.implementation.filters.StringFilter;
+import dao.implementation.filters.StringFilterInclusive;
 import dao.interfaces.Filter;
 import dao.interfaces.UserDAOInterface;
 import model.UserUtility;
@@ -106,7 +106,7 @@ public class UserDAOTest {
         userDao.addUser(user3);
         List<UserBean> userList = new ArrayList<>(Arrays.asList(user1, user2, user3));
 
-        Filter filter1 = new StringFilter("username", "daotest");
+        Filter filter1 = new StringFilterInclusive("username", "daotest");
         assertEquals(userList, userDao.getUsersWithFilter(filter1));
 
         userDao.removeUser(user1.getId());
