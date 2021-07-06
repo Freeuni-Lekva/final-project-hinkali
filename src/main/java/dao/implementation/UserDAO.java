@@ -2,9 +2,11 @@ package dao.implementation;
 
 import commons.beans.UserBean;
 import dao.DatabaseUtility;
+import dao.interfaces.Filter;
 import dao.interfaces.UserDAOInterface;
-
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserDAO implements UserDAOInterface {
 
@@ -34,6 +36,8 @@ public class UserDAO implements UserDAOInterface {
                 user.setId(rs.getInt(1));
                 return true;
             }
+        } catch (SQLIntegrityConstraintViolationException e) {
+            return false;
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -90,5 +94,50 @@ public class UserDAO implements UserDAOInterface {
             DatabaseUtility.closeConnection(conn);
         }
         return null;
+    }
+
+    @Override
+    public boolean removeUser(int id) {
+        Connection conn = DatabaseUtility.getConnection();
+        try {
+            String sql = "DELETE FROM users WHERE userid = ?;";
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, id);
+            int numDeleted = pstmt.executeUpdate();
+            return numDeleted == 1;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DatabaseUtility.closeConnection(conn);
+        }
+        return false;
+    }
+
+    public List<UserBean> getUsersWithFilter(Filter f) {
+        Connection conn = DatabaseUtility.getConnection();
+        List<UserBean> result = new ArrayList<>();
+
+        try {
+            String query = f.format();
+            if (!query.isEmpty()) query = " WHERE " + query;
+            String statement = "SELECT * FROM users" + query;
+            pstmt = conn.prepareStatement(statement);
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()){
+                int userid = rs.getInt("userid");
+                String username = rs.getString("username");
+                String name = rs.getString("name");
+                String surname = rs.getString("surname");
+                //String password = rs.getString("password");
+                //Date birthday = rs.getDate("birthday");
+                UserBean newUserBean = new UserBean(userid, username, name, surname, "", null);
+                result.add(newUserBean);
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }finally {
+            DatabaseUtility.closeConnection(conn);
+        }
+        return result;
     }
 }
