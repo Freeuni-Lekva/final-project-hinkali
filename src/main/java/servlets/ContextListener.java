@@ -1,6 +1,8 @@
 package servlets;
 
+import dao.implementation.FriendDao;
 import dao.implementation.UserDAO;
+import dao.interfaces.FriendDaoInterface;
 import dao.interfaces.UserDAOInterface;
 
 import javax.servlet.ServletContextEvent;
@@ -12,6 +14,9 @@ public class ContextListener implements ServletContextListener {
     public void contextInitialized(ServletContextEvent sce) {
         UserDAOInterface userDao = new UserDAO();
         sce.getServletContext().setAttribute(UserDAO.USER_DAO_ATTR, userDao);
+
+        FriendDaoInterface friendDao = new FriendDao();
+        sce.getServletContext().setAttribute(FriendDao.FRIEND_DAO_ATTR, friendDao);
     }
 
     @Override
