@@ -29,14 +29,14 @@
     <h3> Surname: <%= user.getSurname() %>  </h3>
     <h3> Birthday: <%= user.getBirthday() %>  </h3>
 
-    <% if(check.equals("0")) { %>
+    <% if(check.equals(ProfileServlet.GO_TO_OWN)) { %>
         <h3> Password:  <%=user.getPassword()%>  </h3>
         <form method="post">
             <input name="id" type="hidden" value="<%= user.getId() %>"/>
             <input type="submit" value="Edit"/>
         </form>
 
-       <% }else if (check.equals("1")){ %>
+       <% }else if (check.equals(ProfileServlet.GO_TO_FRIEND)){ %>
         <form method="post">
         <input name="id" type="hidden" value="<%= request.getParameter("id") %>"/>
         <input type="submit" value="unfriend"/>
