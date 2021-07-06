@@ -25,6 +25,9 @@
             <button type="submit" name="search_button" class="searchBtn">Search</button>
         </form>
 
+        <% if(! (Boolean) request.getAttribute("isFirstRequest")){ %>
+        <% if(request.getAttribute("isInvalidQuery") == null){ %>
+
         <label class="info">
             Found <%= results.getResultList().size() %> user(s)
         </label>
@@ -52,6 +55,14 @@
             </ul>
         </div>
     </div>
+
+    <% } else {%>
+    <label class="info">
+        Please enter at least <%= SearchServlet.MIN_QUERY_LENGTH %> characters
+    </label>
+    <% }%>
+    <% } %>
+
     <div class="return_wrapper">
         <a href="/home" class="return">
             <img src="${pageContext.request.contextPath}/resources/back.svg" class="home_svg">

@@ -22,21 +22,53 @@ import java.util.StringTokenizer;
 public class SearchServlet extends HttpServlet {
     public static final String SEARCH_SERVLET_PARAMETER = "search_field";
     public static final String RESULTS_ATTRIBUTE = "results";
+    public static final int MIN_QUERY_LENGTH = 3;
+    private static final boolean TESTING = true;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        //if (req.getSession().getAttribute(UserBean.USER_ATTR) == null){
-        //    resp.sendRedirect("/");
-        //    return;
-        //}
+        if(!TESTING)
+            if (handleUnauthorizedCase(req, resp)) return;
+        if (handleFirstRequestCase(req, resp)) return;
 
         String query = getQuery(req).trim();
+        if (isInvalidQuery(query)){
+            req.setAttribute("isInvalidQuery", true);
+            req.getRequestDispatcher("/WEB-INF/search/search.jsp").forward(req, resp);
+            return;
+        }
 
         UserDAOInterface userDao = (UserDAOInterface) req.getServletContext().getAttribute(UserDAO.USER_DAO_ATTR);
         SearchResults results = getResults(userDao, query);
 
         req.setAttribute(RESULTS_ATTRIBUTE, results);
         req.getRequestDispatcher("/WEB-INF/search/search.jsp").forward(req, resp);
+    }
+
+    private boolean handleUnauthorizedCase(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        if (req.getSession().getAttribute(UserBean.USER_ATTR) == null){
+            resp.sendRedirect("/");
+            return true;
+        }
+        return false;
+    }
+
+    private boolean isInvalidQuery(String query) {
+        return query.length() < MIN_QUERY_LENGTH;
+    }
+
+    private boolean handleFirstRequestCase(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        if(isFirstRequest(req)){
+            req.setAttribute("isFirstRequest", true);
+            req.getRequestDispatcher("/WEB-INF/search/search.jsp").forward(req, resp);
+            return true;
+        }
+        req.setAttribute("isFirstRequest", false);
+        return false;
+    }
+
+    private boolean isFirstRequest(HttpServletRequest req) {
+        return req.getParameterMap().isEmpty();
     }
 
     private SearchResults getResults(UserDAOInterface userDao, String query) {
