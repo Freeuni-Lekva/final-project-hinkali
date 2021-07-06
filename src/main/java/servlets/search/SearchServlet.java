@@ -40,9 +40,18 @@ public class SearchServlet extends HttpServlet {
 
         UserDAOInterface userDao = (UserDAOInterface) req.getServletContext().getAttribute(UserDAO.USER_DAO_ATTR);
         SearchResults results = getResults(userDao, query);
+        addTestUsers(results);
 
         req.setAttribute(RESULTS_ATTRIBUTE, results);
         req.getRequestDispatcher("/WEB-INF/search/search.jsp").forward(req, resp);
+    }
+
+    private void addTestUsers(SearchResults results) {
+        if (TESTING){
+            for (int i = 0; i < 20; i++) {
+                results.addEntry(new UserBean("user" + i, "name" + i * i+4, "surname", "password", null));
+            }
+        }
     }
 
     private boolean handleUnauthorizedCase(HttpServletRequest req, HttpServletResponse resp) throws IOException {
