@@ -3,7 +3,7 @@ package servlets.search;
 import commons.beans.UserBean;
 import dao.implementation.UserDAO;
 import dao.implementation.filters.OrFilter;
-import dao.implementation.filters.StringFilter;
+import dao.implementation.filters.StringFilterInclusive;
 import dao.interfaces.Filter;
 import dao.interfaces.UserDAOInterface;
 import model.SearchResults;
@@ -99,9 +99,9 @@ public class SearchServlet extends HttpServlet {
 
     private Filter buildFilterFromToken(String nextToken) {
         List<Filter> filterList = new ArrayList<>();
-        filterList.add(new StringFilter("username", nextToken));
-        filterList.add(new StringFilter("name", nextToken));
-        filterList.add(new StringFilter("surname", nextToken));
+        filterList.add(new StringFilterInclusive("username", nextToken));
+        filterList.add(new StringFilterInclusive("name", nextToken));
+        filterList.add(new StringFilterInclusive("surname", nextToken));
         return new OrFilter(filterList);
     }
 
