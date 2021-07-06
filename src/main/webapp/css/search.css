@@ -1,0 +1,114 @@
+.search {
+    width: 100%;
+    position: relative;
+    display: flex;
+}
+
+.searchField {
+    width: 100%;
+    border: 2px solid lightgrey;
+    padding: 5px;
+    height: 3em;
+    border-radius: 5px;
+    outline: none;
+    margin: 0 auto;
+}
+
+.searchBtn {
+    width: 10%;
+    text-align: center;
+    cursor: pointer;
+}
+
+.wrap {
+    padding-top: 1.5em;
+    width: 50%;
+    height: 100%;
+    margin: 0 auto;
+}
+
+.info {
+    text-align: center;
+}
+
+.resultOutput {
+    column-count: 2;
+    column-gap: 2rem;
+    margin-top: 3rem;
+    width: 100%;
+}
+
+.resultList {
+    list-style: none;
+    text-align: center;
+    margin: auto;
+    padding: 0px;
+}
+
+.user {
+    border: 1px solid lightgrey;
+    display: inline-flex;
+    list-style-type: none;
+    width: 97%;
+    height: 4rem;
+    margin: 0px;
+    margin-top: 0.5rem;
+    padding: 0px;
+    padding-left: 0.7rem;
+    text-align: left;
+    align-items: center;
+    justify-content: left;
+}
+
+.svg {
+    width: 1.8rem;
+    height: 1.8rem;
+}
+
+.user_link_wrapper {
+    text-decoration: none;
+    color: black;
+    margin-left: 0.9em;
+}
+
+.user_link_wrapper:hover {
+    cursor: pointer;
+}
+
+.name_label {
+    color: rgb(122, 120, 120);
+}
+
+.user::after {
+    size: 4rem;
+}
+
+.user:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.return_wrapper {
+    position: fixed;
+    display: inline-block;
+    left: 1.8em;
+    top: 2.2em;
+}
+
+.return {
+    color: black;
+    text-decoration: none;
+    padding: 0;
+    align-items: center;
+    text-align: left;
+    justify-content: left;
+}
+
+.home_label {
+    margin-left: 0.3rem;
+}
+
+.home_svg {
+    height: 1em;
+    width: 1em;
+}

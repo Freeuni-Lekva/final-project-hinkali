@@ -18,31 +18,49 @@
 </head>
 
 <body>
-    <div class="inputs">
-        <form method="get">
-            <label>
-                <input type="text" name="search_field" placeholder="Search..." class="searchField">
-            </label>
-            <input type="submit" name="search_button" value="Go" class="searchBtn">
+    <div class="wrap">
+        <form method="get" class="search">
+            <input type="text" name="search_field" placeholder="Who are you looking for?" class="searchField"
+                maxlength="32">
+            <button type="submit" name="search_button" class="searchBtn">Search</button>
         </form>
+
+        <label class="info">
+            Found <%= results.getResultList().size() %> user(s)
+        </label>
+
+        <div class="resultOutput">
+            <% if(!results.getResultList().isEmpty() || request.getParameter("search_button")
+                != null){ %>
+            <% } %>
+
+            <ul class="resultList">
+                <% for (UserBean user : results.getResultList()) { %>
+                <li class="user">
+                    <img src="${pageContext.request.contextPath}/resources/user-svgrepo-com.svg" class="svg">
+                    <a href="/home" class="user_link_wrapper">
+                        <label class="username_label">
+                            <%= user.getUsername()%>
+                        </label>
+                        <br>
+                        <label class="name_label">
+                            <%= user.getName() %> <%= user.getSurname() %>
+                        </label>
+                    </a>
+                </li>
+                <% } %>
+            </ul>
+        </div>
     </div>
+    <div class="return_wrapper">
+        <a href="/home" class="return">
+            <img src="${pageContext.request.contextPath}/resources/back.svg" class="home_svg">
+            <label class="home_label">
+                Home
+            </label>
+        </a>
 
-    <% if(!results.getResultList().isEmpty() || request.getParameter("search_button")
-            != null){ %>
-    <label class="numFound">
-        Found <%= results.getResultList().size() %> user(s)
-    </label>
-    <% } %>
-
-    <ul class="resultList">
-        <% for (UserBean user : results.getResultList()) { %>
-        <li class="user">
-            <label>Username: <%= user.getUsername()%>, Name: <%= user.getName() %>, Surname:
-                <%= user.getSurname() %></label>
-        </li>
-        <% } %>
-    </ul>
-    <a href="/home" class="Return"> Return</a>
+    </div>
 </body>
 
 </html>

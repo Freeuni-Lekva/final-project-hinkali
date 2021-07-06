@@ -32,22 +32,11 @@ public class SearchServlet extends HttpServlet {
 
         String query = getQuery(req).trim();
 
-        // under 3 chars
-        if (isInvalidQuery(req, resp, query)) return;
-
         UserDAOInterface userDao = (UserDAOInterface) req.getServletContext().getAttribute(UserDAO.USER_DAO_ATTR);
         SearchResults results = getResults(userDao, query);
 
         req.setAttribute(RESULTS_ATTRIBUTE, results);
         req.getRequestDispatcher("/WEB-INF/search/search.jsp").forward(req, resp);
-    }
-
-    private boolean isInvalidQuery(HttpServletRequest req, HttpServletResponse resp, String query) throws ServletException, IOException {
-        if (query.length() <= 2 && req.getParameter("search_button") != null) {
-            req.getRequestDispatcher("/WEB-INF/search/search_error.html").forward(req, resp);
-            return true;
-        }
-        return false;
     }
 
     private SearchResults getResults(UserDAOInterface userDao, String query) {
