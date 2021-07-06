@@ -37,7 +37,7 @@ public class RegisterServlet extends HttpServlet {
         UserBean user = new UserBean(username, name, surname, hash, date);
         String state = SUCCESS_STR;
         if (userDao.addUser(user)) {
-            req.getSession().setAttribute(UserBean.USER_ATTR, user);
+            req.getSession().setAttribute(UserBean.USER_ATTR, user.getId());
         } else {
             state = FAILED_STR;
         }
