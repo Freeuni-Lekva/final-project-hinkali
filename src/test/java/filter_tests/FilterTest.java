@@ -3,7 +3,7 @@ package filter_tests;
 import dao.implementation.filters.AndFilter;
 import dao.implementation.filters.NoFilter;
 import dao.implementation.filters.OrFilter;
-import dao.implementation.filters.StringFilter;
+import dao.implementation.filters.StringFilterInclusive;
 import dao.interfaces.Filter;
 import org.junit.Test;
 
@@ -31,8 +31,8 @@ public class FilterTest {
         assertEquals("", orFilter.format());
 
         List<Filter> blankFilters = new ArrayList<>(noFilters);
-        blankFilters.add(new StringFilter("columnName", ""));
-        blankFilters.add(new StringFilter("", "filter"));
+        blankFilters.add(new StringFilterInclusive("columnName", ""));
+        blankFilters.add(new StringFilterInclusive("", "filter"));
         Filter andFilter2 = new AndFilter(blankFilters);
         assertEquals("", andFilter2.format());
         Filter orFilter2 = new OrFilter(blankFilters);
@@ -42,13 +42,13 @@ public class FilterTest {
     @Test
     public void testStringFilter1(){
         String expected = "username LIKE '%test%'";
-        Filter stringFilter = new StringFilter("username", "test");
+        Filter stringFilter = new StringFilterInclusive("username", "test");
         assertEquals(expected, stringFilter.format());
     }
 
     @Test
     public void testStringFilter2(){
-        Filter stringFilter = new StringFilter("username", "");
+        Filter stringFilter = new StringFilterInclusive("username", "");
         assertEquals("", stringFilter.format());
     }
 
@@ -57,16 +57,16 @@ public class FilterTest {
         String expectedA = "(username LIKE '%testuser%') AND (name LIKE '%testname%')";
         List<Filter> miscFilters = new ArrayList<>();
         miscFilters.add(new NoFilter());
-        miscFilters.add(new StringFilter("username", "testuser"));
-        miscFilters.add(new StringFilter("name", "testname"));
+        miscFilters.add(new StringFilterInclusive("username", "testuser"));
+        miscFilters.add(new StringFilterInclusive("name", "testname"));
         Filter andFilter = new AndFilter(miscFilters);
         assertEquals(expectedA, andFilter.format());
 
         String expectedB = "(surname LIKE '%testsurname%') OR (random LIKE '%random%')";
         List<Filter> extraFilters = new ArrayList<>();
         extraFilters.add(new NoFilter());
-        extraFilters.add(new StringFilter("surname", "testsurname"));
-        extraFilters.add(new StringFilter("random", "random"));
+        extraFilters.add(new StringFilterInclusive("surname", "testsurname"));
+        extraFilters.add(new StringFilterInclusive("random", "random"));
         Filter orFilter = new OrFilter(extraFilters);
         assertEquals(expectedB, orFilter.format());
 
