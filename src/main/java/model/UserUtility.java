@@ -26,4 +26,13 @@ public class UserUtility {
         }
         return builder.toString();
     }
+
+    public static String capitalizeFirstLetter(String s) {
+        if (s.isEmpty())
+            return s;
+        else if (s.length() == 1)
+            return s.toUpperCase();
+        else
+            return s.substring(0, 1).toUpperCase() + s.substring(1).toLowerCase();
+    }
 }
