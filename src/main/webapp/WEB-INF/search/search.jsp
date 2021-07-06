@@ -14,16 +14,23 @@
 
 <head>
     <title>Search Users</title>
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/search.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/search.css?bandaid=1">
 </head>
 
 <body>
-    <div class="wrap">
+    <div class="topbar">
         <form method="get" class="search">
             <input type="text" name="search_field" placeholder="Who are you looking for?" class="searchField"
                 maxlength="32">
             <button type="submit" name="search_button" class="searchBtn">Search</button>
         </form>
+    </div>
+    <button href="/home" class="return_link">
+        <div class="return_wrapper">
+            <img src="${pageContext.request.contextPath}/resources/back.svg" class="home_svg">
+        </div>
+    </button>
+    <div class="wrap">
 
         <% if(! (Boolean) request.getAttribute("isFirstRequest")){ %>
         <% if(request.getAttribute("isInvalidQuery") == null){ %>
@@ -33,9 +40,6 @@
         </label>
 
         <div class="resultOutput">
-            <% if(!results.getResultList().isEmpty() || request.getParameter("search_button")
-                != null){ %>
-            <% } %>
 
             <ul class="resultList">
                 <% for (UserBean user : results.getResultList()) { %>
@@ -51,27 +55,17 @@
                         </label>
                     </a>
                 </li>
-                <% } %>
             </ul>
         </div>
+        <% } else {%>
+        <label class="info">
+            Please enter at least <%= SearchServlet.MIN_QUERY_LENGTH %> characters
+        </label>
+        <% }%>
     </div>
 
-    <% } else {%>
-    <label class="info">
-        Please enter at least <%= SearchServlet.MIN_QUERY_LENGTH %> characters
-    </label>
-    <% }%>
     <% } %>
 
-    <div class="return_wrapper">
-        <a href="/home" class="return">
-            <img src="${pageContext.request.contextPath}/resources/back.svg" class="home_svg">
-            <label class="home_label">
-                Home
-            </label>
-        </a>
-
-    </div>
 </body>
 
 </html>
