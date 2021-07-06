@@ -16,9 +16,10 @@ $(function(){
             if (resp === "success") {
                 window.location = "index.jsp";
             } else {
-                let msg = $("#error");
-                msg.html("Registration failed, username already in usage");
+                let msg = $("#info");
+                msg.html("Registration failed, username already in usage!");
                 msg.css('color', 'red');
+                $("#userField").css('border-color', 'red');
             }
         });
     });
