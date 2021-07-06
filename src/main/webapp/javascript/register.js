@@ -6,7 +6,7 @@ $(function(){
         let surnameL = $("#surnameField").val();
         let passwordL = $("#passwordField").val();
         let dateL = $("#dateField").val();
-        $.post("register-attempt", {
+        $.post("register", {
             username: usernameL,
             name: nameL,
             surname: surnameL,
