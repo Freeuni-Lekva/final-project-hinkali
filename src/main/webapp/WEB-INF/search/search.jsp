@@ -25,10 +25,8 @@
             <button type="submit" name="search_button" class="searchBtn">Search</button>
         </form>
     </div>
-    <button href="/home" class="return_link">
-        <div class="return_wrapper">
-            <img src="${pageContext.request.contextPath}/resources/back.svg" class="home_svg">
-        </div>
+    <button class="return_link">
+            <img src="${pageContext.request.contextPath}/resources/back.svg" class="home_svg" alt="error">
     </button>
     <div class="wrap">
 
@@ -41,10 +39,14 @@
 
         <div class="resultOutput">
 
+            <% if(!results.getResultList().isEmpty() || request.getParameter("search_button")
+                    != null){ %>
+            <% } %>
+
             <ul class="resultList">
                 <% for (UserBean user : results.getResultList()) { %>
                 <li class="user">
-                    <img src="${pageContext.request.contextPath}/resources/user-svgrepo-com.svg" class="svg">
+                    <img src="${pageContext.request.contextPath}/resources/user-svgrepo-com.svg" class="svg" alt="error">
                     <a href="/home" class="user_link_wrapper">
                         <label class="username_label">
                             <%= user.getUsername()%>
@@ -56,6 +58,7 @@
                     </a>
                 </li>
             </ul>
+            <% } %>
         </div>
         <% } else {%>
         <label class="info">
