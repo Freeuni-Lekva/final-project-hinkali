@@ -30,4 +30,8 @@ create table pending (
 );
 
 INSERT INTO users (username, name, surname, password)
-VALUES ('test_username', 'test_name', 'test_surname', 'password');
+VALUES ('test_username', 'Test_name', 'Test_surname', 'password'),
+		('multiTest', 'TestName2', 'TestSurname2', 'password'),
+        ('looooooooongUseeeername', 'LoooooooooooooongName', 'Wolfeschlegelsteinhausenbergerdorff',
+        'password');
+-- long values for display testing
