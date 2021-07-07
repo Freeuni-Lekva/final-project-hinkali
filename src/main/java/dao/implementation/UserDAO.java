@@ -16,11 +16,6 @@ public class UserDAO implements UserDAOInterface {
     public static final String USER_DAO_ATTR = "users";
 
     private PreparedStatement pstmt;
-    private StatsDaoInterface statsDao;
-
-    public UserDAO(StatsDaoInterface statsDao) {
-        this.statsDao = statsDao;
-    }
 
     @Override
     public boolean addUser(UserBean user) {
@@ -41,7 +36,6 @@ public class UserDAO implements UserDAOInterface {
                 int userid = rs.getInt(1);
                 user.setId(userid);
                 result = true;
-                statsDao.addStatsForNewUser(userid, conn);
             }
         } catch (SQLIntegrityConstraintViolationException e) {
             return false;
@@ -111,7 +105,6 @@ public class UserDAO implements UserDAOInterface {
             String sql = "DELETE FROM users WHERE userid = ?;";
             pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, id);
-            statsDao.removeStats(id, conn);
             int numDeleted = pstmt.executeUpdate();
             if (numDeleted == 1){
                 result = true;

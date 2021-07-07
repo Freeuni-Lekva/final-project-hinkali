@@ -12,13 +12,20 @@ public class StatsDao implements StatsDaoInterface {
     public static final String STATS_DAO_ATTR = "stats";
 
     @Override
-    public void addStatsForNewUser(int userId, Connection conn) {
+    public void addStatsForNewUser(int userId) {
+        Connection conn = DatabaseUtility.getConnection();
         String update = "INSERT INTO stats (userId) VALUES (?)";
         try {
             PreparedStatement preparedStatement = conn.prepareStatement(update, Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setInt(1, userId);
             int numInserted = preparedStatement.executeUpdate();
         } catch (SQLException ignored) {}
+        finally {
+            try {
+                conn.close();
+            } catch (SQLException ignored) {
+            }
+        }
     }
 
     @Override
@@ -95,12 +102,22 @@ public class StatsDao implements StatsDaoInterface {
     }
 
     @Override
-    public void removeStats(int userId, Connection conn) {
+    public boolean removeStats(int userId) {
+        Connection conn = DatabaseUtility.getConnection();
+        boolean result = true;
         String remove = "DELETE FROM stats WHERE userid = (?)";
         try {
             PreparedStatement preparedStatement = conn.prepareStatement(remove);
             preparedStatement.setInt(1, userId);
             int rowsDeleted = preparedStatement.executeUpdate();
+            if (rowsDeleted == 0) result = false;
         } catch (SQLException ignored) {}
+        finally {
+            try {
+                conn.close();
+            } catch (SQLException ignored) {}
+        }
+
+        return result;
     }
 }

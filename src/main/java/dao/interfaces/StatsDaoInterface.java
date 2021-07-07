@@ -6,7 +6,7 @@ import java.sql.Connection;
 import java.util.List;
 
 public interface StatsDaoInterface {
-    void addStatsForNewUser(int userId, Connection conn);
+    void addStatsForNewUser(int userId);
 
     boolean setStats(StatsBean stats);
 
@@ -14,5 +14,5 @@ public interface StatsDaoInterface {
 
     List<StatsBean> getStatsAll();
 
-    void removeStats(int userId, Connection conn);
+    boolean removeStats(int userId);
 }

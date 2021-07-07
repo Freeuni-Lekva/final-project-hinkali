@@ -19,7 +19,6 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class UserDAOTest {
-    private static StatsDaoInterface statsDao;
     private static UserDAOInterface userDao;
     private static UserBean user1;
     private static UserBean user2;
@@ -27,8 +26,7 @@ public class UserDAOTest {
 
     @BeforeClass
     public static void setUp() throws Exception {
-        statsDao = new StatsDao();
-        userDao = new UserDAO(statsDao);
+        userDao = new UserDAO();
         Date date = new Date(1);
         user1 = new UserBean("daotest1", "daotest1", "daotest1", UserUtility.generateHash("daotest1"), date);
         user2 = new UserBean("daotest2", "daotest2", "daotest2", UserUtility.generateHash("daotest2"), date);
