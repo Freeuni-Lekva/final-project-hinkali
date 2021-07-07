@@ -3,6 +3,7 @@ package dao.implementation;
 import commons.beans.UserBean;
 import dao.DatabaseUtility;
 import dao.interfaces.Filter;
+import dao.interfaces.StatsDaoInterface;
 import dao.interfaces.UserDAOInterface;
 import model.UserUtility;
 
@@ -15,8 +16,6 @@ public class UserDAO implements UserDAOInterface {
     public static final String USER_DAO_ATTR = "users";
 
     private PreparedStatement pstmt;
-
-    public UserDAO() {}
 
     @Override
     public boolean addUser(UserBean user) {
@@ -34,7 +33,8 @@ public class UserDAO implements UserDAOInterface {
             if (numInserted == 1) {
                 ResultSet rs = pstmt.getGeneratedKeys();
                 rs.next();
-                user.setId(rs.getInt(1));
+                int userid = rs.getInt(1);
+                user.setId(userid);
                 result = true;
             }
         } catch (SQLIntegrityConstraintViolationException e) {
@@ -106,8 +106,9 @@ public class UserDAO implements UserDAOInterface {
             pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, id);
             int numDeleted = pstmt.executeUpdate();
-            if (numDeleted == 1)
+            if (numDeleted == 1){
                 result = true;
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {

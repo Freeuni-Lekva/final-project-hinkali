@@ -1,12 +1,14 @@
 package dao_tests;
 
 import commons.beans.UserBean;
+import dao.implementation.StatsDao;
 import dao.implementation.UserDAO;
 import dao.implementation.filters.StringFilterInclusive;
 import dao.interfaces.Filter;
+import dao.interfaces.StatsDaoInterface;
 import dao.interfaces.UserDAOInterface;
 import model.UserUtility;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.sql.Date;
@@ -17,14 +19,14 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class UserDAOTest {
+    private static UserDAOInterface userDao;
+    private static UserBean user1;
+    private static UserBean user2;
+    private static UserBean user3;
 
-    private final UserDAOInterface userDao = new UserDAO();
-    private UserBean user1;
-    private UserBean user2;
-    private UserBean user3;
-
-    @Before
-    public void setUp() throws Exception {
+    @BeforeClass
+    public static void setUp() throws Exception {
+        userDao = new UserDAO();
         Date date = new Date(1);
         user1 = new UserBean("daotest1", "daotest1", "daotest1", UserUtility.generateHash("daotest1"), date);
         user2 = new UserBean("daotest2", "daotest2", "daotest2", UserUtility.generateHash("daotest2"), date);
