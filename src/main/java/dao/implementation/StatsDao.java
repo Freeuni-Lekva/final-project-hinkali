@@ -18,7 +18,6 @@ public class StatsDao implements StatsDaoInterface {
             PreparedStatement preparedStatement = conn.prepareStatement(update, Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setInt(1, userId);
             int numInserted = preparedStatement.executeUpdate();
-            assert numInserted == 1;
         } catch (SQLException ignored) {}
     }
 
@@ -102,7 +101,6 @@ public class StatsDao implements StatsDaoInterface {
             PreparedStatement preparedStatement = conn.prepareStatement(remove, Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setInt(1, userId);
             int rowsDeleted = preparedStatement.executeUpdate();
-            assert rowsDeleted == 1;
         } catch (SQLException ignored) {}
     }
 }

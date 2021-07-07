@@ -111,10 +111,10 @@ public class UserDAO implements UserDAOInterface {
             String sql = "DELETE FROM users WHERE userid = ?;";
             pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, id);
+            statsDao.removeStats(id, conn);
             int numDeleted = pstmt.executeUpdate();
             if (numDeleted == 1){
                 result = true;
-                statsDao.removeStats(id, conn);
             }
         } catch (SQLException e) {
             e.printStackTrace();

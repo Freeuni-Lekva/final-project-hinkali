@@ -1,15 +1,15 @@
 package dao_tests;
 
 import commons.beans.UserBean;
+import dao.implementation.StatsDao;
 import dao.implementation.UserDAO;
 import dao.implementation.filters.StringFilterInclusive;
 import dao.interfaces.Filter;
 import dao.interfaces.StatsDaoInterface;
 import dao.interfaces.UserDAOInterface;
 import model.UserUtility;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
-import org.mockito.Mock;
 
 import java.sql.Date;
 import java.util.ArrayList;
@@ -19,21 +19,20 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class UserDAOTest {
+    private static StatsDaoInterface statsDao;
+    private static UserDAOInterface userDao;
+    private static UserBean user1;
+    private static UserBean user2;
+    private static UserBean user3;
 
-    @Mock
-    StatsDaoInterface statsDao;
-
-    private final UserDAOInterface userDao = new UserDAO(statsDao);
-    private UserBean user1;
-    private UserBean user2;
-    private UserBean user3;
-
-    @Before
-    public void setUp() throws Exception {
+    @BeforeClass
+    public static void setUp() throws Exception {
+        statsDao = new StatsDao();
+        userDao = new UserDAO(statsDao);
         Date date = new Date(1);
-        user1 = new UserBean("daotest1", "daotest1", "daotest1", UserUtility.generateHash("daotest1"), date);
-        user2 = new UserBean("daotest2", "daotest2", "daotest2", UserUtility.generateHash("daotest2"), date);
-        user3 = new UserBean("daotest3", "daotest3", "daotest3", UserUtility.generateHash("daotest3"), date);
+        user1 = new UserBean("daotest1", "Daotest1", "Daotest1", UserUtility.generateHash("daotest1"), date);
+        user2 = new UserBean("daotest2", "Daotest2", "Daotest2", UserUtility.generateHash("daotest2"), date);
+        user3 = new UserBean("daotest3", "Daotest3", "Daotest3", UserUtility.generateHash("daotest3"), date);
     }
 
     @Test
