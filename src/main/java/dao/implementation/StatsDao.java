@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class StatsDao implements StatsDaoInterface {
+    public static final String STATS_DAO_ATTR = "stats";
+
     @Override
     public void addStatsForNewUser(int userId, Connection conn) {
         String update = "INSERT INTO stats (userId) VALUES (?)";

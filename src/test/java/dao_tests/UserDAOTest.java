@@ -4,10 +4,12 @@ import commons.beans.UserBean;
 import dao.implementation.UserDAO;
 import dao.implementation.filters.StringFilterInclusive;
 import dao.interfaces.Filter;
+import dao.interfaces.StatsDaoInterface;
 import dao.interfaces.UserDAOInterface;
 import model.UserUtility;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mock;
 
 import java.sql.Date;
 import java.util.ArrayList;
@@ -18,7 +20,10 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class UserDAOTest {
 
-    private final UserDAOInterface userDao = new UserDAO();
+    @Mock
+    StatsDaoInterface statsDao;
+
+    private final UserDAOInterface userDao = new UserDAO(statsDao);
     private UserBean user1;
     private UserBean user2;
     private UserBean user3;
