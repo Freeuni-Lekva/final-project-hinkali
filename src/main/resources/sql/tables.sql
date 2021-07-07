@@ -1,6 +1,7 @@
 USE occultexpress;
 
 DROP TABLE IF EXISTS friends;
+DROP TABLE IF EXISTS stats;
 DROP TABLE IF EXISTS pending;
 DROP TABLE IF EXISTS users;
 
@@ -11,6 +12,15 @@ CREATE TABLE users (
     surname CHAR(64),
     password CHAR(64) NOT NULL,
     birthday DATE
+);
+
+CREATE TABLE stats(
+    userid INT NOT NULL,
+    games_played INT DEFAULT 0,
+    wins INT DEFAULT 0,
+    draws INT DEFAULT 0,
+    losses INT DEFAULT 0,
+    FOREIGN KEY (userid) REFERENCES users(userid)
 );
 
 Create table friends (
