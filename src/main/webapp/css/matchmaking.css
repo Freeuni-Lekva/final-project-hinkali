@@ -1,16 +1,17 @@
 html, body {
     margin: 0;
     padding: 0;
-    background-color: #212121;
+    background-color: #282828;
 }
 
 .topbar {
     width: 100%;
     height: 4em;
     position: fixed;
-    background-color: #1b1b1b;
+    background-color: #1d2021;
+    border-bottom: 0.2em solid #504945;
+    border-radius: .2rem;
     justify-content: left;
-    box-shadow: 0 0.01em .5em -.3em grey;
 }
 
 .return_link {
@@ -21,13 +22,13 @@ html, body {
     width: 2.6em;
     aspect-ratio: 1/1;
 
-    border: 0;
+    border: 0.2em solid #504945;
     border-radius: .2rem;
-    background-color: #6d6d6d;
+    background-color: #928374;
 }
 
 .return_link:hover{
-    background-color: #E1E2E1;
+    background-color: #ebdbb2;
     transition: 200ms;
 }
 
@@ -50,13 +51,20 @@ html, body {
     align-content: center;
     align-items: center;
     margin: 40vh auto 0;
-    color: black;
-    background-color: #cfcfcf;
     padding: 1.3em;
-    border: 0;
+    color: #49413a;
+
+    background-color: #928374;
+    border: 0.2em solid #504945;
     border-radius: .2rem;
+}
+
+.status:hover{
+    background-color: #ebdbb2;
+    transition: 200ms;
 }
 
 .timeElapsed{
     margin-top: 1em;
+    transition: 100ms;
 }

@@ -1,7 +1,7 @@
 html, body {
     margin: 0;
     padding: 0;
-    background-color: #212121;
+    background-color: #282828;
 }
 
 .search {
@@ -17,20 +17,19 @@ html, body {
     border: 0;
     border-radius: .2rem;
     margin: 0 auto;
-    background-color:#6d6d6d;
-    color: #eeeeee;
+    background-color:#928374;
     text-indent: 0.8rem;
 }
 
 .searchField:focus{
     color: black;
-    background-color: #E1E2E1;
+    background-color: #ebdbb2;
     transition: 200ms;
 }
 
 .searchField:hover{
     color: black;
-    background-color: #E1E2E1;
+    background-color: #ebdbb2;
     transition: 200ms;
 }
 
@@ -46,9 +45,10 @@ html, body {
     height: 4em;
     position: fixed;
     display: flex;
-    background-color: #1b1b1b;
+    background-color: #1d2021;
+    border-bottom: 0.2em solid #504945;
+    border-radius: .2rem;
     justify-content: center;
-    box-shadow: 0 0.01em .5em -.3em grey;
 }
 
 .return_link {
@@ -63,13 +63,13 @@ html, body {
     cursor: pointer;
     aspect-ratio: 1/1;
 
-    border: 0;
+    border: 0.2em solid #504945;
     border-radius: .2rem;
-    background-color: #6d6d6d;
+    background-color: #928374;
 }
 
 .return_link:hover{
-    background-color: #E1E2E1;
+    background-color: #ebdbb2;
     transition: 200ms;
 }
 
@@ -92,7 +92,7 @@ html, body {
 
 .info {
     text-align: center;
-    color:#eeeeee ;
+    color: #cc241d;
 }
 
 .resultOutput {
@@ -110,19 +110,19 @@ html, body {
 }
 
 .user {
-    border: 0;
-    border-radius: .2rem;
     display: inline-flex;
     list-style-type: none;
     width: 97%;
     height: 4rem;
-    margin: 0;
-    margin-top: 0.5rem;
+    margin: 0.5rem 0 0;
     padding: 0 0 0 0.7rem;
     text-align: left;
     align-items: center;
     justify-content: left;
-    background-color: #cfcfcf;
+    color: #49413a;
+    background-color: #928374;
+    border: 0.2em solid #504945;
+    border-radius: .2rem;
 }
 
 .svg {
@@ -137,11 +137,11 @@ html, body {
 }
 
 .name_label {
-    color: rgb(122, 120, 120);
+    color: #49413a;
 }
 
 .user:hover {
     text-decoration: underline;
-    background-color: #eeeeee;
+    background-color: #ebdbb2;
     transition: 200ms;
 }
