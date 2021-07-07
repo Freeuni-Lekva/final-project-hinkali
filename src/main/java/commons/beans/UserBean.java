@@ -68,4 +68,13 @@ public class UserBean {
                 ", birthday=" + birthday +
                 '}';
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o instanceof UserBean) {
+            UserBean toCompare = (UserBean) o;
+            return this.id == toCompare.id;
+        }
+        return false;
+    }
 }
