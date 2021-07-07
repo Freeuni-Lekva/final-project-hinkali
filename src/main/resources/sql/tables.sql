@@ -33,11 +33,11 @@ Create table friends (
 );
 
 create table pending (
-    user_id INT NOT NULL,
-    friend_id INT NOT NULL,
-    FOREIGN KEY (user_id) REFERENCES users(userid),
-    FOREIGN KEY (friend_id) REFERENCES users(userid),
-    PRIMARY KEY (user_id, friend_id)
+    sender_id INT NOT NULL,
+    receiver_id INT NOT NULL,
+    FOREIGN KEY (sender_id) REFERENCES users(userid),
+    FOREIGN KEY (receiver_id) REFERENCES users(userid),
+    PRIMARY KEY (sender_id, receiver_id)
 );
 
 INSERT INTO users (username, name, surname, password)
