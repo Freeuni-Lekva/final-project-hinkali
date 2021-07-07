@@ -11,6 +11,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page isELIgnored="false" %>
 
 <%
     UserDAOInterface userDao = (UserDAOInterface) request.getServletContext().getAttribute(UserDAO.USER_DAO_ATTR);
@@ -21,45 +22,52 @@
 <html>
 <head>
     <title> <%=user.getUsername()%> </title>
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/profile.css">
 </head>
 <body>
 
-    <h1> <%= user.getUsername()%></h1>
-    <h3> Name: <%= user.getName() %>  </h3>
-    <h3> Surname: <%= user.getSurname() %>  </h3>
-    <h3> Birthday: <%= user.getBirthday() %>  </h3>
+    <div class = "all">
+        <div class = "user">
+            <h2> Username: <%= user.getUsername()%> </h2>
+            <h3> Name: <%= user.getName() %>  </h3>
+            <h3> Surname: <%= user.getSurname() %>  </h3>
+            <h3> Birthday: <%= user.getBirthday() %>  </h3>
 
-    <% if(check.equals(ProfileServlet.GO_TO_OWN)) { %>
-        <h3> Password:  <%=user.getPassword()%>  </h3>
-        <form method="post">
-            <input name="id" type="hidden" value="<%= user.getId() %>"/>
-            <input type="submit" value="Edit"/>
-        </form>
+             <% if(check.equals(ProfileServlet.GO_TO_OWN)) { %>
+             <h3> Password:  <%=user.getPassword()%>  </h3>
+            <form method="post">
+                 <input name="id" type="hidden" value="<%= user.getId() %>"/>
+                <input type="submit" value="Edit"/>
+            </form>
 
-       <% }else if (check.equals(ProfileServlet.GO_TO_FRIEND)){ %>
-        <form method="post">
-        <input name="id" type="hidden" value="<%= request.getParameter("id") %>"/>
-        <input type="submit" value="unfriend"/>
-    </form>
-        <%}else{%>
-    <form method="post">
-        <input name="id" type="hidden" value="<%= request.getParameter("id") %>"/>
-        <input type="submit" value="add friend"/>
-    </form>
-       <% }%>
+            <% }else if (check.equals(ProfileServlet.GO_TO_FRIEND)){ %>
+            <form method="post">
+                <input name="id" type="hidden" value="<%= request.getParameter("id") %>"/>
+                <input type="submit" value="unfriend"/>
+            </form>
+            <%}else{%>
+            <form method="post">
+                <input name="id" type="hidden" value="<%= request.getParameter("id") %>"/>
+                <input type="submit" value="add friend"/>
+            </form>
+            <% }%>
+        </div>
 
-    <p>Friends:</p>
+        <div class = "friends">
+            <h3>Friends:</h3>
 
-    <ul>
-        <%
+            <ul>
+            <%
             FriendDaoInterface friends = (FriendDaoInterface) request.getServletContext().getAttribute(FriendDao.FRIEND_DAO_ATTR);
             String url = "/profile";
             int mainUser = (Integer)request.getSession().getAttribute(UserBean.USER_ATTR);
             for(int id:  friends.friendIdList(user.getId()))
                 if(mainUser!=id)
                 out.println("<li> <a href=" + url + "?id=" + id + ">" + userDao.getUserById(id).getUsername() + "</a> </li>");
-        %>
-    </ul>
+            %>
+            </ul>
+        </div>
+    </div>
 
 </body>
 </html>
