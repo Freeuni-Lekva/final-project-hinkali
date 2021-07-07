@@ -9,7 +9,6 @@ function redirectHome(){
     window.location.replace("/home")
 }
 
-
 window.onload = function (){
     document.getElementById("returnBtnId").addEventListener("click", redirectHome);
 };

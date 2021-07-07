@@ -14,7 +14,7 @@ html, body {
 .searchField {
     width: 100%;
     outline: none;
-    border: 0 solid black;
+    border: 0;
     border-radius: .2rem;
     margin: 0 auto;
     background-color:#6d6d6d;
