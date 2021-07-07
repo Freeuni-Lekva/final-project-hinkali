@@ -12,8 +12,14 @@ public interface FriendDaoInterface {
 
      boolean rejectFriendRequest(int senderId, int receiverId);
 
-     boolean unfriend(int senderId, int receiverId);
+     boolean unfriend(int userId, int friendId);
 
      Set<Integer> friendIdList(int userId);
+
+     Set<Integer> pendingList(int userId);
+
+     boolean isFriend(int currUserId, int userToCheck);
+
+     boolean isPendingFriend(int currUserId, int userToCheck);
 
 }
