@@ -20,6 +20,7 @@ CREATE TABLE stats(
     wins INT DEFAULT 0,
     draws INT DEFAULT 0,
     losses INT DEFAULT 0,
+    points INT DEFAULT 0,
     FOREIGN KEY (userid) REFERENCES users(userid)
 );
 
