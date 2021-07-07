@@ -27,7 +27,7 @@ public class StatsDao implements StatsDaoInterface {
         Connection conn = DatabaseUtility.getConnection();
         String update = "UPDATE stats SET games_played = (?), wins = (?), draws = (?), losses = (?), points = (?) WHERE userid = (?)";
         try {
-            PreparedStatement preparedStatement = conn.prepareStatement(update, Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement preparedStatement = conn.prepareStatement(update);
             preparedStatement.setInt(1, stats.getGamesPlayed());
             preparedStatement.setInt(2, stats.getWins());
             preparedStatement.setInt(3, stats.getDraws());
@@ -98,7 +98,7 @@ public class StatsDao implements StatsDaoInterface {
     public void removeStats(int userId, Connection conn) {
         String remove = "DELETE FROM stats WHERE userid = (?)";
         try {
-            PreparedStatement preparedStatement = conn.prepareStatement(remove, Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement preparedStatement = conn.prepareStatement(remove);
             preparedStatement.setInt(1, userId);
             int rowsDeleted = preparedStatement.executeUpdate();
         } catch (SQLException ignored) {}
