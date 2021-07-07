@@ -1,5 +1,4 @@
-html,
-body {
+html, body {
     margin: 0;
     padding: 0;
     background-color: #212121;
@@ -119,8 +118,7 @@ body {
     height: 4rem;
     margin: 0;
     margin-top: 0.5rem;
-    padding: 0;
-    padding-left: 0.7rem;
+    padding: 0 0 0 0.7rem;
     text-align: left;
     align-items: center;
     justify-content: left;
