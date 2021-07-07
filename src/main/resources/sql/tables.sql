@@ -46,3 +46,5 @@ VALUES ('test_username', 'Test_name', 'Test_surname', 'password'),
         ('looooooooongUseeeername', 'LoooooooooooooongName', 'Wolfeschlegelsteinhausenbergerdorff',
         'password');
 -- long values for display testing
+
+INSERT INTO stats (userid) VALUES (1), (2), (3);
