@@ -30,9 +30,9 @@ public class UserDAOTest {
         statsDao = new StatsDao();
         userDao = new UserDAO(statsDao);
         Date date = new Date(1);
-        user1 = new UserBean("daotest1", "Daotest1", "Daotest1", UserUtility.generateHash("daotest1"), date);
-        user2 = new UserBean("daotest2", "Daotest2", "Daotest2", UserUtility.generateHash("daotest2"), date);
-        user3 = new UserBean("daotest3", "Daotest3", "Daotest3", UserUtility.generateHash("daotest3"), date);
+        user1 = new UserBean("daotest1", "daotest1", "daotest1", UserUtility.generateHash("daotest1"), date);
+        user2 = new UserBean("daotest2", "daotest2", "daotest2", UserUtility.generateHash("daotest2"), date);
+        user3 = new UserBean("daotest3", "daotest3", "daotest3", UserUtility.generateHash("daotest3"), date);
     }
 
     @Test
