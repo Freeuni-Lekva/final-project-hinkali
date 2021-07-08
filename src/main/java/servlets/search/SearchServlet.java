@@ -7,6 +7,7 @@ import dao.implementation.filters.StringFilterInclusive;
 import dao.interfaces.Filter;
 import dao.interfaces.UserDAOInterface;
 import model.SearchResults;
+import servlets.ContextListener;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -23,11 +24,10 @@ public class SearchServlet extends HttpServlet {
     public static final String SEARCH_SERVLET_PARAMETER = "search_field";
     public static final String RESULTS_ATTRIBUTE = "results";
     public static final int MIN_QUERY_LENGTH = 3;
-    private static final boolean TESTING = true;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        if(!TESTING)
+        if(!ContextListener.TESTING)
             if (handleUnauthorizedCase(req, resp)) return;
         if (handleFirstRequestCase(req, resp)) return;
 
@@ -47,14 +47,14 @@ public class SearchServlet extends HttpServlet {
     }
 
     private void addTestUsers(SearchResults results) {
-        if (TESTING){
+        if (ContextListener.TESTING){
             for (int i = 0; i < 20; i++) {
                 results.addEntry(new UserBean("user" + i, "name" + i * i+4, "surname", "password", null));
             }
         }
     }
 
-    private boolean handleUnauthorizedCase(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+    public static boolean handleUnauthorizedCase(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         if (req.getSession().getAttribute(UserBean.USER_ATTR) == null){
             resp.sendRedirect("/");
             return true;

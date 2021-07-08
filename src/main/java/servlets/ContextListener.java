@@ -9,6 +9,7 @@ import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
 public class ContextListener implements ServletContextListener {
+    public static final boolean TESTING = true;
 
     @Override
     public void contextInitialized(ServletContextEvent sce) {
