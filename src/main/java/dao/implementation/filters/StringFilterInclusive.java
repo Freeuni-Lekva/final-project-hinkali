@@ -2,10 +2,10 @@ package dao.implementation.filters;
 
 import dao.interfaces.Filter;
 
-public class StringFilter implements Filter {
+public class StringFilterInclusive implements Filter {
     private final String columnLabel, filter;
 
-    public StringFilter(String columnLabel, String filter){
+    public StringFilterInclusive(String columnLabel, String filter){
         this.columnLabel = columnLabel;
         this.filter = filter;
     }

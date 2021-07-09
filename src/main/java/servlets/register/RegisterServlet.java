@@ -11,12 +11,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.sql.Date;
 
-@WebServlet("/register-attempt")
+@WebServlet("/register")
 public class RegisterServlet extends HttpServlet {
 
     public static final String SUCCESS_STR = "success";
@@ -24,7 +21,7 @@ public class RegisterServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        
+        req.getRequestDispatcher("register.html").forward(req, resp);
     }
 
     @Override
@@ -34,12 +31,12 @@ public class RegisterServlet extends HttpServlet {
         String name = req.getParameter("name");
         String surname = req.getParameter("surname");
         String password = req.getParameter("password");
-        Date date = Date.valueOf(req.getParameter("birthday"));
-        String hash = UserUtility.generateHash(password);
-        UserBean user = new UserBean(username, name, surname, hash, date);
+        String dateString = req.getParameter("birthday");
+        Date date = (dateString.equals("")) ? null : Date.valueOf(dateString);
+        UserBean user = new UserBean(username, name, surname, password, date);
         String state = SUCCESS_STR;
         if (userDao.addUser(user)) {
-            req.getSession().setAttribute(UserBean.USER_ATTR, user);
+            req.getSession().setAttribute(UserBean.USER_ATTR, user.getId());
         } else {
             state = FAILED_STR;
         }

@@ -1,6 +1,7 @@
 USE occultexpress;
 
 DROP TABLE IF EXISTS friends;
+DROP TABLE IF EXISTS stats;
 DROP TABLE IF EXISTS pending;
 DROP TABLE IF EXISTS users;
 
@@ -11,6 +12,16 @@ CREATE TABLE users (
     surname CHAR(64),
     password CHAR(64) NOT NULL,
     birthday DATE
+);
+
+CREATE TABLE stats(
+    userid INT NOT NULL,
+    games_played INT DEFAULT 0,
+    wins INT DEFAULT 0,
+    draws INT DEFAULT 0,
+    losses INT DEFAULT 0,
+    points INT DEFAULT 0,
+    FOREIGN KEY (userid) REFERENCES users(userid)
 );
 
 Create table friends (
@@ -30,4 +41,10 @@ create table pending (
 );
 
 INSERT INTO users (username, name, surname, password)
-VALUES ('test_username', 'test_name', 'test_surname', 'password');
+VALUES ('test_username', 'Test_name', 'Test_surname', 'password'),
+		('multiTest', 'TestName2', 'TestSurname2', 'password'),
+        ('looooooooongUseeeername', 'LoooooooooooooongName', 'Wolfeschlegelsteinhausenbergerdorff',
+        'password');
+-- long values for display testing
+
+INSERT INTO stats (userid) VALUES (1), (2), (3);
