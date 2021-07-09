@@ -28,9 +28,9 @@ public class UserDAOTest {
     public static void setUp() throws Exception {
         userDao = new UserDAO();
         Date date = new Date(1);
-        user1 = new UserBean("daotest1", "daotest1", "daotest1", UserUtility.generateHash("daotest1"), date);
-        user2 = new UserBean("daotest2", "daotest2", "daotest2", UserUtility.generateHash("daotest2"), date);
-        user3 = new UserBean("daotest3", "daotest3", "daotest3", UserUtility.generateHash("daotest3"), date);
+        user1 = new UserBean("daotest1", "daotest1", "daotest1", "daotest1", date);
+        user2 = new UserBean("daotest2", "daotest2", "daotest2", "daotest2", date);
+        user3 = new UserBean("daotest3", "daotest3", "daotest3", "daotest3", date);
     }
 
     @Test
@@ -110,6 +110,30 @@ public class UserDAOTest {
 
         Filter filter1 = new StringFilterInclusive("username", "daotest");
         assertEquals(userList, userDao.getUsersWithFilter(filter1));
+
+        userDao.removeUser(user1.getId());
+        userDao.removeUser(user2.getId());
+        userDao.removeUser(user3.getId());
+    }
+
+    @Test
+    public void testChangeUser() {
+        userDao.addUser(user1);
+        userDao.addUser(user2);
+        userDao.addUser(user3);
+
+        UserBean changedUser = new UserBean(user1.getId(), "newusername123", "", "", "newpassword123", user1.getBirthday());
+        assertTrue(userDao.changeUser(changedUser));
+
+        changedUser.setName("varsqen");
+        assertTrue(userDao.changeUser(changedUser));
+
+        changedUser.setUsername(user2.getUsername());
+        assertFalse(userDao.changeUser(changedUser));
+
+        changedUser.setPassword(UserUtility.generateHash(""));
+        changedUser.setUsername("newusername123");
+        assertTrue(userDao.changeUser(changedUser));
 
         userDao.removeUser(user1.getId());
         userDao.removeUser(user2.getId());
