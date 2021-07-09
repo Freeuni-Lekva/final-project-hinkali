@@ -56,6 +56,9 @@ public class UserWrapperDao implements UserWrapperInterface {
         return userDao.getUsersWithFilter(f);
     }
 
+    @Override
+    public boolean changeUser(UserBean user) { return userDao.changeUser(user); }
+
     @Deprecated
     public void addStatsForNewUser(int userId) {
     }
