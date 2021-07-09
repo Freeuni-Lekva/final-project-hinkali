@@ -1,12 +1,8 @@
 package servlets;
 
 import dao.implementation.FriendDao;
-import dao.implementation.StatsDao;
-import dao.implementation.UserDAO;
 import dao.implementation.UserWrapperDao;
 import dao.interfaces.FriendDaoInterface;
-import dao.interfaces.StatsDaoInterface;
-import dao.interfaces.UserDAOInterface;
 import dao.interfaces.UserWrapperInterface;
 
 import javax.servlet.ServletContextEvent;
