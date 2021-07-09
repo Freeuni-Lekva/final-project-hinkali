@@ -13,5 +13,7 @@ public interface UserDAOInterface {
 
     boolean removeUser(int id);
 
-    public List<UserBean> getUsersWithFilter(Filter f);
+    List<UserBean> getUsersWithFilter(Filter f);
+
+    boolean changeUser(UserBean user);
 }
