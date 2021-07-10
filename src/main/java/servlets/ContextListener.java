@@ -21,6 +21,7 @@ public class ContextListener implements ServletContextListener {
         UserWrapperInterface userWrapperDao = new UserWrapperDao();
         sce.getServletContext().setAttribute(UserWrapperDao.USER_WRAPPER_ATTR, userWrapperDao);
 
+
         FriendDaoInterface friendDao = new FriendDao();
         sce.getServletContext().setAttribute(FriendDao.FRIEND_DAO_ATTR, friendDao);
     }
