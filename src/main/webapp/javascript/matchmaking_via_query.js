@@ -17,7 +17,16 @@ window.onload = function (){
 // temporary non-socket implementation
 function sendJoinRequest(){
     fetch("/test_matchmaking", {
-        method: "POST"
-    }).then(r => r.json()).then(r => console.log(r));
+        method: "POST",
+        body: "JOIN"
+    }).then(r => r.json()).then(r => {
+        console.log("here");
+        if (r.hasOwnProperty('gameId')){
+            console.log("here");
+            window.location.replace("/play?gameId=" + r.gameId);
+        }
+    }).then(r => console.log(r));
 }
+
+setInterval(sendJoinRequest, 3000);
 

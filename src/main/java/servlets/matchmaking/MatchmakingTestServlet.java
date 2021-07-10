@@ -36,6 +36,12 @@ public class MatchmakingTestServlet extends HttpServlet {
         BasicMatchmakingQueue queue = (BasicMatchmakingQueue) req.getServletContext().getAttribute(BasicMatchmakingQueue.MATCHMAKING_ATTR);
         String processed = queue.processMatchmakingRequestById((Integer) req.getSession().getAttribute(UserBean.USER_ATTR));
         String jsonResponse = "{ \"response\": \"" + processed + "\"}";
+
+        try{
+            int gameId = Integer.parseInt(processed);
+            jsonResponse = "{ \"response\": \"success\",\n \"gameId\": " + gameId + "}";
+        }catch (NumberFormatException ignored){}
+
         resp.setStatus(200);
         resp.getWriter().println(jsonResponse);
     }

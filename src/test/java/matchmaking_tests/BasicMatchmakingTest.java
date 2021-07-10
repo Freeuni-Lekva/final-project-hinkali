@@ -41,7 +41,7 @@ public class BasicMatchmakingTest {
         assertEquals(BasicMatchmakingQueue.ADDED_TO_QUEUE, queue.processMatchmakingRequestById(0));
         assertEquals(BasicMatchmakingQueue.ADDED_TO_QUEUE, queue.processMatchmakingRequestById(1));
         assertEquals(BasicMatchmakingQueue.WAITING, queue.processMatchmakingRequestById(0));
-        assertEquals(BasicMatchmakingQueue.GAME_ID_PREFIX + (queue.getGame_id_count() - 1), queue.processMatchmakingRequestById(0));
-        assertEquals(BasicMatchmakingQueue.GAME_ID_PREFIX + (queue.getGame_id_count() - 1), queue.processMatchmakingRequestById(1));
+        assertEquals("" + (queue.getGame_id_count() - 1), queue.processMatchmakingRequestById(0));
+        assertEquals("" + (queue.getGame_id_count() - 1), queue.processMatchmakingRequestById(1));
     }
 }
