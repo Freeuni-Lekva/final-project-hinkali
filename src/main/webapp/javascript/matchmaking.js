@@ -13,3 +13,11 @@ function redirectHome(){
 window.onload = function (){
     document.getElementById("returnBtnId").addEventListener("click", redirectHome);
 };
+
+// temporary non-socket implementation
+function sendJoinRequest(){
+    fetch("/test_matchmaking", {
+        method: "POST"
+    }).then(r => r.json()).then(r => console.log(r));
+}
+
