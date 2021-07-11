@@ -1,0 +1,71 @@
+body {
+    background-color: #232323;
+}
+
+.registration_label {
+    margin-bottom: 15px;
+    color: #ffffff;
+}
+
+.form_container{
+    border: 5px solid #808080;
+    border-radius: 10px;
+    width: 330px;
+    padding: 2px;
+    margin: 120px auto;
+    background-image: linear-gradient(to bottom right, #323232, #5e5d5d);
+    color: #ffffff;
+    text-align: center;
+}
+
+.fields {
+    float: left;
+    text-align: right;
+}
+
+input {
+    width: 60%;
+    padding: 5px 6px;
+    border: 1px solid #d7d7d7;
+    border-radius: 8px;
+    background-color: #bbbbbb;
+    color: #242424;
+    margin: 7px auto;
+}
+
+input:hover{
+    background-color: #f8f8f8;
+    transition: 200ms;
+}
+
+.updatebtn {
+    background-color: #2d952d;
+    color: white;
+    font-weight: bold;
+    padding: 10px 10px;
+    margin-bottom: 5px;
+    margin-left: auto;
+    border: none;
+    cursor: pointer;
+    width: 50%;
+    border-radius: 8px;
+}
+
+.updatebtn:hover {
+    background-color: #05b400;
+    transition: 200ms;
+}
+
+.date_label {
+    margin-top: 3px;
+    text-align: center;
+}
+
+::placeholder {
+    color: #787878;
+}
+
+.date {
+    margin-top: 0;
+    margin-bottom: 0;
+}
