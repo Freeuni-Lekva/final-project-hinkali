@@ -1,0 +1,114 @@
+html,
+
+body {
+    background-color: #181818;
+}
+
+h1 {
+    color: #bfbfbf;
+    text-align: center;
+}
+h2, h3 {
+    color:#bfbfbf;
+}
+ul {
+    margin-top: -7px;
+    list-style-type: none;
+    color: #bfbfbf;
+}
+li {
+    padding: 5px;
+}
+
+a:hover{
+    color: #555;
+}
+a:link {
+    text-decoration: none;
+}
+a:link, a:visited {
+    background-color: #4B0082;
+    color:  #bfbfbf;
+    padding: 14px 25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+}
+a:hover, a:active {
+    background-color: #9370DB;
+}
+
+.all{
+    display: flex;
+    justify-content: space-around;
+}
+.user {
+    margin-top: 10%;
+    position: relative;
+    display: flex;
+    width: 30%;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #3a3b3c;
+    background-clip: border-box;
+    border: 0 solid rgba(0,0,0,.125);
+    border-radius: .25rem;
+    box-shadow: 0 1px 3px 0 rgba(0,0,0,.1), 0 1px 2px 0 rgba(0,0,0,.06);
+    padding: 1rem;
+}
+.unfriend {
+    width: 30%;
+    background-color: red;
+    box-sizing: border-box;
+    border: 3px solid #181818;
+    border-radius: 4px;
+}
+.unfriend:hover{
+    border: 3px solid darkred;
+}
+.add{
+    width: 30%;
+    background-color:green;
+    box-sizing: border-box;
+    border: 3px solid #181818;
+    border-radius: 4px;
+}
+
+.add:hover{
+    border: 3px solid darkgreen;
+}
+.edit {
+    width: 30%;
+    background-color:#bfbfbf;
+    box-sizing: border-box;
+    border: 3px solid #181818;
+    border-radius: 4px;
+}
+.edit:hover {
+    border: 3px solid #555;
+}
+
+.friends{
+    margin-top: 10%;
+    position: relative;
+    display: flex;
+    overflow-y:scroll;
+    height:200px;
+    width: 30%;
+    border: 0 solid rgba(0,0,0,.125);
+    border-radius: .25rem;
+    box-shadow: 0 1px 3px 0 rgba(0,0,0,.1), 0 1px 2px 0 rgba(0,0,0,.06);
+    padding: 1rem;
+    background-color: #3a3b3c;
+    background-clip: border-box;
+    flex-direction: column;
+
+}
+
+.add.input[type="submit"]{
+    backdrop-color: white;
+}
+
+
+
