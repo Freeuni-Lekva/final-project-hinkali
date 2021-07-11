@@ -10,9 +10,8 @@ body {
 .form_container{
     border: 5px solid #808080;
     border-radius: 10px;
-    width: 23%;
-    height: 30%;
-    margin: 120px 37.5%;
+    width: 330px;
+    margin: 120px auto;
     padding: 2px;
     background-image: linear-gradient(to bottom right, #323232, #5e5d5d);
     text-align: center;
@@ -40,7 +39,7 @@ input:hover{
     color: white;
     font-weight: bold;
     padding: 10px 10px;
-    margin: 1px 25%;
+    margin: 1px auto;
     border: none;
     cursor: pointer;
     width: 50%;
