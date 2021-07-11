@@ -131,11 +131,11 @@ public class UserDAOTest {
         changedUser.setUsername(user2.getUsername());
         assertFalse(userDao.changeUser(changedUser));
 
-        changedUser.setPassword(UserUtility.generateHash(""));
         changedUser.setUsername("newusername123");
+        changedUser.setPassword("coolpassword");
         assertTrue(userDao.changeUser(changedUser));
 
-        userDao.removeUser(user1.getId());
+//        userDao.removeUser(user1.getId());
         userDao.removeUser(user2.getId());
         userDao.removeUser(user3.getId());
     }
