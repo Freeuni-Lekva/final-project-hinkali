@@ -72,7 +72,9 @@ public class MatchmakingQueue implements IQueue<Integer>{
     private Integer getPair(List<Integer> users, Integer originalId) {
         for (Integer userId :
                 users) {
-            if (!userId.equals(originalId)) return userId;
+            if (!userId.equals(originalId) && !pairs.containsKey(userId)){
+                return userId;
+            }
         }
 
         return -1;
