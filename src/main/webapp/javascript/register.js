@@ -1,5 +1,5 @@
 $(function(){
-    $("#form").on("submit", function (event) {
+    $("#register_form").on("submit", function (event) {
         event.preventDefault();
         let usernameL = $("#userField").val();
         let nameL = $("#nameField").val();

@@ -16,11 +16,11 @@
     <div class="form_container">
       <h1 class="registration_label">Registration</h1>
       <p id="info" style="font-style: italic">Fields containing '*' are required</p>
-      <form id="form" name="register_form">
+      <form id="register_form" name="register_form">
           <div class="fields">
-            <input placeholder="*Username" type="text" id="userField" class="user_field" name="username" pattern="[A-Za-z0-9]{3,20}"
+            <input placeholder="*Username" type="text" id="userField" class="user_field" name="username" required pattern="[A-Za-z0-9]{3,20}"
               title="Username must only contain lowercase and/or uppercase letters and numbers, length 3-20"><br><br>
-            <input class="password_field" type="password" id="passwordField" name="password" placeholder="*Password" pattern=".{5,60}"
+            <input class="password_field" type="password" id="passwordField" name="password" placeholder="*Password" required pattern=".{5,60}"
               title="Password length must be at least 5, at most 60"><br><br>
             <input type="text" id="nameField" name="name" placeholder="Name" pattern="[A-Za-z]{0,30}"
               title="(Optional) Name must contain letters only, at most 30 characters long"><br><br>
@@ -29,7 +29,7 @@
             <label for="dateField">Birthday</label><br>
             <input class="date" type="date" id="dateField" name="birthday" min="1920-01-01" max="2016-01-01"><br><br>
           </div>
-          <button type="submit" class="registerbtn">Register</button>
+          <button type="submit" class="registerbtn">Register</button><br>
           <small>Already have an account? <a href="index.jsp"><u>Log In</u></a></small>
       </form>
     </div>

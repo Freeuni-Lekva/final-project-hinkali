@@ -11,22 +11,26 @@ body {
     border: 5px solid #808080;
     border-radius: 10px;
     width: 330px;
-    margin: 120px auto;
     padding: 2px;
+    margin: 120px auto;
     background-image: linear-gradient(to bottom right, #323232, #5e5d5d);
-    text-align: center;
     color: #ffffff;
+    text-align: center;
+}
+
+.fields {
+    float: left;
+    text-align: right;
 }
 
 input {
-    width: 70%;
+    width: 60%;
     padding: 5px 6px;
-    margin: 1px 0;
-    display: inline-block;
     border: 1px solid #d7d7d7;
     border-radius: 8px;
     background-color: #bbbbbb;
     color: #242424;
+    margin: 7px auto;
 }
 
 input:hover{
@@ -34,27 +38,34 @@ input:hover{
     transition: 200ms;
 }
 
-.registerbtn {
+.updatebtn {
     background-color: #2d952d;
     color: white;
     font-weight: bold;
     padding: 10px 10px;
-    margin: 1px auto;
+    margin-bottom: 5px;
+    margin-left: auto;
     border: none;
     cursor: pointer;
     width: 50%;
     border-radius: 8px;
 }
 
-.registerbtn:hover {
+.updatebtn:hover {
     background-color: #05b400;
     transition: 200ms;
 }
 
-.date {
-    width: 60%;
+.date_label {
+    margin-top: 3px;
+    text-align: center;
 }
 
 ::placeholder {
     color: #787878;
+}
+
+.date {
+    margin-top: 0;
+    margin-bottom: 0;
 }
