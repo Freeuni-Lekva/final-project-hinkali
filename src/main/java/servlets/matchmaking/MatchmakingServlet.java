@@ -3,7 +3,10 @@ package servlets.matchmaking;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import commons.beans.UserBean;
+import model.communication.IResponse;
 import model.communication.MatchmakingRequest;
+import model.matchmaking.BasicMatchmakingQueue;
+import model.matchmaking.QueryBasedMatchmaking;
 import servlets.ContextListener;
 import servlets.search.SearchServlet;
 
@@ -33,7 +36,10 @@ public class MatchmakingServlet extends HttpServlet {
         }
 
         MatchmakingRequest request = proccessJsonBody(req);
-        System.out.println(request);
+        QueryBasedMatchmaking matchmaking = (QueryBasedMatchmaking) req.getServletContext().getAttribute(BasicMatchmakingQueue.MATCHMAKING_ATTR);
+        IResponse response = matchmaking.handleMatchmakingRequest(request);
+
+        resp.getWriter().println(response.toJson());
     }
 
     private MatchmakingRequest proccessJsonBody(HttpServletRequest req) throws IOException {

@@ -26,10 +26,9 @@ function sendJoinRequest(){
         },
         body: joinJson
     }).then(r => r.json()).then(r => {
-        console.log("here");
-        if (r.hasOwnProperty('gameId')){
-            console.log("here");
+        if (r.body === "created"){
             window.location.replace("/play?gameId=" + r.gameId);
+
         }
     }).then(r => console.log(r));
 }
