@@ -7,6 +7,7 @@ import dao.interfaces.StatsDaoInterface;
 import dao.interfaces.UserDAOInterface;
 import dao.interfaces.UserWrapperInterface;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class UserWrapperDao implements UserWrapperInterface {
@@ -74,6 +75,9 @@ public class UserWrapperDao implements UserWrapperInterface {
     public List<StatsBean> getStatsAll() {
         return statsDao.getStatsAll();
     }
+
+    @Override
+    public ArrayList<StatsBean> getStatsAllWithUsernamesAndDescendingPoints() { return statsDao.getStatsAllWithUsernamesAndDescendingPoints();}
 
     @Deprecated
     public boolean removeStats(int userId) {

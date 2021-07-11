@@ -3,6 +3,7 @@ package dao.interfaces;
 import commons.beans.StatsBean;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 import java.util.List;
 
 public interface StatsDaoInterface {
@@ -13,6 +14,8 @@ public interface StatsDaoInterface {
     StatsBean getStatsById(int userId);
 
     List<StatsBean> getStatsAll();
+
+    ArrayList<StatsBean> getStatsAllWithUsernamesAndDescendingPoints();
 
     boolean removeStats(int userId);
 }

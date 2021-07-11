@@ -101,6 +101,29 @@ public class StatsDao implements StatsDaoInterface {
         return result;
     }
 
+
+    @Override
+    public ArrayList<StatsBean> getStatsAllWithUsernamesAndDescendingPoints() {
+        ArrayList<StatsBean> result = new ArrayList<>();
+        Connection conn = DatabaseUtility.getConnection();
+        String query = "SELECT st.*, us.username FROM stats st JOIN users us on st.userid = us.userid ORDER BY st.points DESC ";
+        try {
+            PreparedStatement preparedStatement = conn.prepareStatement(query);
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()){
+                result.add( new StatsBean(rs.getString(7) ,rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getInt(4),
+                        rs.getInt(5), rs.getInt(6)));
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }finally {
+            try {
+                conn.close();
+            } catch (SQLException ignored) {}
+        }
+        return result;
+    }
+
     @Override
     public boolean removeStats(int userId) {
         Connection conn = DatabaseUtility.getConnection();
