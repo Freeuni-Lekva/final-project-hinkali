@@ -1,14 +1,10 @@
 package servlets.matchmaking;
 
-import com.google.gson.Gson;
-import com.sun.tools.javac.util.Pair;
 import commons.beans.UserBean;
 import model.matchmaking.BasicMatchmakingQueue;
 import servlets.ContextListener;
 import servlets.search.SearchServlet;
 
-import javax.json.Json;
-import javax.json.JsonObject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
