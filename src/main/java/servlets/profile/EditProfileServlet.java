@@ -64,7 +64,7 @@ public class EditProfileServlet extends HttpServlet {
                 if (checkPasswordIncorrect(userDao, user.getUsername(), oldPassword))
                     state = INCORRECT_PASSWORD;
                 else if (checkPasswordLength(newPassword)) {
-                    user.setPassword(UserUtility.generateHash(newPassword));
+                    user.setPassword(newPassword);
 
                     tryChangeUserWithSameUsername(userDao, user);
                 }
@@ -76,7 +76,7 @@ public class EditProfileServlet extends HttpServlet {
                 if (checkPasswordIncorrect(userDao, user.getUsername(), oldPassword))
                     state = INCORRECT_PASSWORD;
                 else if (checkPasswordLength(newPassword)) {
-                    user.setPassword(UserUtility.generateHash(newPassword));
+                    user.setPassword(newPassword);
                     user.setUsername(username);
                     tryChangeUserWithNewUsername(userDao, user);
                 }

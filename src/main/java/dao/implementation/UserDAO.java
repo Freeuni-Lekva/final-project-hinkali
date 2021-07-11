@@ -152,7 +152,7 @@ public class UserDAO implements UserDAOInterface {
             pstmt.setString(1, user.getUsername());
             pstmt.setString(2, UserUtility.capitalizeFirstLetter(user.getName()));
             pstmt.setString(3, UserUtility.capitalizeFirstLetter(user.getSurname()));
-            pstmt.setString(4, user.getPassword());
+            pstmt.setString(4, UserUtility.generateHash(user.getPassword()));
             pstmt.setDate(5, user.getBirthday());
             pstmt.setInt(6, user.getId());
             int numChanged = pstmt.executeUpdate();
