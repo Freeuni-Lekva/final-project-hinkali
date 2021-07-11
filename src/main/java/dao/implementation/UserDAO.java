@@ -150,8 +150,8 @@ public class UserDAO implements UserDAOInterface {
             String sql = "UPDATE users SET username = ?, name = ?, surname = ?, password = ?, birthday = ? WHERE userid = ?;";
             pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, user.getUsername());
-            pstmt.setString(2, user.getName());
-            pstmt.setString(3, user.getSurname());
+            pstmt.setString(2, UserUtility.capitalizeFirstLetter(user.getName()));
+            pstmt.setString(3, UserUtility.capitalizeFirstLetter(user.getSurname()));
             pstmt.setString(4, user.getPassword());
             pstmt.setDate(5, user.getBirthday());
             pstmt.setInt(6, user.getId());
