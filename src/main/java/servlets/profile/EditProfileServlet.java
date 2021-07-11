@@ -27,7 +27,7 @@ public class EditProfileServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession(false);
         if (session == null || session.getAttribute(UserBean.USER_ATTR) == null) {
-            resp.sendRedirect("index.jsp");
+            resp.sendRedirect("register");
             return;
         }
         int currentUserId = (int) session.getAttribute(UserBean.USER_ATTR);
