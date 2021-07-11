@@ -27,6 +27,7 @@ public class ProfileServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         if (req.getSession().getAttribute(UserBean.USER_ATTR) == null){
             resp.sendRedirect("/");
+            return;
         }
 
        int userId = (int) req.getSession().getAttribute(UserBean.USER_ATTR);
@@ -58,6 +59,11 @@ public class ProfileServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        if (req.getSession().getAttribute(UserBean.USER_ATTR) == null){
+            resp.sendRedirect("/");
+            return;
+        }
+
         int user = (Integer)req.getSession().getAttribute(UserBean.USER_ATTR);
         int checking = Integer.parseInt(req.getParameter("id"));
         FriendDaoInterface friendDao = (FriendDaoInterface) req.getServletContext().getAttribute(FriendDao.FRIEND_DAO_ATTR);
