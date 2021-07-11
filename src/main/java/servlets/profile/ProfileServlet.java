@@ -25,6 +25,9 @@ public class ProfileServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        if (req.getSession().getAttribute(UserBean.USER_ATTR) == null){
+            resp.sendRedirect("/");
+        }
 
        int userId = (int) req.getSession().getAttribute(UserBean.USER_ATTR);
 
