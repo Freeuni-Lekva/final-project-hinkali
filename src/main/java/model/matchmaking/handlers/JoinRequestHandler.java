@@ -6,10 +6,10 @@ import model.communication.ResponseBuilder;
 import model.matchmaking.queue.IQueue;
 
 public class JoinRequestHandler implements RequestHandlerChain {
-    private final IQueue queue;
+    private final IQueue<Integer> queue;
     private final MatchmakingRequest request;
 
-    public JoinRequestHandler(IQueue queue, MatchmakingRequest request){
+    public JoinRequestHandler(IQueue<Integer> queue, MatchmakingRequest request){
         this.queue = queue;
         this.request = request;
     }
@@ -17,7 +17,7 @@ public class JoinRequestHandler implements RequestHandlerChain {
     @Override
     public IResponse processRequest() {
         if (queue.contains(request.getId())){
-           // higher chain; return
+            return new FindMatchRequestHandler(queue, request).processRequest();
         }
 
         queue.push(request.getId());

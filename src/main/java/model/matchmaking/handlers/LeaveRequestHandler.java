@@ -6,10 +6,10 @@ import model.communication.ResponseBuilder;
 import model.matchmaking.queue.IQueue;
 
 public class LeaveRequestHandler implements RequestHandlerChain {
-    private final IQueue queue;
+    private final IQueue<Integer> queue;
     private final MatchmakingRequest request;
 
-    public LeaveRequestHandler(IQueue queue, MatchmakingRequest request){
+    public LeaveRequestHandler(IQueue<Integer> queue, MatchmakingRequest request){
         this.queue = queue;
         this.request = request;
     }

@@ -6,10 +6,10 @@ import model.communication.ResponseBuilder;
 import model.matchmaking.queue.IQueue;
 
 public class FindMatchRequestHandler implements RequestHandlerChain {
-    private final IQueue queue;
+    private final IQueue<Integer> queue;
     private final MatchmakingRequest request;
 
-    public FindMatchRequestHandler(IQueue queue, MatchmakingRequest request){
+    public FindMatchRequestHandler(IQueue<Integer> queue, MatchmakingRequest request){
         this.queue = queue;
         this.request = request;
     }
