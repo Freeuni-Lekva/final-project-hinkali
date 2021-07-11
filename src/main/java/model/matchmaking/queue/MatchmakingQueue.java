@@ -32,7 +32,7 @@ public class MatchmakingQueue implements IQueue<Integer>{
         Integer pairId = pairs.get(obj);
 
         queue.remove(obj);
-        queue.remove(pairId);
+        queue.replace(pairId, NO_SESSION);
         pairs.remove(obj);
         pairs.remove(pairId);
 

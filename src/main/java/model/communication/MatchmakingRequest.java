@@ -9,11 +9,14 @@ public class MatchmakingRequest implements IRequest{
     private String action;
     private int id;
 
-    public MatchmakingRequest(String action){
+    public MatchmakingRequest(String action, int id){
         this.action = action;
+        this.id = id;
     }
 
-    public MatchmakingRequest(){}
+    public MatchmakingRequest(){
+        this.id = -1;
+    }
 
     public String getAction() {
         return action;

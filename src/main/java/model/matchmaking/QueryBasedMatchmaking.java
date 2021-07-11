@@ -3,6 +3,7 @@ package model.matchmaking;
 import model.communication.IResponse;
 import model.communication.MatchmakingRequest;
 import model.matchmaking.handlers.JoinRequestHandler;
+import model.matchmaking.handlers.RequestTypeHandler;
 import model.matchmaking.queue.IQueue;
 import model.matchmaking.queue.MatchmakingQueue;
 
@@ -17,6 +18,6 @@ public class QueryBasedMatchmaking implements IMatchmaking{
     }
 
     public synchronized IResponse handleMatchmakingRequest(MatchmakingRequest request) {
-        return new JoinRequestHandler(queue, request).processRequest();
+        return new RequestTypeHandler(queue, request).processRequest();
     }
 }
