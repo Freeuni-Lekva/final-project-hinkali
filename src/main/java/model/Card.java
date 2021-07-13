@@ -2,7 +2,9 @@ package model;
 
 public class Card {
 
-    private final int cardId;
+    public static final int NO_ID = -1;
+
+    private int cardId;
     private String name;
     private String image;
     private int power;
@@ -14,8 +16,16 @@ public class Card {
         this.power = power;
     }
 
+    public Card(String name, String image, int power) {
+        this(NO_ID, name, image, power);
+    }
+
     public int getCardId() {
         return cardId;
+    }
+
+    public void setCardId(int cardId) {
+        this.cardId = cardId;
     }
 
     public String getName() {
