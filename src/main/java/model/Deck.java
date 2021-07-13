@@ -8,7 +8,7 @@ public class Deck {
     public static final String DECK_ATTR = "deck";
     public static final int NO_ID = -1;
 
-    private final int deckId;
+    private int deckId;
     private String name;
     private String image;
     private List<Card> cards;
@@ -23,9 +23,17 @@ public class Deck {
 
     public Deck(String name, String image, List<Card> cards) { this(NO_ID, name, image, cards); }
 
+    public Deck(int deckId, String name, String image) {
+        this.deckId = deckId;
+        this.name = name;
+        this.image = image;
+    }
+
     public int getDeckId() {
         return deckId;
     }
+
+    public void setDeckId(int deckId) { this.deckId = deckId; }
 
     public String getName() {
         return name;
