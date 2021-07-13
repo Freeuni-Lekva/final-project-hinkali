@@ -54,4 +54,13 @@ public class Deck {
     public List<Card> getCards() { return cards; }
 
     public void setCards(List<Card> cards) { this.cards = cards; }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o instanceof Deck) {
+            Deck toCompare = (Deck) o;
+            return this.deckId == toCompare.deckId;
+        }
+        return false;
+    }
 }

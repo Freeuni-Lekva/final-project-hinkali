@@ -51,4 +51,13 @@ public class Card {
     public void setPower(int power) {
         this.power = power;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o instanceof Card) {
+            Card toCompare = (Card) o;
+            return this.cardId == toCompare.cardId;
+        }
+        return false;
+    }
 }
