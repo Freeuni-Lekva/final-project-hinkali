@@ -116,6 +116,7 @@ public class UserDAO implements UserDAOInterface {
         return result;
     }
 
+    @Override
     public List<UserBean> getUsersWithFilter(Filter f) {
         Connection conn = DatabaseUtility.getConnection();
         List<UserBean> result = new ArrayList<>();
@@ -143,6 +144,7 @@ public class UserDAO implements UserDAOInterface {
         return result;
     }
 
+    @Override
     public boolean changeUser(UserBean user) {
         Connection conn = DatabaseUtility.getConnection();
         boolean result = false;
