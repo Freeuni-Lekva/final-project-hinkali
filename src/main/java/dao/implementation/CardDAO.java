@@ -5,6 +5,8 @@ import dao.interfaces.CardDAOInterface;
 import model.Card;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CardDAO implements CardDAOInterface {
 
@@ -100,6 +102,30 @@ public class CardDAO implements CardDAOInterface {
             }
         } catch (SQLIntegrityConstraintViolationException e) {
             return false;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DatabaseUtility.closeConnection(conn);
+        }
+        return result;
+    }
+
+    @Override
+    public List<Card> getCards(List<Integer> cardIds) {
+        Connection conn = DatabaseUtility.getConnection();
+        List<Card> result = new ArrayList<>();
+        try {
+            String sql = "SELECT * FROM cards WHERE card_id IN (?);";
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setArray(1, conn.createArrayOf("INT", cardIds.toArray()));
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("card_id");
+                String name = rs.getString("name");
+                String image = rs.getString("image");
+                int power = rs.getInt("power");
+                result.add(new Card(id, name, image, power));
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
