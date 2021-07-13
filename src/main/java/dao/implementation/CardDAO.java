@@ -114,22 +114,31 @@ public class CardDAO implements CardDAOInterface {
     public List<Card> getCards(List<Integer> cardIds) {
         Connection conn = DatabaseUtility.getConnection();
         List<Card> result = new ArrayList<>();
-        try {
-            String sql = "SELECT * FROM cards WHERE card_id IN (?);";
-            pstmt = conn.prepareStatement(sql);
-            pstmt.setArray(1, conn.createArrayOf("INT", cardIds.toArray()));
-            ResultSet rs = pstmt.executeQuery();
-            while (rs.next()) {
-                int id = rs.getInt("card_id");
-                String name = rs.getString("name");
-                String image = rs.getString("image");
-                int power = rs.getInt("power");
-                result.add(new Card(id, name, image, power));
+        if (!cardIds.isEmpty()) {
+            try {
+                StringBuilder sb = new StringBuilder();
+                sb.append("SELECT * FROM cards WHERE card_id IN (?");
+                for (int i = 0; i < cardIds.size() - 1; ++i) {
+                    sb.append(", ?");
+                }
+                sb.append(")");
+                String sql = sb.toString();
+                pstmt = conn.prepareStatement(sql);
+                for (int i = 0; i < cardIds.size(); ++i)
+                    pstmt.setInt(i + 1, cardIds.get(i));
+                ResultSet rs = pstmt.executeQuery();
+                while (rs.next()) {
+                    int id = rs.getInt("card_id");
+                    String name = rs.getString("name");
+                    String image = rs.getString("image");
+                    int power = rs.getInt("power");
+                    result.add(new Card(id, name, image, power));
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } finally {
+                DatabaseUtility.closeConnection(conn);
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            DatabaseUtility.closeConnection(conn);
         }
         return result;
     }
