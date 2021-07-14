@@ -14,16 +14,21 @@ window.onload = function (){
     document.getElementById("returnBtnId").addEventListener("click", redirectHome);
 };
 
+let joinJson = JSON.stringify({ action: 'join'})
+
 // temporary non-socket implementation
 function sendJoinRequest(){
-    fetch("/test_matchmaking", {
-        method: "POST",
-        body: "JOIN"
+    fetch("/matchmaking", {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: joinJson
     }).then(r => r.json()).then(r => {
-        console.log("here");
-        if (r.hasOwnProperty('gameId')){
-            console.log("here");
+        if (r.body === "created"){
             window.location.replace("/play?gameId=" + r.gameId);
+
         }
     }).then(r => console.log(r));
 }

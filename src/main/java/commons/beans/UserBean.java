@@ -8,7 +8,7 @@ public class UserBean {
     public static final int NO_ID = -1;
 
     private int id;
-    private final String username;
+    private String username;
     private String name, surname;
     private String password;
     private Date birthday;
@@ -49,6 +49,8 @@ public class UserBean {
     }
 
     public void setId(int id) { this.id = id; }
+
+    public void setUsername(String username) { this.username = username; }
 
     public void setName(String name) { this.name = name; }
 

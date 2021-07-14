@@ -5,6 +5,7 @@ import dao.implementation.UserWrapperDao;
 import dao.interfaces.FriendDaoInterface;
 import dao.interfaces.UserWrapperInterface;
 import model.matchmaking.BasicMatchmakingQueue;
+import model.matchmaking.QueryBasedMatchmaking;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
@@ -14,7 +15,7 @@ public class ContextListener implements ServletContextListener {
 
     @Override
     public void contextInitialized(ServletContextEvent sce) {
-        System.out.println("Context is being Initialized");
+        System.out.println("Context is being initialized");
 
         addMatchmakingQueue(sce);
 
@@ -27,7 +28,8 @@ public class ContextListener implements ServletContextListener {
     }
 
     private void addMatchmakingQueue(ServletContextEvent sce) {
-        sce.getServletContext().setAttribute(BasicMatchmakingQueue.MATCHMAKING_ATTR, new BasicMatchmakingQueue());
+        //sce.getServletContext().setAttribute(BasicMatchmakingQueue.MATCHMAKING_ATTR, new BasicMatchmakingQueue());
+        sce.getServletContext().setAttribute(BasicMatchmakingQueue.MATCHMAKING_ATTR, new QueryBasedMatchmaking());
     }
 
     @Override
