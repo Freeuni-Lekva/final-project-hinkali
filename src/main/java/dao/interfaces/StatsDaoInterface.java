@@ -15,7 +15,7 @@ public interface StatsDaoInterface {
 
     List<StatsBean> getStatsAll();
 
-    ArrayList<StatsBean> getStatsAllWithUsernamesAndDescendingPoints();
+    ArrayList<StatsBean> getStatsWithDescendingPoints();
 
     boolean removeStats(int userId);
 }

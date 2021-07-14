@@ -12,7 +12,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     UserWrapperDao dao = (UserWrapperDao) request.getServletContext().getAttribute(UserWrapperDao.USER_WRAPPER_ATTR);
-    ArrayList<StatsBean> stats = dao.getStatsAllWithUsernamesAndDescendingPoints();
+    ArrayList<StatsBean> stats = dao.getStatsWithDescendingPoints();
 %>
 <html>
 <head>
@@ -46,10 +46,10 @@
     <%
         int i = 0;
         while(true){
-            if(i == 10 || i == stats.size())
+            if(i == stats.size())
                 break;
             StatsBean sb = stats.get(i);
-            out.print("<ol>" + sb.getUsername() +
+            out.print("<ol>" + dao.getUserById(sb.getUserid()).getUsername() +
                     " " + sb.getPoints() +
                     " " + sb.getGamesPlayed() +
                     " " + sb.getWins() +

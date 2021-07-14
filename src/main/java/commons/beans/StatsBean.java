@@ -14,8 +14,6 @@ public class StatsBean {
     private int losses;
     private int points;
 
-    private String username;
-
     public StatsBean(int userid, int gamesPlayed, int wins, int draws, int losses, int points){
         this.userid = userid;
         this.gamesPlayed = gamesPlayed;
@@ -25,16 +23,6 @@ public class StatsBean {
         this.points = points;
     }
 
-    public StatsBean(String username, int userid, int gamesPlayed, int wins, int draws, int losses, int points){
-        this.userid = userid;
-        this.gamesPlayed = gamesPlayed;
-        this.wins = wins;
-        this.draws = draws;
-        this.losses = losses;
-        this.points = points;
-        this.username = username;
-    }
-
     public StatsBean(int userid){
         this(userid, 0, 0, 0,0, 0);
     }
@@ -42,8 +30,6 @@ public class StatsBean {
     public int getUserid() {
         return userid;
     }
-
-    public String getUsername(){if(username != null )return username; return null;}
 
     public int getGamesPlayed() {
         return gamesPlayed;

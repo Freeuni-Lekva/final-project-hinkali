@@ -80,7 +80,7 @@ public class UserWrapperDao implements UserWrapperInterface {
     }
 
     @Override
-    public ArrayList<StatsBean> getStatsAllWithUsernamesAndDescendingPoints() { return statsDao.getStatsAllWithUsernamesAndDescendingPoints();}
+    public ArrayList<StatsBean> getStatsWithDescendingPoints() { return statsDao.getStatsWithDescendingPoints();}
 
     @Deprecated
     public boolean removeStats(int userId) {
