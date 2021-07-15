@@ -39,7 +39,7 @@ public class SearchServlet extends HttpServlet {
         }
 
         UserDAOInterface userDao = (UserDAOInterface) req.getServletContext().getAttribute(UserDAO.USER_DAO_ATTR);
-        SearchResults results = getResults(userDao, query);
+        SearchResults results = getResults(req, userDao, query);
         addTestUsers(results);
 
         req.setAttribute(RESULTS_ATTRIBUTE, results);
@@ -80,7 +80,7 @@ public class SearchServlet extends HttpServlet {
         return req.getParameterMap().isEmpty();
     }
 
-    private SearchResults getResults(UserDAOInterface userDao, String query) {
+    private SearchResults getResults(HttpServletRequest req, UserDAOInterface userDao, String query) {
         if (query.isEmpty()) return new SearchResults();
 
         OrFilter orFilter = new OrFilter();
@@ -94,7 +94,13 @@ public class SearchServlet extends HttpServlet {
         if (orFilter.format().isEmpty()) return new SearchResults();
 
         List<UserBean> users = userDao.getUsersWithFilter(orFilter);
+        int selfId = (int) req.getSession().getAttribute(UserBean.USER_ATTR);
+        removeSelf(users, selfId);
         return new SearchResults(users);
+    }
+
+    private void removeSelf(List<UserBean> users, int selfId) {
+        users.removeIf(u -> u.getId() == selfId);
     }
 
     private Filter buildFilterFromToken(String nextToken) {

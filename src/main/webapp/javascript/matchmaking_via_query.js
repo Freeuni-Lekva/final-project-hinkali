@@ -33,5 +33,5 @@ function sendJoinRequest(){
     }).then(r => console.log(r));
 }
 
-setInterval(sendJoinRequest, 3000);
+setInterval(sendJoinRequest, 2000);
 
