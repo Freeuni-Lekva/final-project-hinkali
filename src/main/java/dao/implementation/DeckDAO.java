@@ -97,6 +97,8 @@ public class DeckDAO implements DeckDAOInterface {
             if (numChanged == 1) {
                 result = true;
             }
+        } catch (SQLIntegrityConstraintViolationException e) {
+            return false;
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -120,6 +122,26 @@ public class DeckDAO implements DeckDAOInterface {
             }
         } catch (SQLIntegrityConstraintViolationException e) {
             return false;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DatabaseUtility.closeConnection(conn);
+        }
+        return result;
+    }
+
+    @Override
+    public boolean removeCardFromDeck(int deckId, int cardId) {
+        Connection conn = DatabaseUtility.getConnection();
+        boolean result = false;
+        try {
+            String sql = "DELETE FROM decks_cards WHERE deck_id = ? AND card_id = ?;";
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, deckId);
+            pstmt.setInt(2, cardId);
+            int numDeleted = pstmt.executeUpdate();
+            if (numDeleted == 1)
+                result = true;
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -164,6 +186,43 @@ public class DeckDAO implements DeckDAOInterface {
             if (numChanged == 1) {
                 result = true;
             }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DatabaseUtility.closeConnection(conn);
+        }
+        return result;
+    }
+
+    @Override
+    public int getUserDeckId(int userId) {
+        Connection conn = DatabaseUtility.getConnection();
+        int result = -1;
+        try {
+            String sql = "SELECT deck_id FROM users_decks WHERE user_id = ?;";
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, userId);
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                result = rs.getInt("deck_id");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    @Override
+    public boolean removeUserDeck(int userId) {
+        Connection conn = DatabaseUtility.getConnection();
+        boolean result = false;
+        try {
+            String sql = "DELETE FROM users_decks WHERE user_id = ?;";
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, userId);
+            int numDeleted = pstmt.executeUpdate();
+            if (numDeleted == 1)
+                result = true;
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
