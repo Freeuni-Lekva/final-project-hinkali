@@ -117,7 +117,7 @@
             <target>8</target>
             </configuration>
         </plugin>
-        </plugins>
+      </plugins>
     </pluginManagement>
   </build>
 </project>
