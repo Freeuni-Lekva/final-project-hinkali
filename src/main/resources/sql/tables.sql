@@ -1,5 +1,8 @@
 USE occultexpress;
 
+DROP TABLE IF EXISTS users_decks;
+DROP TABLE IF EXISTS decks_cards;
+DROP TABLE IF EXISTS decks;
 DROP TABLE IF EXISTS cards;
 DROP TABLE IF EXISTS friends;
 DROP TABLE IF EXISTS stats;
@@ -63,7 +66,7 @@ CREATE TABLE decks_cards (
 );
 
 CREATE TABLE users_decks (
-    user_id INT NOT NULL,
+    user_id INT UNIQUE NOT NULL,
     deck_id INT NOT NULL,
     FOREIGN KEY (user_id) REFERENCES users(userid),
     FOREIGN KEY (deck_id) REFERENCES decks(deck_id),
