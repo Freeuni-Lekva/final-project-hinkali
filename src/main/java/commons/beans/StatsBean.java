@@ -1,5 +1,7 @@
 package commons.beans;
 
+import java.util.Objects;
+
 public class StatsBean {
     public static final int POINTS_ON_WIN = 3;
     public static final int POINTS_ON_DRAW = 1;
