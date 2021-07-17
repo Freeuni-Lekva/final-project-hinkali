@@ -24,7 +24,7 @@ public class DeckDAOTest {
     private Card card1 = new Card("cardTest1", "cardTest1", 1);
     private Card card2 = new Card("cardTest2", "cardTest2", 2);
     private Card card3 = new Card("cardTest3", "cardTest3", 3);
-    private UserBean user = new UserBean("deckTest123", "deckTest123", "deckTest123", "deckTest123", null);;
+    private UserBean user = new UserBean("deckTest123", "deckTest123", "deckTest123", "deckTest123", null);
     private DeckDAOInterface deckDao = new DeckDAO();
     private CardDAOInterface cardDao = new CardDAO();
     private UserDAOInterface userDao = new UserDAO();
@@ -40,7 +40,6 @@ public class DeckDAOTest {
         assertTrue(cardDao.addCard(card3));
 
         List<Card> cards1 = new ArrayList<>(Arrays.asList(card1, card2));
-        List<Card> cards2 = new ArrayList<>(Arrays.asList(card1, card3));
 
         deck1 = new Deck("deckTest1", "deckTest1", cards1);
         deck2 = new Deck("deckTest2", "deckTest2", null);
