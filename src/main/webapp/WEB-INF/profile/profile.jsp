@@ -35,7 +35,6 @@
         <h3> Birthday: <%= user.getBirthday() %>  </h3>
 
         <% if(check.equals(ProfileServlet.GO_TO_OWN)) { %>
-        <h3> Password:  <%=user.getPassword()%>  </h3>
         <form method="post">
             <input name="id" type="hidden" value="<%= user.getId() %>"/>
             <input type="submit" class = "edit" value="Edit"/>
@@ -71,6 +70,12 @@
                         out.println("<li> <a href=" + url + "?id=" + id + ">" + userWrapperDao.getUserById(id).getUsername() + "</a> </li>");
             %>
         </ul>
+    </div>
+    <div class = "stats">
+        <h2>Wins: </h2>
+        <h2>Loses: </h2>
+        <h2>You are #</h2>
+
     </div>
 </div>
 

@@ -3,7 +3,6 @@ package servlets.profile;
 import commons.beans.UserBean;
 import dao.implementation.FriendDao;
 import dao.implementation.UserDAO;
-import dao.implementation.UserWrapperDao;
 import dao.interfaces.FriendDaoInterface;
 import dao.interfaces.UserDAOInterface;
 
@@ -25,13 +24,15 @@ public class ProfileServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+        if (req.getSession().getAttribute(UserBean.USER_ATTR) == null){
+            resp.sendRedirect("/");
+            return;
+        }
        int userId = (int) req.getSession().getAttribute(UserBean.USER_ATTR);
 
-        req.getSession().setAttribute(UserBean.USER_ATTR, userId);
        int userToCheck = 0;
         if(req.getParameter("id") == null){
-            userToCheck = userId;
+            resp.sendRedirect("profile?id=" + userId);
 
         } else {
             userToCheck = Integer.parseInt(req.getParameter("id"));
