@@ -3,6 +3,7 @@ package dao.interfaces;
 import commons.beans.StatsBean;
 import commons.beans.UserBean;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public interface UserWrapperInterface extends UserDAOInterface, StatsDaoInterface{
@@ -23,6 +24,8 @@ public interface UserWrapperInterface extends UserDAOInterface, StatsDaoInterfac
     StatsBean getStatsById(int userId);
 
     List<StatsBean> getStatsAll();
+
+    ArrayList<StatsBean> getStatsWithDescendingPoints();
 
     boolean removeStats(int userId);
 }

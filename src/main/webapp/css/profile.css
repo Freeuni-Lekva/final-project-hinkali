@@ -1,7 +1,8 @@
 html,
 
 body {
-    background-color: #181818;
+    background-color:	#161414;
+
 }
 
 h1 {
@@ -20,95 +21,155 @@ li {
     padding: 5px;
 }
 
-a:hover{
-    color: #555;
-}
-a:link {
-    text-decoration: none;
-}
-a:link, a:visited {
-    background-color: #4B0082;
-    color:  #bfbfbf;
-    padding: 14px 25px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-}
-a:hover, a:active {
-    background-color: #9370DB;
-}
-
 .all{
-    display: flex;
-    justify-content: space-around;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-gap: 1rem;
+    grid-template-columns: repeat(3, 1fr);
+
 }
-.user {
-    margin-top: 10%;
-    position: relative;
-    display: flex;
-    width: 30%;
-    flex-direction: column;
+.user, .stats {
+    margin-top: 20%;
+    max-width: 1200px;
+    display: grid;
+    grid-gap: 1rem;
     min-width: 0;
     word-wrap: break-word;
-    background-color: #3a3b3c;
+
     background-clip: border-box;
     border: 0 solid rgba(0,0,0,.125);
     border-radius: .25rem;
-    box-shadow: 0 1px 3px 0 rgba(0,0,0,.1), 0 1px 2px 0 rgba(0,0,0,.06);
+    box-shadow: 0 1px 3px 0 #4b4b4b, 0 1px 2px 0 #929292;
     padding: 1rem;
+    background-image: linear-gradient(to bottom right,#222121, #1e1e1e);
+
 }
 .unfriend {
     width: 30%;
-    background-color: red;
+    color: white;
+    background-color: #f44336;
     box-sizing: border-box;
-    border: 3px solid #181818;
-    border-radius: 4px;
+    border: 2px solid #f44336;
+    border-radius: 2em;
+    transition-duration: 0.4s;
+    cursor: pointer;
 }
 .unfriend:hover{
-    border: 3px solid darkred;
+    background-color: transparent;
+
 }
 .add{
+    color: white;
     width: 30%;
-    background-color:green;
+    background-color:#4CAF50;
     box-sizing: border-box;
-    border: 3px solid #181818;
-    border-radius: 4px;
+    border: 2px solid #4CAF50;
+    border-radius: 2em;
+    transition-duration: 0.4s;
+    cursor: pointer;
 }
 
 .add:hover{
-    border: 3px solid darkgreen;
+    background-color: transparent;
+
 }
 .edit {
     width: 30%;
-    background-color:#bfbfbf;
+    background-color:#5bb3d8;
+    color: white;
     box-sizing: border-box;
-    border: 3px solid #181818;
-    border-radius: 4px;
+    border:0.16em solid rgba(255,255,255,0);
+    border-radius:2em;
+    transition-duration: 0.4s;
+    cursor: pointer;
 }
 .edit:hover {
-    border: 3px solid #555;
+    border-color: rgba(255,255,255,1);
+    background-color: transparent;
 }
 
 .friends{
-    margin-top: 10%;
-    position: relative;
-    display: flex;
+    margin-top: 20%;
+    max-width: 1200px;
+
+    display: grid;
+    grid-gap: 1rem;
+
     overflow-y:scroll;
     height:200px;
-    width: 30%;
+
     border: 0 solid rgba(0,0,0,.125);
     border-radius: .25rem;
-    box-shadow: 0 1px 3px 0 rgba(0,0,0,.1), 0 1px 2px 0 rgba(0,0,0,.06);
+    box-shadow: 0 1px 3px 0 #4b4b4b, 0 1px 2px 0 #929292;
     padding: 1rem;
-    background-color: #3a3b3c;
+
     background-clip: border-box;
     flex-direction: column;
-
+    background-image: linear-gradient(to bottom right,#222121, #1e1e1e);
 }
 
 .add.input[type="submit"]{
     backdrop-color: white;
 }
 
+.rank{
+    padding-top: 10%;
+    position: relative;
+    text-align: center;
+
+}
+
+.stats{
+
+    text-align:center;
+}
+
+.button{
+    color:#494ca2;
+    font-size: 16px;
+    background-color: transparent;
+    border:0.16em solid #494ca2;
+
+    transition-duration: 0.4s;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    cursor: pointer;
+}
+.button:hover {
+    background-color: #494ca2;
+    color:#bfbfbf;
+}
+h1 {
+    display: flex;
+    flex-direction: row;
+    color:#febf0a;
+}
+h1:before, h1:after{
+    content: "";
+    flex: 1 1;
+    border-bottom: 1px solid #febf0a;
+    margin: auto;
+
+}
+h1:before {
+    margin-right: 10px
+}
+h1:after {
+    margin-left: 10px
+}
+.return_link {
+    position: fixed;
+    display: inline-block;
+    cursor: pointer;
+    border: 0.2em solid #494ca2;
+    border-radius: .2rem;
+    background-color: #494ca2;
+    transition-duration: 0.4s;
+}
+
+.return_link:hover{
+    background-image: linear-gradient(to bottom right, #494ca2, rgba(0,0,0,.125));
 
 
+}

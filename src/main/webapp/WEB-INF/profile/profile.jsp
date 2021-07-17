@@ -4,7 +4,8 @@
 <%@ page import="servlets.profile.ProfileServlet" %>
 <%@ page import="dao.implementation.FriendDao" %>
 <%@ page import="dao.interfaces.FriendDaoInterface" %>
-<%@ page import="dao.implementation.UserWrapperDao" %><%--
+<%@ page import="dao.implementation.UserWrapperDao" %>
+<%@ page import="commons.beans.StatsBean" %><%--
   Created by IntelliJ IDEA.
   User: User
   Date: 06.07.2021
@@ -26,6 +27,10 @@
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/profile.css">
 </head>
 <body>
+<a href="/home"> <button class="return_link" id="returnBtnId">
+    <img src="${pageContext.request.contextPath}/resources/home.svg" class="home_svg" alt="error">
+</button>
+</a>
 
 <div class = "all">
     <div class = "user">
@@ -44,17 +49,24 @@
 
         <form method="post">
             <input name="id" type="hidden" value="<%= request.getParameter("id") %>"/>
-            <input type="submit" class = "unfriend" value="unfriend"/>
+            <input type="submit" class = "unfriend" value="Unfriend"/>
         </form>
 
         <%}else{%>
 
         <form method="post">
             <input name="id" type="hidden" value="<%= request.getParameter("id") %>"/>
-            <input type="submit" class = "add" value="add friend"/>
+            <input type="submit" class = "add" value="Add Friend"/>
         </form>
 
         <% }%>
+    </div>
+
+    <div class = "stats">
+        <% StatsBean stats = userWrapperDao.getStatsById(user.getId()); %>
+        <h2>Wins: <%=stats.getWins() %> </h2>
+        <h2>Loses: <%=stats.getLosses()%> </h2>
+        <h2>Games Played: <%=stats.getGamesPlayed()%></h2>
     </div>
 
     <div class = "friends">
@@ -67,16 +79,21 @@
                 int mainUser = (Integer)request.getSession().getAttribute(UserBean.USER_ATTR);
                 for(int id:  friends.friendIdList(user.getId()))
                     if(mainUser!=id)
-                        out.println("<li> <a href=" + url + "?id=" + id + ">" + userWrapperDao.getUserById(id).getUsername() + "</a> </li>");
+                        out.println("<li> <a href=" + url + "?id=" + id + "> <button type=\"button\" class = \"button\">" + userWrapperDao.getUserById(id).getUsername() + "</button></a> </li>");
             %>
         </ul>
     </div>
-    <div class = "stats">
-        <h2>Wins: </h2>
-        <h2>Loses: </h2>
-        <h2>You are #</h2>
 
+    <div class="nothing"></div>
+
+    <div class = "rank">
+        <% if(check.equals(ProfileServlet.GO_TO_OWN)) { %>
+        <h1> You are # <%=userWrapperDao.getRankById(user.getId())%></h1>
+        <% }else {%>
+        <h1> <%=user.getUsername()%> is # <%=userWrapperDao.getRankById(user.getId())%></h1>
+        <%}%>
     </div>
+
 </div>
 
 </body>

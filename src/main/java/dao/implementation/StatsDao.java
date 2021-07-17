@@ -4,6 +4,7 @@ import commons.beans.StatsBean;
 import dao.DatabaseUtility;
 import dao.interfaces.StatsDaoInterface;
 
+import javax.xml.crypto.Data;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -101,6 +102,27 @@ public class StatsDao implements StatsDaoInterface {
         return result;
     }
 
+
+    @Override
+    public ArrayList<StatsBean> getStatsWithDescendingPoints() {
+        ArrayList<StatsBean> result = new ArrayList<>();
+        Connection conn = DatabaseUtility.getConnection();
+        String query = "SELECT * FROM stats ORDER BY points DESC LIMIT 10 ";
+        try {
+            PreparedStatement preparedStatement = conn.prepareStatement(query);
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()){
+                result.add( new StatsBean(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getInt(4),
+                        rs.getInt(5), rs.getInt(6)));
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }finally {
+            DatabaseUtility.closeConnection(conn);
+        }
+        return result;
+    }
+
     @Override
     public boolean removeStats(int userId) {
         Connection conn = DatabaseUtility.getConnection();
@@ -119,5 +141,24 @@ public class StatsDao implements StatsDaoInterface {
         }
 
         return result;
+    }
+
+    @Override
+    public int getRankById(int userId) {
+        Connection conn = DatabaseUtility.getConnection();
+        String get = "SELECT * FROM (SELECT ROW_NUMBER() OVER(order by points), userid FROM stats) stats WHERE userid = (?);";
+        int rank = 0;
+        try{
+            PreparedStatement preparedStatement = conn.prepareStatement(get);
+            preparedStatement.setInt(1, userId);
+            ResultSet rs = preparedStatement.executeQuery();
+            if (rs.next()) {
+                rank = rs.getInt(1);
+            }
+        } catch (SQLException ignored){}
+        finally {
+            DatabaseUtility.closeConnection(conn);
+        }
+        return rank;
     }
 }

@@ -7,6 +7,7 @@ import dao.implementation.filters.StringFilterInclusive;
 import dao.interfaces.Filter;
 import dao.interfaces.UserDAOInterface;
 import model.SearchResults;
+import servlets.ContextListener;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -23,11 +24,10 @@ public class SearchServlet extends HttpServlet {
     public static final String SEARCH_SERVLET_PARAMETER = "search_field";
     public static final String RESULTS_ATTRIBUTE = "results";
     public static final int MIN_QUERY_LENGTH = 3;
-    private static final boolean TESTING = true;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        if(!TESTING)
+        if(!ContextListener.TESTING)
             if (handleUnauthorizedCase(req, resp)) return;
         if (handleFirstRequestCase(req, resp)) return;
 
@@ -39,7 +39,7 @@ public class SearchServlet extends HttpServlet {
         }
 
         UserDAOInterface userDao = (UserDAOInterface) req.getServletContext().getAttribute(UserDAO.USER_DAO_ATTR);
-        SearchResults results = getResults(userDao, query);
+        SearchResults results = getResults(req, userDao, query);
         addTestUsers(results);
 
         req.setAttribute(RESULTS_ATTRIBUTE, results);
@@ -47,14 +47,14 @@ public class SearchServlet extends HttpServlet {
     }
 
     private void addTestUsers(SearchResults results) {
-        if (TESTING){
+        if (ContextListener.TESTING){
             for (int i = 0; i < 20; i++) {
                 results.addEntry(new UserBean("user" + i, "name" + i * i+4, "surname", "password", null));
             }
         }
     }
 
-    private boolean handleUnauthorizedCase(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+    public static boolean handleUnauthorizedCase(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         if (req.getSession().getAttribute(UserBean.USER_ATTR) == null){
             resp.sendRedirect("/");
             return true;
@@ -80,7 +80,7 @@ public class SearchServlet extends HttpServlet {
         return req.getParameterMap().isEmpty();
     }
 
-    private SearchResults getResults(UserDAOInterface userDao, String query) {
+    private SearchResults getResults(HttpServletRequest req, UserDAOInterface userDao, String query) {
         if (query.isEmpty()) return new SearchResults();
 
         OrFilter orFilter = new OrFilter();
@@ -94,7 +94,13 @@ public class SearchServlet extends HttpServlet {
         if (orFilter.format().isEmpty()) return new SearchResults();
 
         List<UserBean> users = userDao.getUsersWithFilter(orFilter);
+        int selfId = (int) req.getSession().getAttribute(UserBean.USER_ATTR);
+        removeSelf(users, selfId);
         return new SearchResults(users);
+    }
+
+    private void removeSelf(List<UserBean> users, int selfId) {
+        users.removeIf(u -> u.getId() == selfId);
     }
 
     private Filter buildFilterFromToken(String nextToken) {

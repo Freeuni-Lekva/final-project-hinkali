@@ -7,6 +7,7 @@ import dao.interfaces.StatsDaoInterface;
 import dao.interfaces.UserDAOInterface;
 import dao.interfaces.UserWrapperInterface;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class UserWrapperDao implements UserWrapperInterface {
@@ -56,6 +57,9 @@ public class UserWrapperDao implements UserWrapperInterface {
         return userDao.getUsersWithFilter(f);
     }
 
+    @Override
+    public boolean changeUser(UserBean user) { return userDao.changeUser(user); }
+
     @Deprecated
     public void addStatsForNewUser(int userId) {
     }
@@ -75,8 +79,14 @@ public class UserWrapperDao implements UserWrapperInterface {
         return statsDao.getStatsAll();
     }
 
+    @Override
+    public ArrayList<StatsBean> getStatsWithDescendingPoints() { return statsDao.getStatsWithDescendingPoints();}
+
     @Deprecated
     public boolean removeStats(int userId) {
         return false;
     }
+
+    @Override
+    public int getRankById(int userId) { return statsDao.getRankById(userId);}
 }

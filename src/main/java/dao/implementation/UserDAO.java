@@ -3,7 +3,6 @@ package dao.implementation;
 import commons.beans.UserBean;
 import dao.DatabaseUtility;
 import dao.interfaces.Filter;
-import dao.interfaces.StatsDaoInterface;
 import dao.interfaces.UserDAOInterface;
 import model.UserUtility;
 
@@ -139,6 +138,31 @@ public class UserDAO implements UserDAOInterface {
         }catch (SQLException e){
             e.printStackTrace();
         }finally {
+            DatabaseUtility.closeConnection(conn);
+        }
+        return result;
+    }
+
+    public boolean changeUser(UserBean user) {
+        Connection conn = DatabaseUtility.getConnection();
+        boolean result = false;
+        try {
+            String sql = "UPDATE users SET username = ?, name = ?, surname = ?, password = ?, birthday = ? WHERE userid = ?;";
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, user.getUsername());
+            pstmt.setString(2, UserUtility.capitalizeFirstLetter(user.getName()));
+            pstmt.setString(3, UserUtility.capitalizeFirstLetter(user.getSurname()));
+            pstmt.setString(4, UserUtility.generateHash(user.getPassword()));
+            pstmt.setDate(5, user.getBirthday());
+            pstmt.setInt(6, user.getId());
+            int numChanged = pstmt.executeUpdate();
+            if (numChanged == 1)
+                result = true;
+        } catch (SQLIntegrityConstraintViolationException e) {
+            return false;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
             DatabaseUtility.closeConnection(conn);
         }
         return result;
