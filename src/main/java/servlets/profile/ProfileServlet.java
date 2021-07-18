@@ -25,21 +25,20 @@ public class ProfileServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.getSession().setAttribute(UserBean.USER_ATTR, 1) ;
         if (req.getSession().getAttribute(UserBean.USER_ATTR) == null){
             resp.sendRedirect("/");
             return;
         }
-
-       int userId = (int) req.getSession().getAttribute(UserBean.USER_ATTR);
-
-        req.getSession().setAttribute(UserBean.USER_ATTR, userId);
-       int userToCheck = 0;
+        int userId = (int) req.getSession().getAttribute(UserBean.USER_ATTR);
+        int userToCheck = 0;
         if(req.getParameter("id") == null){
-            userToCheck = userId;
-
+            resp.sendRedirect("profile?id=" + userId);
+            return;
         } else {
             userToCheck = Integer.parseInt(req.getParameter("id"));
         }
+
         //Direct to own profile page
         if(userToCheck == userId ){
             req.setAttribute(ProfileServlet.GO_TO_PARAM,ProfileServlet.GO_TO_OWN);
@@ -69,7 +68,7 @@ public class ProfileServlet extends HttpServlet {
         FriendDaoInterface friendDao = (FriendDaoInterface) req.getServletContext().getAttribute(FriendDao.FRIEND_DAO_ATTR);
 
         if(user == checking){
-            //go to edit
+            resp.sendRedirect("/edit-profile");
         } else if(friendDao.isFriend(user,checking)){
             friendDao.unfriend(user,checking);
             req.setAttribute(ProfileServlet.GO_TO_PARAM,ProfileServlet.GO_TO_STRANGER);
