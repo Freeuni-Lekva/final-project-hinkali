@@ -21,20 +21,16 @@ import static org.junit.jupiter.api.Assertions.*;
 public class DeckDAOTest {
 
     private Deck deck1, deck2, deck3;
-    private Card card1 = new Card("cardTest1", "cardTest1", 1);
-    private Card card2 = new Card("cardTest2", "cardTest2", 2);
-    private Card card3 = new Card("cardTest3", "cardTest3", 3);
-    private UserBean user = new UserBean("deckTest123", "deckTest123", "deckTest123", "deckTest123", null);
-    private DeckDAOInterface deckDao = new DeckDAO();
-    private CardDAOInterface cardDao = new CardDAO();
-    private UserDAOInterface userDao = new UserDAO();
+    private final Card card1 = new Card("cardTest1", "cardTest1", 1);
+    private final Card card2 = new Card("cardTest2", "cardTest2", 2);
+    private final Card card3 = new Card("cardTest3", "cardTest3", 3);
+    private final UserBean user = new UserBean("deckTest123", "deckTest123", "deckTest123", "deckTest123", null);
+    private final DeckDAOInterface deckDao = new DeckDAO();
+    private final CardDAOInterface cardDao = new CardDAO();
+    private final UserDAOInterface userDao = new UserDAO();
 
     @Before
     public void setUp() throws Exception {
-        card1 = new Card("cardTest1", "cardTest1", 1);
-        card2 = new Card("cardTest2", "cardTest2", 2);
-        card3 = new Card("cardTest3", "cardTest3", 3);
-
         assertTrue(cardDao.addCard(card1));
         assertTrue(cardDao.addCard(card2));
         assertTrue(cardDao.addCard(card3));
