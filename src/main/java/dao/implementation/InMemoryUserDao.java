@@ -4,13 +4,16 @@ import commons.beans.UserBean;
 import dao.interfaces.Filter;
 import dao.interfaces.UserDAOInterface;
 
-import javax.xml.registry.infomodel.User;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class InMemoryUserDao implements UserDAOInterface {
-    
-    private List<UserBean> users;
+    private final List<UserBean> users;
+
+    public InMemoryUserDao(){
+        users = new ArrayList<>();
+    }
     
     @Override
     public boolean addUser(UserBean user) {
