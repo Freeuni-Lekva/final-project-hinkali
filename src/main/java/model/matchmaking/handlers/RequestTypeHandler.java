@@ -16,10 +16,12 @@ public class RequestTypeHandler implements RequestHandlerChain {
 
     @Override
     public IResponse processRequest() {
-        return switch (request.getAction()) {
-            case "join" -> new JoinRequestHandler(queue, request).processRequest();
-            case "leave" -> new LeaveRequestHandler(queue, request).processRequest();
-            default -> ResponseBuilder.getErrorResponse();
+        IResponse response;
+        switch (request.getAction()) {
+            case "join": response = new JoinRequestHandler(queue, request).processRequest(); break;
+            case "leave": response = new LeaveRequestHandler(queue, request).processRequest(); break;
+            default: response = ResponseBuilder.getErrorResponse();
         };
+        return response;
     }
 }
