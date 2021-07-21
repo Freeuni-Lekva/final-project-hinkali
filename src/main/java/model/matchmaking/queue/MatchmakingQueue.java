@@ -90,4 +90,13 @@ public class MatchmakingQueue implements IQueue<Integer>{
         Set<Integer> userSet = queue.keySet();
         return new ArrayList<>(userSet);
     }
+
+    @Override
+    public String toString() {
+        return "MatchmakingQueue{" +
+                "queue=" + queue +
+                ", pairs=" + pairs +
+                ", sessionCount=" + sessionCount +
+                '}';
+    }
 }

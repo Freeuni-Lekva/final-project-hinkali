@@ -4,9 +4,11 @@ import model.matchmaking.BasicMatchmakingQueue;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@Disabled
 public class BasicMatchmakingTest {
     private BasicMatchmakingQueue queue;
 
