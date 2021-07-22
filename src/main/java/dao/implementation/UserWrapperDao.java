@@ -86,4 +86,7 @@ public class UserWrapperDao implements UserWrapperInterface {
     public boolean removeStats(int userId) {
         return false;
     }
+
+    @Override
+    public int getRankById(int userId) { return statsDao.getRankById(userId);}
 }
