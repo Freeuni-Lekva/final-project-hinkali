@@ -1,4 +1,5 @@
 import '../styles/Card.css'
+import sample from '../resources/sample.png'
 
 const Card = ({card}) => {
 
@@ -6,10 +7,7 @@ const Card = ({card}) => {
         <div className="topInfo">
 
         </div>
-        <img alt="picture goes here"/>
-        <div className="bottomInfo">
-            <label>{card.name}</label>
-        </div>
+        <img src={sample} alt="picture goes here" className="image"/>
     </div>
 }
 

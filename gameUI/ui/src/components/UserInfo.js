@@ -1,5 +1,5 @@
 import '../styles/UserInfo.css'
-import userAvatar from './resources/user-svgrepo-com.svg'
+import userAvatar from '../resources/user-svgrepo-com.svg'
 
 const UserInfo = ({user}) => {
     return <div className="UserInfo">

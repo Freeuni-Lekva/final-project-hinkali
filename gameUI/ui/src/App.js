@@ -22,18 +22,18 @@ function App() {
 
   return (
     <div className="App">
-        <div className="upperWrapper">
-            <div className="userInfoWrapper">
-                <UserInfo user={gameState.opponent}/>
-                <UserInfo user={gameState.player}/>
-            </div>
+        <div className="userInfoWrapper">
+            <UserInfo user={gameState.opponent}/>
+            <UserInfo user={gameState.player}/>
+        </div>
+        <div className="gameWrapper">
             <div className="boardWrapper">
                 <PlayerBoard board={gameState.opponent.board}/>
                 <PlayerBoard board={gameState.player.board}/>
             </div>
-        </div>
-        <div className="playerControlWrapper">
-            <PlayerHand hand={gameState.player.hand}/>
+            <div className="playerControlWrapper">
+                <PlayerHand hand={gameState.player.hand}/>
+            </div>
         </div>
     </div>
   );

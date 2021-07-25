@@ -1,10 +1,11 @@
 import Card from "./Card";
 import '../styles/PlayerHand.css'
+import EndTurnButton from "./EndTurnButton";
 
 const PlayerHand = ({hand}) => {
 
     return <div className="PlayerHand">
-            <ul className="cards">
+            <ul className="cardsList">
                 {hand.map(card => {
                     return <li key={card.name} className="cardWrapper">
                         <Card card={card}/>
@@ -12,7 +13,7 @@ const PlayerHand = ({hand}) => {
                 })}
             </ul>
         <div className="endTurnButton">
-
+            <EndTurnButton isPlayerTurn={false}/>
         </div>
     </div>
 }
