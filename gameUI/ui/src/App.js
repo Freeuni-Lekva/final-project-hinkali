@@ -3,25 +3,28 @@ import PlayerHand from "./components/PlayerHand";
 import UserInfo from "./components/UserInfo";
 import './styles/App.css'
 
+const gameState = {
+    player: {
+        name: 'me',
+        lives: 2,
+        board: [{type: 'close', cards:[{name: 'jerardo', rating: 15}, {name: 'extra', rating: 2}]}, {type: 'mid', cards:[{name: 'middle', rating: 4}]},
+            {type: 'far', cards: [{name: 'katapult', rating: 8}]}],
+        hand: [{name: 'cardInHandA', rating: 6}, {name: 'cardInHandB', rating: 5}],
+        isPlayerTurn: false
+    },
+    opponent: {
+        name: 'opponent',
+        lives: 2,
+        board: [{type: 'far', cards:[{name: 'bigu', rating: 10}]}, {type: 'mid', cards:[{name: 'smol', rating: 2}, {name: 'extrasmol', rating: 1}]},
+            {type: 'close', cards: [{name: 'notpult', rating: 7}]}]
+    }
+}
+
 
 function App() {
-    const gameState = {
-        player: {
-            name: 'me',
-            lives: 2,
-            board: [{type: 'close', cards:[{name: 'jerardo'}, {name: 'extra'}]}, {type: 'mid', cards:[{name: 'midldle'}]}, {type: 'far', cards: [{name: 'katapult'}]}],
-            hand: [{name: 'cardInHandA'}, {name: 'cardInHandB'}],
-            isPlayerTurn: false
-        },
-        opponent: {
-            name: 'opponent',
-            lives: 2,
-            board: [{type: 'far', cards:[{name: 'bigu'}]}, {type: 'mid', cards:[{name: 'smol'}, {name: 'extrasmol'}]}, {type: 'close', cards: [{name: 'notpult'}]}]
-        }
-    }
 
-  return (
-    <div className="App">
+    return (
+        <div className="App">
         <div className="userInfoWrapper">
             <UserInfo user={gameState.opponent}/>
             <UserInfo user={gameState.player}/>

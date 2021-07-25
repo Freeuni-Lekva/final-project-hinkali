@@ -1,21 +1,22 @@
 .Card{
-    display: flex;
-    flex-direction: column;
+    display: flow;
     aspect-ratio: 8/11.5;
-    height: 80%;
+    height: 85%;
     justify-content: center;
     padding: 0.2em;
-    border-radius: 0.5em;
+    border-radius: 0.4em;
     position: relative;
     background-image: linear-gradient(to bottom right, var(--materialBlueGrey-color), var(--materialBlueGreyDarker-color));
     border: 0.01em outset black;
+    cursor: pointer;
+    transition: 400ms;
 }
 
 .Card:hover{
-    height: 90%;
-    padding: 1em;
+    height: 110%;
+    padding: 0.6em;
     box-shadow: 0 2em 3em 0 black, inset 0 0 0.7em black;
-    transition: 200ms;
+    transition: 400ms;
     z-index: 1000;
 }
 
@@ -23,6 +24,13 @@
     width: 99%;
     height: 99%;
     border: 0.01em inset black;
-    border-radius: 0.5em;
+    border-radius: 0.3em;
     background: var(--materialBlueGreyDarker-color);
+}
+
+.topInfo{
+    position: relative;
+    height: 0;
+    top: 0;
+    left: 10%;
 }
