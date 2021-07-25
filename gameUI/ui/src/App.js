@@ -1,35 +1,39 @@
-import './App.css';
 import PlayerBoard from "./components/PlayerBoard";
 import PlayerHand from "./components/PlayerHand";
-import EndTurnButton from "./components/EndTurnButton";
 import UserInfo from "./components/UserInfo";
+import './styles/App.css'
+
 
 function App() {
-    const player = {
-        name: 'me',
-        board: 'playerBoardGoesHere',
-        hand: [{name: 'geraldo'}, {name: 'jerald'}],
-        isPlayerTurn: false
-    }
-
-    const opponent = {
-        name: 'not me',
-        board: 'opponentBoardGoesHere'
+    const gameState = {
+        player: {
+            name: 'me',
+            lives: 2,
+            board: [{type: 'close', cards:[{name: 'jerardo'}, {name: 'extra'}]}, {type: 'mid', cards:[{name: 'midldle'}]}, {type: 'far', cards: [{name: 'katapult'}]}],
+            hand: [{name: 'cardInHandA'}, {name: 'cardInHandB'}],
+            isPlayerTurn: false
+        },
+        opponent: {
+            name: 'opponent',
+            lives: 2,
+            board: [{type: 'far', cards:[{name: 'bigu'}]}, {type: 'mid', cards:[{name: 'smol'}, {name: 'extrasmol'}]}, {type: 'close', cards: [{name: 'notpult'}]}]
+        }
     }
 
   return (
     <div className="App">
-        <div className="userInfoWrapper">
-            <UserInfo user={opponent}/>
-            <UserInfo user={player}/>
-        </div>
-        <div className="boardWrapper">
-            <PlayerBoard board={opponent.board}/>
-            <PlayerBoard board={player.board}/>
+        <div className="upperWrapper">
+            <div className="userInfoWrapper">
+                <UserInfo user={gameState.opponent}/>
+                <UserInfo user={gameState.player}/>
+            </div>
+            <div className="boardWrapper">
+                <PlayerBoard board={gameState.opponent.board}/>
+                <PlayerBoard board={gameState.player.board}/>
+            </div>
         </div>
         <div className="playerControlWrapper">
-            <PlayerHand hand={player.hand}/>
-            <EndTurnButton isPlayerTurn={player.isPlayerTurn}/>
+            <PlayerHand hand={gameState.player.hand}/>
         </div>
     </div>
   );

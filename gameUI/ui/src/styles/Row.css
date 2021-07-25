@@ -1,0 +1,45 @@
+:root {
+    --background-color:#161414;
+    --mainyellow-color:#febf0a;
+    --mainpurple-clor:#494ca2;
+}
+
+.Row{
+    height: 8em;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    margin-top: 0.3rem;
+    margin-bottom: 0.3rem;
+    border: 0.1em solid var(--mainYellow-color);
+    border-radius: 1em;
+}
+
+.cards{
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+
+.cardWrapper{
+    list-style: none;
+    padding: 0;
+    height: 100%;
+    width: fit-content;
+    margin-left: 0.5em;
+    margin-right: 0.5em;
+    justify-content: center;
+    align-items: center;
+}
+
+.rowInfo{
+    background-color: white;
+    height: 100%;
+    width: 4rem;
+}

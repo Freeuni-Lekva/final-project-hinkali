@@ -1,8 +1,15 @@
+import '../styles/Card.css'
 
 const Card = ({card}) => {
 
     return <div className="Card">
-        <label>{card.name}</label>
+        <div className="topInfo">
+
+        </div>
+        <img alt="picture goes here"/>
+        <div className="bottomInfo">
+            <label>{card.name}</label>
+        </div>
     </div>
 }
 

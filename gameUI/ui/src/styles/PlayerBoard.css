@@ -1,0 +1,15 @@
+:root {
+    --background-color:#161414;
+    --mainYellow-color:#febf0a;
+    --mainPurple-clor:#494ca2;
+}
+
+.PlayerBoard{
+    display: inline-grid;
+    width: 85%;
+    height: fit-content;
+    margin: 1em;
+    border: 0.1em solid var(--mainYellow-color);
+    border-radius: 1em;
+    background-color: grey;
+}

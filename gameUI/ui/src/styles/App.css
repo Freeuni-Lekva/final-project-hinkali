@@ -1,0 +1,34 @@
+:root {
+    --background-color:#161414;
+    --mainYellow-color:#febf0a;
+    --mainPurple-clor:#494ca2;
+}
+
+.App{
+    background-color: var(--background-color);
+}
+
+.upperWrapper{
+    display: inline-flex;
+    flex-direction: row;
+    width: 100%;
+    height: 40%;
+    overflow: hidden;
+}
+
+.userInfoWrapper{
+    width: 10%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    margin: 1em;
+}
+
+.boardWrapper{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}

@@ -1,12 +1,19 @@
 import Card from "./Card";
-import './PlayerHand.css'
+import '../styles/PlayerHand.css'
 
 const PlayerHand = ({hand}) => {
 
     return <div className="PlayerHand">
-        {hand.map(card => {
-            return <Card card={card}/>
-        })}
+            <ul className="cards">
+                {hand.map(card => {
+                    return <li key={card.name} className="cardWrapper">
+                        <Card card={card}/>
+                    </li>
+                })}
+            </ul>
+        <div className="endTurnButton">
+
+        </div>
     </div>
 }
 
