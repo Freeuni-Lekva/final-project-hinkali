@@ -10,19 +10,24 @@ const gameState = {
         board: [{type: 'close', cards:[{name: 'jerardo', rating: 15}, {name: 'extra', rating: 2}]}, {type: 'mid', cards:[{name: 'middle', rating: 4}]},
             {type: 'far', cards: [{name: 'katapult', rating: 8}]}],
         hand: [{name: 'cardInHandA', rating: 6}, {name: 'cardInHandB', rating: 5}],
-        isPlayerTurn: false
+        isPlayerTurn: false,
+        deck: {size: 10},
+        isPlayer: true,
+        livesLeft: 2
     },
     opponent: {
         name: 'opponent',
         lives: 2,
         board: [{type: 'far', cards:[{name: 'bigu', rating: 10}]}, {type: 'mid', cards:[{name: 'smol', rating: 2}, {name: 'extrasmol', rating: 1}]},
-            {type: 'close', cards: [{name: 'notpult', rating: 7}]}]
+            {type: 'close', cards: [{name: 'notpult', rating: 7}]}],
+        deck: {size: 11},
+        isPlayer: false,
+        livesLeft: 2
     }
 }
 
 
 function App() {
-
     return (
         <div className="App">
         <div className="userInfoWrapper">
