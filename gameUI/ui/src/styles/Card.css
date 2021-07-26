@@ -9,14 +9,14 @@
     background-image: linear-gradient(to bottom right, var(--materialBlueGrey-color), var(--materialBlueGreyDarker-color));
     border: 0.01em outset black;
     cursor: pointer;
-    transition: 400ms;
+    transition: 200ms;
 }
 
 .Card:hover{
     height: 110%;
     padding: 0.6em;
     box-shadow: 0 2em 3em 0 black, inset 0 0 0.7em black;
-    transition: 400ms;
+    transition: 200ms;
     z-index: 1000;
 }
 
