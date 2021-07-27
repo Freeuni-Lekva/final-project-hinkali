@@ -2,11 +2,12 @@
     display: flow;
     aspect-ratio: 8/11.5;
     height: 85%;
+    align-items: center;
     justify-content: center;
     padding: 0.2em;
     border-radius: 0.4em;
     position: relative;
-    background-image: linear-gradient(to bottom right, var(--materialBlueGrey-color), var(--materialBlueGreyDarker-color));
+    background: rebeccapurple;
     border: 0.01em outset black;
     cursor: pointer;
     transition: 200ms;
@@ -14,23 +15,53 @@
 
 .Card:hover{
     height: 110%;
-    padding: 0.6em;
+    padding: 0.4em;
     box-shadow: 0 2em 3em 0 black, inset 0 0 0.7em black;
+    font-size: larger;
     transition: 200ms;
     z-index: 1000;
 }
 
+.Card:hover .ratingLabel{
+    font-size: x-large;
+    transition: 200ms;
+}
+
 .image{
-    width: 99%;
-    height: 99%;
+    width: 98%;
+    height: 98%;
     border: 0.01em inset black;
     border-radius: 0.3em;
     background: var(--materialBlueGreyDarker-color);
 }
 
-.topInfo{
-    position: relative;
-    height: 0;
+.info{
+    position: absolute;
+    left: 13%;
+    height: 20%;
+    width: 26%;
+}
+
+.ratingLabel{
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    position: absolute;
+    display: block;
     top: 0;
-    left: 10%;
+    aspect-ratio: 1/1;
+    width: 100%;
+    color: white;
+    align-content: center;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    padding: 0.1em;
+    border-bottom-left-radius: 1em;
+    border-bottom-right-radius: 1em;
+    border: 0.1em outset gold;
+    border-top: transparent;
+    font-size: larger;
+    font-weight: bold;
+    transition: 200ms;
+    background-image: linear-gradient(to bottom right, darkred, purple);
 }

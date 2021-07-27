@@ -5,7 +5,9 @@ const PlayerBoard = ({board}) => {
 
     return <div className="PlayerBoard">
         <div className="points">
-            0
+            <label className="pointsLabel">
+                75
+            </label>
         </div>
         <ul className="rowList">
             {board.map(row => {

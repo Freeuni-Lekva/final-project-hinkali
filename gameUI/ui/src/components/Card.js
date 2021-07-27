@@ -1,11 +1,10 @@
 import '../styles/Card.css'
-import sample from '../resources/sample.png'
 import notFoundImg from '../resources/image-not-found.png'
 
 const Card = ({card}) => {
 
     return <div className="Card">
-        <div className="topInfo">
+        <div className="info">
             <label className="ratingLabel">
                 {card.rating}
             </label>

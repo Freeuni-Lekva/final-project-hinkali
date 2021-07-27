@@ -7,7 +7,7 @@ const EndTurnButton = ({isPlayerTurn}) => {
         <div className="button_su">
         <span className="su_button_circle">
         </span>
-            <a href="#" className="button_su_inner">
+            <a className="button_su_inner">
           <span className="button_text_container">
             Pass Turn
           </span>

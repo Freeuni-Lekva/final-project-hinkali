@@ -19,7 +19,7 @@ const gameState = {
         name: 'opponent',
         lives: 2,
         board: [{type: 'far', cards:[{name: 'bigu', rating: 10}]}, {type: 'mid', cards:[{name: 'smol', rating: 2}, {name: 'extrasmol', rating: 1}]},
-            {type: 'close', cards: [{name: 'notpult', rating: 7}]}],
+            {type: 'close', cards: []}],
         deck: {size: 11},
         isPlayer: false,
         livesLeft: 2

@@ -4,8 +4,9 @@ import '../styles/Row.css'
 const Row = ({row}) => {
     return <div className="Row">
         <div className="rowInfo">
-            <label className="type"> {row.type} </label>
-            <label className="rowPoints">0</label>
+            <div className="labelContainer">
+                <label className="rowPoints">0</label>
+            </div>
         </div>
         <ul className="cards">
             {row.cards.map(card => {

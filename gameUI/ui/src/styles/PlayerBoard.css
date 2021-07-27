@@ -6,8 +6,7 @@
     justify-content: flex-start;
     margin-top: 0.5em;
     margin-bottom: 0.5em;
-    box-shadow: inset 0 0 0.3em black, 0 1px 3px 0 #4b4b4b, 0 1px 2px 0 #929292;
-    border: 0 solid rgba(0,0,0,.125);
+    box-shadow: inset 0 0 0.3em black;
     border-radius: .25rem;
     background-image: linear-gradient(to bottom right, var(--materialBlueGrey-color), var(--materialBlueGreyDarker-color));
 }
@@ -27,13 +26,44 @@
 
 .points{
     display: flex;
+    position: relative;
     aspect-ratio: 1/1;
     width: 3%;
     justify-content: center;
     align-items: center;
+    text-align: center;
     padding: 0.3em;
-    border: 0.1em solid darkred;
-    border-radius: 50%;
     margin-left: 1em;
     margin-right: 1em;
+}
+
+.points:before{
+    content: '';
+    position: absolute;
+    margin: 0 auto;
+    left: 50%;
+    top: 30%;
+    width: 75%;
+    height: 75%;
+    background-image: linear-gradient(to bottom right, var(--mainPurple-color), darkred);
+    /* Rotate */
+    -webkit-transform: rotate(-45deg);
+    -moz-transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+    -o-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+    /* Rotate Origin */
+    -webkit-transform-origin: 0 100%;
+    -moz-transform-origin: 0 100%;
+    -ms-transform-origin: 0 100%;
+    -o-transform-origin: 0 100%;
+    transform-origin: 0 100%;
+    box-shadow: inset 0 0 0.8em black;
+}
+
+.pointsLabel{
+    z-index: 10;
+    color: white;
+    font-weight: bolder;
+    font-size: large;
 }
