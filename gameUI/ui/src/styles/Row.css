@@ -5,13 +5,14 @@
     display: flex;
     flex-direction: row;
     align-items: stretch;
-    justify-content: flex-start;
+    justify-content: space-between;
     margin-top: 0.3rem;
     margin-bottom: 0.3rem;
 }
 
 .cards{
     padding: 0;
+    position: relative;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -19,7 +20,22 @@
     width: 94%;
     height: 100%;
     box-shadow: inset 0 0 0.7em black;
+    border-radius: 1em;
+    margin-right: 0.4em;
 }
+
+.cards::before{
+    content: '';
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background-color: #212121;
+    opacity: 0.2;
+    border-radius: 1em;
+}
+
 
 .cards:hover{
     box-shadow: inset 0 0 1.2em black;
@@ -52,12 +68,13 @@
 .labelContainer::before{
     content: '';
     position: absolute;
-    background-image: linear-gradient(to bottom right, darkred, var(--mainPurple-color));
+    background-color: darkred;
+    box-shadow: inset 0 0 0.2em black;
     width: 100%;
     height: 100%;
     border-radius: 50%;
     left: 0;
-    top: -22%;
+    top: -20%;
 }
 
 .labelContainer{
@@ -72,6 +89,6 @@
     position: relative;
     z-index: 100000;
     color: white;
-    font-weight: bold;
-    font-size: large;
+    font-weight: bolder;
+    font-size: larger;
 }

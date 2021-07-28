@@ -7,15 +7,14 @@
     padding: 0.2em;
     border-radius: 0.4em;
     position: relative;
-    background: rebeccapurple;
-    border: 0.01em outset black;
+    background: lightgray;
     cursor: pointer;
     transition: 200ms;
 }
 
 .Card:hover{
     height: 110%;
-    padding: 0.4em;
+    padding: 0.6em;
     box-shadow: 0 2em 3em 0 black, inset 0 0 0.7em black;
     font-size: larger;
     transition: 200ms;
@@ -28,9 +27,8 @@
 }
 
 .image{
-    width: 98%;
-    height: 98%;
-    border: 0.01em inset black;
+    width: 100%;
+    height: 100%;
     border-radius: 0.3em;
     background: var(--materialBlueGreyDarker-color);
 }
@@ -58,7 +56,6 @@
     padding: 0.1em;
     border-bottom-left-radius: 1em;
     border-bottom-right-radius: 1em;
-    border: 0.1em outset gold;
     border-top: transparent;
     font-size: larger;
     font-weight: bold;

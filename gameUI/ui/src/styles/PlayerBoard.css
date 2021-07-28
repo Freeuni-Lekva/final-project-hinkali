@@ -1,5 +1,6 @@
 .PlayerBoard{
     display: flex;
+    position: relative;
     flex-direction: row;
     width: 97%;
     align-items: center;
@@ -7,8 +8,19 @@
     margin-top: 0.5em;
     margin-bottom: 0.5em;
     box-shadow: inset 0 0 0.3em black;
-    border-radius: .25rem;
-    background-image: linear-gradient(to bottom right, var(--materialBlueGrey-color), var(--materialBlueGreyDarker-color));
+    border-radius: 1rem;
+}
+
+.PlayerBoard::before{
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    background-color: #494ca2;
+    opacity: 0.7;
+    border-radius: 1rem;
 }
 
 .rowList{
@@ -45,7 +57,7 @@
     top: 30%;
     width: 75%;
     height: 75%;
-    background-image: linear-gradient(to bottom right, var(--mainPurple-color), darkred);
+    background-color: darkred;
     /* Rotate */
     -webkit-transform: rotate(-45deg);
     -moz-transform: rotate(-45deg);
@@ -58,12 +70,12 @@
     -ms-transform-origin: 0 100%;
     -o-transform-origin: 0 100%;
     transform-origin: 0 100%;
-    box-shadow: inset 0 0 0.8em black;
+    box-shadow: inset 0 0 0.2em black;
 }
 
 .pointsLabel{
     z-index: 10;
     color: white;
     font-weight: bolder;
-    font-size: large;
+    font-size: x-large;
 }
