@@ -1,5 +1,6 @@
 import '../styles/UserInfo.css'
 import userAvatar from '../resources/user-svgrepo-com.svg'
+import Deck from "./Deck";
 
 const UserInfo = ({user}) => {
     const deck = user.deck
@@ -7,11 +8,9 @@ const UserInfo = ({user}) => {
     let html = null
     if (user.isPlayer){
         html = <div className="UserInfo">
-            <div className="deck">
-                <label>{deck.size}</label>
-            </div>
+            <Deck deck={user.deck}/>
             <div className="livesLeft">
-                <label>{livesLeft}</label>
+                <label> Lives left: {livesLeft} </label>
             </div>
                 <div className="user">
                     <img src={userAvatar} className="svg" alt="error"/>
@@ -40,9 +39,10 @@ const UserInfo = ({user}) => {
                     </label>
                 </div>
             </div>
-            <div className="deck">
-                <label>{deck.size}</label>
+            <div className="livesLeft">
+                <label> Lives left: {livesLeft} </label>
             </div>
+            <Deck deck={user.deck}/>
         </div>
     }
 

@@ -6,6 +6,8 @@
 
 .UserInfo{
     height: fit-content;
+    display: flex;
+    flex-direction: column;
 }
 
 .user {
@@ -38,11 +40,25 @@
     color: #bfbfbf;
     margin-left: 0.9em;
     font-size: larger;
+    transition: 200ms;
 }
 
 .user:hover {
     font-weight: bold;
     color: white;
     transition: 300ms;
-    box-shadow: 0 1px 3px 0 #4b4b4b, 0 1px 2px 0 #929292;
+}
+
+.livesLeft{
+    color: white;
+    font-size: x-large;
+    font-weight: lighter;
+    position: relative;
+    background-color: #1e1e1e;
+    border-radius: .25em;
+    width: fit-content;
+    margin-bottom: 1em;
+    margin-top: 1em;
+    padding: 0.5em 1em;
+    align-self: center;
 }
