@@ -11,6 +11,8 @@ public interface UserDAOInterface {
 
     UserBean getUserById(int id);
 
+    UserBean getUserByUsername(String username);
+
     boolean removeUser(int id);
 
     List<UserBean> getUsersWithFilter(Filter f);

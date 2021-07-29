@@ -1,6 +1,7 @@
 package commons.beans;
 
 import java.sql.Date;
+import java.util.Objects;
 
 public class UserBean {
     // put this in setAttribute(key, obj)
@@ -71,12 +72,17 @@ public class UserBean {
                 '}';
     }
 
+
     @Override
     public boolean equals(Object o) {
-        if (o instanceof UserBean) {
-            UserBean toCompare = (UserBean) o;
-            return this.id == toCompare.id;
-        }
-        return false;
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        UserBean userBean = (UserBean) o;
+        return id == userBean.id && Objects.equals(username, userBean.username);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, username);
     }
 }
