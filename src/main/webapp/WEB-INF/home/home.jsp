@@ -25,6 +25,10 @@
         <input type="submit" value="Play">
     </form>
     <form method="post">
+        <input name= "buttonID" type="hidden" value=<%= HomeServlet.INVITE_BUTTON_ID%>>
+        <input type="submit" value="Invite Friend">
+    </form>
+    <form method="post">
         <input name= "buttonID" type="hidden" value=<%= HomeServlet.PROFILE_BUTTON_ID%>>
         <input type="submit" value="Profile">
     </form>
