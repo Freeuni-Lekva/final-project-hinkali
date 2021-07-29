@@ -72,16 +72,17 @@ public class UserBean {
                 '}';
     }
 
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         UserBean userBean = (UserBean) o;
-        return id == userBean.id && Objects.equals(username, userBean.username) && Objects.equals(name, userBean.name) && Objects.equals(surname, userBean.surname) && Objects.equals(password, userBean.password) && Objects.equals(birthday, userBean.birthday);
+        return id == userBean.id && Objects.equals(username, userBean.username);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, username, name, surname, password, birthday);
+        return Objects.hash(id, username);
     }
 }
