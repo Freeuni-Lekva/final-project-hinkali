@@ -8,7 +8,7 @@ import java.util.List;
 public interface IGameInviteManager {
     void handleInviteRequest(UserBean sender, UserBean receiver);
     IResponse handleAwaitRequest(UserBean user);
-    void handleLeaveRequest(UserBean user);
+    IResponse handleLeaveRequest(UserBean user);
     IResponse handleAcceptRequest(UserBean receiver, UserBean sender);
     List<UserBean> getAllInvites(UserBean user);
 }

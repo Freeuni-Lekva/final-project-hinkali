@@ -13,18 +13,20 @@ public class GameInviteManager implements IGameInviteManager{
     private final Map<UserBean, Integer> usersToGameIds;
     private final Map<UserBean, UserBean> lastInvited;
     private int sessionCount;
+    public static final int INITIAL_GAME_ID = 1024;
 
     public GameInviteManager(){
         pendingInvites = new HashMap<>();
         usersToGameIds = new HashMap<>();
         lastInvited = new HashMap<>();
-        sessionCount = 0;
+        sessionCount = INITIAL_GAME_ID;
     }
 
     @Override
     public void handleInviteRequest(UserBean sender, UserBean receiver) {
         if (pendingInvites.containsKey(receiver)){
             pendingInvites.get(receiver).add(sender);
+            lastInvited.put(sender, receiver);
             return;
         }
 
@@ -48,10 +50,11 @@ public class GameInviteManager implements IGameInviteManager{
     }
 
     @Override
-    public void handleLeaveRequest(UserBean user) {
+    public IResponse handleLeaveRequest(UserBean user) {
         assert (!usersToGameIds.containsKey(user));
         pendingInvites.get(lastInvited.get(user)).remove(user);
         lastInvited.remove(user);
+        return new FailedResponse();
     }
 
     @Override
@@ -67,11 +70,27 @@ public class GameInviteManager implements IGameInviteManager{
         return pendingInvites.get(user);
     }
 
+    public Map<UserBean, Integer> getUsersToGameIds() {
+        return usersToGameIds;
+    }
+
+    public Map<UserBean, UserBean> getLastInvited() {
+        return lastInvited;
+    }
+
     private int createGame(UserBean sender, UserBean receiver){
         int gameId = sessionCount++;
-        usersToGameIds.put(sender, gameId);
-        usersToGameIds.put(receiver, gameId);
+        updateGameIdForUser(sender, gameId);
+        updateGameIdForUser(receiver, gameId);
         pendingInvites.remove(receiver);
         return gameId;
+    }
+
+    private void updateGameIdForUser(UserBean sender, int gameId) {
+        if (usersToGameIds.containsKey(sender)){
+            usersToGameIds.replace(sender, gameId);
+        }else{
+            usersToGameIds.put(sender, gameId);
+        }
     }
 }
