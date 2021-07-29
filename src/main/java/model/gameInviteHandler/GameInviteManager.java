@@ -23,7 +23,7 @@ public class GameInviteManager implements IGameInviteManager{
     }
 
     @Override
-    public void handleInviteRequest(UserBean sender, UserBean receiver) {
+    public synchronized void handleInviteRequest(UserBean sender, UserBean receiver) {
         if (pendingInvites.containsKey(receiver)){
             pendingInvites.get(receiver).add(sender);
             lastInvited.put(sender, receiver);
@@ -35,7 +35,7 @@ public class GameInviteManager implements IGameInviteManager{
     }
 
     @Override
-    public IResponse handleAwaitRequest(UserBean user) {
+    public synchronized IResponse handleAwaitRequest(UserBean user) {
         if (usersToGameIds.containsKey(user)){
             int gameId = usersToGameIds.get(user);
             usersToGameIds.remove(user);
@@ -50,7 +50,7 @@ public class GameInviteManager implements IGameInviteManager{
     }
 
     @Override
-    public IResponse handleLeaveRequest(UserBean user) {
+    public synchronized IResponse handleLeaveRequest(UserBean user) {
         assert (!usersToGameIds.containsKey(user));
         pendingInvites.get(lastInvited.get(user)).remove(user);
         lastInvited.remove(user);
@@ -58,7 +58,7 @@ public class GameInviteManager implements IGameInviteManager{
     }
 
     @Override
-    public IResponse handleAcceptRequest(UserBean receiver, UserBean sender) {
+    public synchronized IResponse handleAcceptRequest(UserBean receiver, UserBean sender) {
         assert (pendingInvites.containsKey(receiver));
         assert (pendingInvites.get(receiver).contains(sender));
         int gameId = createGame(sender, receiver);
