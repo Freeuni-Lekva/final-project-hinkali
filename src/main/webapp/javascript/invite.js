@@ -18,9 +18,47 @@ const redirectToHome = () => {
     window.location = '/home'
 }
 
+const acceptInvite = (username) => {
+    fetch(generateAcceptUrl(username)).then(r => r.json())
+        .then(r => {
+            if (r.state === 'success'){
+                clearInterval(waitingInterval)
+                redirectToGame(r.gameId)
+            }else{
+                throw ('could not accept invite')
+            }
+        })
+        .catch(e => console.error(e))
+}
 
-let waitingInterval
+// elements
+const appendListElement = (username, list) => {
+    const listWrapper = document.createElement('li')
+    const label = document.createElement('label')
+    label.innerHTML = username
+    const button = document.createElement('button')
+    button.innerText = 'Accept'
+    button.addEventListener("click", () => {
+        acceptInvite(username)
+        console.log("here")
+    })
+    listWrapper.appendChild(label)
+    listWrapper.appendChild(button)
+    list.appendChild(listWrapper)
+}
+
+const updateListDisplay = (usernames) => {
+    const list = document.getElementById('unorderedListId')
+    while (list.firstChild){
+        list.removeChild(list.lastChild)
+    }
+    usernames.map(username => {
+        appendListElement(username, list)
+    })
+}
+
 // functions
+let waitingInterval
 const sendJoinRequest = () => {
     const username = document.getElementById('inviteInputID').value
     const url = generateJoinUrl(username)
@@ -33,6 +71,7 @@ const sendJoinRequest = () => {
             const label = document.getElementById('statusLabelID')
             label.innerHTML = 'Error'
             label.style.visibility = 'visible'
+            document.getElementById('btnId').disabled = false
             return
         }
         waitingInterval = setInterval(awaitResponse, 1_500)
@@ -78,6 +117,18 @@ const awaitResponse = () => {
 const sendCancelRequest = () => {
     fetch(cancelUrl).then(r => r.json()).then(r => console.log(r)).catch(e => console.error(e))
 }
+
+const fetchInvites = () => {
+    fetch(fetchInvitesUrl).then(r => r.json())
+        .then(r => {
+            const usernames = r.senders
+            updateListDisplay(usernames)
+        }).catch(e => {
+            console.error(e)
+    })
+}
+
+setInterval(fetchInvites, 1_500)
 
 
 
