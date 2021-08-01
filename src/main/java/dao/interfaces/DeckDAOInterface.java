@@ -27,4 +27,8 @@ public interface DeckDAOInterface {
     boolean removeUserDeck(int userId);
 
     List<Integer> getDeckCardIds(int deckId);
+
+    List<Integer> getDecksContainingCard(int cardId);
+
+    List<Integer> getUsersWithDeck(int deckId);
 }
