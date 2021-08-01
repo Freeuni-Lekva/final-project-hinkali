@@ -141,7 +141,13 @@ public class FriendDao implements FriendDaoInterface {
     }
 
     @Override
-    public boolean isPendingFriend(int currUserId, int userToCheck) {
+    public boolean isSender(int currUserId, int userToCheck) {
         return pendingList(currUserId).contains(userToCheck);
     }
+
+    @Override
+    public boolean amSender(int currUserId, int userToCheck){
+        return pendingList(userToCheck).contains(currUserId);
+    }
+
 }
