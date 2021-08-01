@@ -186,6 +186,8 @@ public class DeckDAO implements DeckDAOInterface {
             if (numChanged == 1) {
                 result = true;
             }
+        } catch(SQLIntegrityConstraintViolationException e) {
+            return false;
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
