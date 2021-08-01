@@ -1,5 +1,6 @@
 package servlets.gameInvite.restAPI;
 
+import com.google.gson.Gson;
 import commons.beans.UserBean;
 import dao.implementation.UserWrapperDao;
 import dao.interfaces.UserWrapperInterface;
@@ -30,14 +31,24 @@ public class InviteServlet extends HttpServlet {
         String receiverUsername = req.getParameter("username");
         if (receiverUsername == null || receiverUsername.isEmpty()){
             System.err.println("InviteServlet: no parameter received");
+            String errorStr = "error";
+            Gson gson = new Gson();
+            resp.setStatus(404);
+            resp.getWriter().println(gson.toJson(errorStr));
             return;
         }
         UserBean receiver = dao.getUserByUsername(receiverUsername);
         if (receiver == null){
             System.err.println("InviteServlet: no such user found");
+            String errorStr = "error";
+            Gson gson = new Gson();
+            resp.setStatus(404);
+            resp.getWriter().println(gson.toJson(errorStr));
             return;
         }
 
         inviteManager.handleInviteRequest(user, receiver);
+        Gson gson = new Gson();
+        resp.getWriter().println(gson.toJson("waiting"));
     }
 }

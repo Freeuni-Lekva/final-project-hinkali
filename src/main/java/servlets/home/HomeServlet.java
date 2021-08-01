@@ -16,22 +16,32 @@ public class HomeServlet extends HttpServlet {
     public static final String SEARCH_BUTTON_ID = "2";
     public static final String DECKS_BUTTON_ID = "3";
     public static final String LOG_OUT_BUTTON_ID = "4";
+    public static final String INVITE_BUTTON_ID = "5";
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         String buttonId = req.getParameter("buttonID");
 
-        if(buttonId.equals(PLAY_BUTTON_ID))
-            resp.sendRedirect("/test_matchmaking");
-        else if(buttonId.equals(PROFILE_BUTTON_ID))
-            resp.sendRedirect("/profile");
-        else if(buttonId.equals(SEARCH_BUTTON_ID))
-            resp.sendRedirect("/search");
-        else if(buttonId.equals(DECKS_BUTTON_ID))
-            resp.sendRedirect("/choose_deck");
-        else if(buttonId.equals(LOG_OUT_BUTTON_ID)){
-            req.getSession().invalidate();
-            resp.sendRedirect("/login");
+        switch (buttonId) {
+            case PLAY_BUTTON_ID:
+                resp.sendRedirect("/matchmaking");
+                break;
+            case PROFILE_BUTTON_ID:
+                resp.sendRedirect("/profile");
+                break;
+            case SEARCH_BUTTON_ID:
+                resp.sendRedirect("/search");
+                break;
+            case DECKS_BUTTON_ID:
+                resp.sendRedirect("/choose_deck");
+                break;
+            case LOG_OUT_BUTTON_ID:
+                req.getSession().invalidate();
+                resp.sendRedirect("/login");
+                break;
+            case INVITE_BUTTON_ID:
+                resp.sendRedirect("/gameInvite");
+                break;
         }
     }
 
