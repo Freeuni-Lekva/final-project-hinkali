@@ -31,4 +31,6 @@ public interface DeckDAOInterface {
     List<Integer> getDecksContainingCard(int cardId);
 
     List<Integer> getUsersWithDeck(int deckId);
+
+    List<Deck> getAllDecks();
 }

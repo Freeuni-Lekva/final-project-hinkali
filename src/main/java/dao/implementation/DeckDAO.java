@@ -295,4 +295,26 @@ public class DeckDAO implements DeckDAOInterface {
         }
         return result;
     }
+
+    @Override
+    public List<Deck> getAllDecks() {
+        Connection conn = DatabaseUtility.getConnection();
+        List<Deck> result = new ArrayList<>();
+        try {
+            String sql = "SELECT * FROM decks";
+            pstmt = conn.prepareStatement(sql);
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                int deckId = rs.getInt("deck_id");
+                String name = rs.getString("name");
+                String image = rs.getString("image");
+                result.add(new Deck(deckId, name, image));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DatabaseUtility.closeConnection(conn);
+        }
+        return result;
+    }
 }

@@ -10,6 +10,8 @@ import java.util.List;
 
 public class DeckWrapperDAO implements DeckWrapperInterface {
 
+    public static final String DECK_WRAPPER_ATTR = "deckWrapper";
+
     private final CardDAOInterface cardDao;
     private final DeckDAOInterface deckDao;
 
@@ -89,4 +91,7 @@ public class DeckWrapperDAO implements DeckWrapperInterface {
 
     @Override
     public List<Integer> getUsersWithDeck(int deckId) { return deckDao.getUsersWithDeck(deckId); }
+
+    @Override
+    public List<Deck> getAllDecks() { return deckDao.getAllDecks(); }
 }

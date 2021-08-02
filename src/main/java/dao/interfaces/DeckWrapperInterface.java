@@ -54,4 +54,7 @@ public interface DeckWrapperInterface extends CardDAOInterface, DeckDAOInterface
 
     @Override
     List<Integer> getDeckCardIds(int deckId);
+
+    @Override
+    List<Deck> getAllDecks();
 }
