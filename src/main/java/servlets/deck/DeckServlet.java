@@ -26,7 +26,7 @@ public class DeckServlet extends HttpServlet {
         String strId = req.getParameter("id");
         int profileId = (strId == null || strId.equals("")) ? -1 : Integer.parseInt(strId);
         if (profileId == -1 || profileId != currentUserId)
-            resp.sendRedirect("choose-deck?id=" + currentUserId); // send to own profile edit
+            resp.sendRedirect("choose-deck?id=" + currentUserId);
         else
             req.getRequestDispatcher("/WEB-INF/deck/decks.jsp").forward(req, resp);
     }
