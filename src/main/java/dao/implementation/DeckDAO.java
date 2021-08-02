@@ -186,6 +186,8 @@ public class DeckDAO implements DeckDAOInterface {
             if (numChanged == 1) {
                 result = true;
             }
+        } catch(SQLIntegrityConstraintViolationException e) {
+            return false;
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -236,13 +238,55 @@ public class DeckDAO implements DeckDAOInterface {
         Connection conn = DatabaseUtility.getConnection();
         List<Integer> result = new ArrayList<>();
         try {
-            String sql = "SELECT * FROM decks_cards WHERE deck_id = ?;";
+            String sql = "SELECT card_id FROM decks_cards WHERE deck_id = ?;";
             pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, deckId);
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
                 int cardId = rs.getInt("card_id");
                 result.add(cardId);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DatabaseUtility.closeConnection(conn);
+        }
+        return result;
+    }
+
+    @Override
+    public List<Integer> getDecksContainingCard(int cardId) {
+        Connection conn = DatabaseUtility.getConnection();
+        List<Integer> result = new ArrayList<>();
+        try {
+            String sql = "SELECT deck_id FROM decks_cards WHERE card_id = ?;";
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, cardId);
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                int deckId = rs.getInt("deck_id");
+                result.add(deckId);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DatabaseUtility.closeConnection(conn);
+        }
+        return result;
+    }
+
+    @Override
+    public List<Integer> getUsersWithDeck(int deckId) {
+        Connection conn = DatabaseUtility.getConnection();
+        List<Integer> result = new ArrayList<>();
+        try {
+            String sql = "SELECT user_id FROM users_decks WHERE deck_id = ?;";
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, deckId);
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                int userId = rs.getInt("user_id");
+                result.add(userId);
             }
         } catch (SQLException e) {
             e.printStackTrace();

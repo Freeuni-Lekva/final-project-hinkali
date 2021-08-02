@@ -2,7 +2,9 @@ package servlets.register;
 
 import commons.beans.UserBean;
 import dao.implementation.UserDAO;
+import dao.implementation.UserWrapperDao;
 import dao.interfaces.UserDAOInterface;
+import dao.interfaces.UserWrapperInterface;
 import model.UserUtility;
 
 import javax.servlet.ServletException;
@@ -26,7 +28,7 @@ public class RegisterServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        UserDAOInterface userDao = (UserDAOInterface) getServletContext().getAttribute(UserDAO.USER_DAO_ATTR);
+        UserWrapperInterface userDao = (UserWrapperInterface) getServletContext().getAttribute(UserWrapperDao.USER_WRAPPER_ATTR);
         String username = req.getParameter("username");
         String name = req.getParameter("name");
         String surname = req.getParameter("surname");

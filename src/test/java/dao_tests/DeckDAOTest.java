@@ -178,4 +178,30 @@ public class DeckDAOTest {
         assertTrue(deckDao.removeCardFromDeck(deck1.getDeckId(), card.getCardId()));
         assertTrue(cardDao.removeCard(card.getCardId()));
     }
+
+    @Test
+    public void testGetDecksContainingCard() {
+        assertTrue(deckDao.addCardToDeck(deck1.getDeckId(), card1.getCardId()));
+        assertTrue(deckDao.addCardToDeck(deck1.getDeckId(), card2.getCardId()));
+        assertTrue(deckDao.addCardToDeck(deck2.getDeckId(), card1.getCardId()));
+
+        List<Integer> expectedDeckIds = new ArrayList<>(Arrays.asList(deck1.getDeckId(), deck2.getDeckId()));
+        assertEquals(expectedDeckIds, deckDao.getDecksContainingCard(card1.getCardId()));
+
+        assertTrue(deckDao.removeCardFromDeck(deck1.getDeckId(), card1.getCardId()));
+        assertTrue(deckDao.removeCardFromDeck(deck1.getDeckId(), card2.getCardId()));
+        assertTrue(deckDao.removeCardFromDeck(deck2.getDeckId(), card1.getCardId()));
+    }
+
+    @Test
+    public void testGetUsersWithDeck() {
+        assertTrue(userDao.addUser(user));
+        assertTrue(deckDao.chooseDeck(user.getId(), deck1.getDeckId()));
+        List<Integer> expectedUserIds = new ArrayList<>(Arrays.asList(user.getId()));
+
+        assertEquals(expectedUserIds, deckDao.getUsersWithDeck(deck1.getDeckId()));
+
+        assertTrue(deckDao.removeUserDeck(user.getId()));
+        assertTrue(userDao.removeUser(user.getId()));
+    }
 }
