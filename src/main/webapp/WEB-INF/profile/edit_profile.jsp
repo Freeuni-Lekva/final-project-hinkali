@@ -22,12 +22,13 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <!--    jQuery-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <!--    JavaScript-->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="<c:url value="/css/edit_profile.css"/>">
     <script src="<c:url value="/javascript/edit_profile.js"/>" type="text/javascript"></script>
 </head>
 <body>
+    <a href="profile">
+        <button class="return_link" id="returnBtnId"><img src="<c:url value="/resources/back.svg"/>" class="back_svg" alt="error"></button>
+    </a>
     <div class="form_container">
         <h1 class="edit_label">Edit Profile</h1>
         <p id="info" style="font-style: italic">Change desired fields and click update</p>
@@ -51,7 +52,6 @@
             <label for="dateField" class="date_label">Birthday</label><br>
             <input type="date" class="date" id="dateField" name="birthday" min="1920-01-01" max="2016-01-01" value="<%=user.getBirthday()%>"><br><br>
             <button type="submit" class="updatebtn" id="update">Update</button><br>
-            <a href="profile?id=<%=user.getId()%>"><u>Return to profile</u></a>
             <input type="hidden" id="userId" name="userId" value="<%=user.getId()%>">
         </form>
     </div>
