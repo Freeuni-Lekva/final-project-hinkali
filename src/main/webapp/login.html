@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="login"
+          connect="width=device-width,initial-scale=1.0" >
+    <title> login</title>
+    <link rel="stylesheet" href="css/login.css" >
+</head>
+<body>
+
+<nav class="navbar">
+
+    <div class="navbar__container">
+        <a href="/" id="navbar__logo">Hinkali</a>
+        <div class="navbar__taggle" id="mobile-menu">
+            <span class="bar"> </span>
+            <span class="bar"> </span>
+            <span class="bar"> </span>
+        </div>
+        <ul class="navbar__menu">
+            <li class="navbar__item">
+                <a href="WEB-INF/home/home.jsp" class="navbar__links">Home</a>
+            </li>
+
+
+            <li class="navbar__btm">
+                <a href="register.html" class="button">Register</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+
+<form method = "post" action = "./login">
+    <p>User Name:<input type = "text" name = "username"/></p>
+    <p>Password:<input type = "password" name = "password"/>
+        <input type = "submit" value= "Login" /></p>
+</form>
+
+<script> src="javascript/login.js"</script>
+</body>
+</html>
