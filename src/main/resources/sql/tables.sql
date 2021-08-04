@@ -81,3 +81,17 @@ VALUES ('test_username', 'Test_name', 'Test_surname', 'password'),
 -- long values for display testing
 
 INSERT INTO stats (userid) VALUES (1), (2), (3);
+
+INSERT INTO cards (name, image, power) VALUES ('diamond2', 'dia2.png', 2);
+INSERT INTO cards (name, image, power) VALUES ('diamond6', 'dia6.png', 6);
+INSERT INTO cards (name, image, power) VALUES ('club3', 'club3.png', 3);
+INSERT INTO cards (name, image, power) VALUES ('heart10', 'hea10.png', 10);
+INSERT INTO decks (name, image) VALUES ('test1', 'deckpic.png');
+INSERT INTO decks (name, image) VALUES ('test2', 'deckpic.png');
+INSERT INTO decks_cards VALUES (1, 1);
+INSERT INTO decks_cards VALUES (1, 2);
+INSERT INTO decks_cards VALUES (1, 3);
+INSERT INTO decks_cards VALUES (1, 4);
+INSERT INTO decks_cards VALUES (2, 1);
+INSERT INTO decks_cards VALUES (2, 2);
+INSERT INTO decks_cards VALUES (2, 3);

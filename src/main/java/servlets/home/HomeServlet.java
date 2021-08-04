@@ -33,7 +33,7 @@ public class HomeServlet extends HttpServlet {
                 resp.sendRedirect("/search");
                 break;
             case DECKS_BUTTON_ID:
-                resp.sendRedirect("/choose_deck");
+                resp.sendRedirect("/choose-deck");
                 break;
             case LOG_OUT_BUTTON_ID:
                 req.getSession().invalidate();

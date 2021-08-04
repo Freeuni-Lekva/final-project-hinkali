@@ -204,4 +204,13 @@ public class DeckDAOTest {
         assertTrue(deckDao.removeUserDeck(user.getId()));
         assertTrue(userDao.removeUser(user.getId()));
     }
+
+    @Test
+    public void testGetAllDecks() {
+        List<Deck> decks = deckDao.getAllDecks();
+        assertTrue(decks.size() >= 3);
+        assertTrue(decks.contains(deck1));
+        assertTrue(decks.contains(deck2));
+        assertTrue(decks.contains(deck3));
+    }
 }

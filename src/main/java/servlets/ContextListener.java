@@ -1,7 +1,9 @@
 package servlets;
 
+import dao.implementation.DeckWrapperDAO;
 import dao.implementation.FriendDao;
 import dao.implementation.UserWrapperDao;
+import dao.interfaces.DeckWrapperInterface;
 import dao.interfaces.FriendDaoInterface;
 import dao.interfaces.UserWrapperInterface;
 import model.gameInviteHandler.GameInviteManager;
@@ -28,6 +30,9 @@ public class ContextListener implements ServletContextListener {
 
         FriendDaoInterface friendDao = new FriendDao();
         sce.getServletContext().setAttribute(FriendDao.FRIEND_DAO_ATTR, friendDao);
+
+        DeckWrapperInterface deckWrapperDao = new DeckWrapperDAO();
+        sce.getServletContext().setAttribute(DeckWrapperDAO.DECK_WRAPPER_ATTR, deckWrapperDao);
     }
 
     private void addInviteManager(ServletContextEvent sce) {
