@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("/game")
+@WebServlet("/game/info")
 public class GameUsersInfoServlet extends HttpServlet {
 
     private class ResponseWrapper {
@@ -32,10 +32,13 @@ public class GameUsersInfoServlet extends HttpServlet {
 //        UserBean opponent = new UserBean(0, "opponentName", "opponentSurname", "opponentUsername", "", null);
 //        req.getSession().setAttribute(UserBean.USER_ATTR, 0);
 
-        if (req.getSession().getAttribute(UserBean.USER_ATTR) == null){
-            resp.sendRedirect("/");
-            return;
-        }
+        resp.addHeader("Access-Control-Allow-Origin", "*");
+        resp.getWriter().println("hello");
+
+//        if (req.getSession().getAttribute(UserBean.USER_ATTR) == null){
+//            resp.sendRedirect("/");
+//            return;
+//        }
 
 //        ResponseWrapper response = new ResponseWrapper(player, opponent);
 //        GsonBuilder gsonBuilder = new GsonBuilder();
