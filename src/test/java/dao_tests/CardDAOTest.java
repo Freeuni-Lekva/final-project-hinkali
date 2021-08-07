@@ -21,9 +21,9 @@ public class CardDAOTest {
     @Before
     public void setUp() throws Exception {
         cardDao = new CardDAO();
-        card1 = new Card("cardTest1", "cardTest1", 1);
-        card2 = new Card("cardTest2", "cardTest2", 2);
-        card3 = new Card("cardTest3", "cardTest3", 3);
+        card1 = new Card("cardTest1", "cardTest1", 1, 0);
+        card2 = new Card("cardTest2", "cardTest2", 2, 0);
+        card3 = new Card("cardTest3", "cardTest3", 3, 0);
         assertTrue(cardDao.addCard(card1));
         assertTrue(cardDao.addCard(card2));
         assertTrue(cardDao.addCard(card3));
@@ -42,7 +42,7 @@ public class CardDAOTest {
         assertFalse(cardDao.addCard(card2));
         assertFalse(cardDao.addCard(card3));
 
-        Card card = new Card("cardTest0", "cardTest0", 0);
+        Card card = new Card("cardTest0", "cardTest0", 0, 0);
         assertTrue(cardDao.addCard(card));
         assertTrue(cardDao.removeCard(card.getCardId()));
     }
@@ -69,7 +69,7 @@ public class CardDAOTest {
 
     @Test
     public void testChangeCard() {
-        Card card = new Card(card1.getCardId(), "cardTest0", "cardTest0", 0);
+        Card card = new Card(card1.getCardId(), "cardTest0", "cardTest0", 0, 0);
         assertTrue(cardDao.changeCard(card));
 
         card.setName(card2.getName());

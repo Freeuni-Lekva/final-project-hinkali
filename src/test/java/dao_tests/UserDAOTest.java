@@ -135,7 +135,7 @@ public class UserDAOTest {
         changedUser.setPassword("coolpassword");
         assertTrue(userDao.changeUser(changedUser));
 
-//        userDao.removeUser(user1.getId());
+        userDao.removeUser(user1.getId());
         userDao.removeUser(user2.getId());
         userDao.removeUser(user3.getId());
     }

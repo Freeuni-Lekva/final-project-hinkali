@@ -19,11 +19,12 @@ public class CardDAO implements CardDAOInterface {
         Connection conn = DatabaseUtility.getConnection();
         boolean result = false;
         try {
-            String sql = "INSERT INTO cards (name, image, power) VALUES (?, ?, ?);";
+            String sql = "INSERT INTO cards (name, image, power, position) VALUES (?, ?, ?, ?);";
             pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             pstmt.setString(1, card.getName());
             pstmt.setString(2, card.getImage());
             pstmt.setInt(3, card.getPower());
+            pstmt.setInt(4, card.getRow());
             int numInserted = pstmt.executeUpdate();
             if (numInserted == 1) {
                 ResultSet rs = pstmt.getGeneratedKeys();
@@ -55,7 +56,8 @@ public class CardDAO implements CardDAOInterface {
                 String name = rs.getString("name");
                 String image = rs.getString("image");
                 int power = rs.getInt("power");
-                result = new Card(cardId, name, image, power);
+                int row = rs.getInt("position");
+                result = new Card(cardId, name, image, power, row);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -90,12 +92,13 @@ public class CardDAO implements CardDAOInterface {
         Connection conn = DatabaseUtility.getConnection();
         boolean result = false;
         try {
-            String sql = "UPDATE cards SET name = ?, image = ?, power = ? WHERE card_id = ?;";
+            String sql = "UPDATE cards SET name = ?, image = ?, power = ?, position = ? WHERE card_id = ?;";
             pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, card.getName());
             pstmt.setString(2, card.getImage());
             pstmt.setInt(3, card.getPower());
-            pstmt.setInt(4, card.getCardId());
+            pstmt.setInt(4, card.getRow());
+            pstmt.setInt(5, card.getCardId());
             int numChanged = pstmt.executeUpdate();
             if (numChanged == 1) {
                 result = true;
@@ -132,7 +135,8 @@ public class CardDAO implements CardDAOInterface {
                     String name = rs.getString("name");
                     String image = rs.getString("image");
                     int power = rs.getInt("power");
-                    result.add(new Card(id, name, image, power));
+                    int row = rs.getInt("position");
+                    result.add(new Card(id, name, image, power, row));
                 }
             } catch (SQLException e) {
                 e.printStackTrace();
