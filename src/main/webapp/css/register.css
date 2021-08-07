@@ -1,21 +1,22 @@
-body {
-    background-color: #232323;
+html, body {
+    background-color: #161414;
 }
 
 .registration_label {
     margin-bottom: 15px;
-    color: #ffffff;
+    color: #febf0a;
 }
 
 .form_container{
-    border: 5px solid #808080;
-    border-radius: 10px;
     width: 330px;
     margin: 120px auto;
-    padding: 2px;
-    background-image: linear-gradient(to bottom right, #323232, #5e5d5d);
     text-align: center;
-    color: #ffffff;
+    color: #febf0a;
+    border: 0 solid rgba(0,0,0,.125);
+    border-radius: .25rem;
+    box-shadow: 0 1px 3px 0 #4b4b4b, 0 1px 2px 0 #929292;
+    padding: 1rem;
+    background-image: linear-gradient(to bottom right,#222121, #1e1e1e);
 }
 
 input {
@@ -23,38 +24,39 @@ input {
     padding: 5px 6px;
     margin: 1px 0;
     display: inline-block;
-    border: 1px solid #d7d7d7;
+    border: 1px solid #494ca2;
     border-radius: 8px;
-    background-color: #bbbbbb;
-    color: #242424;
+    background-color: #494ca2;
+    color: white;
 }
 
 input:hover{
-    background-color: #f8f8f8;
+    background-image: linear-gradient(to bottom right, #494ca2, rgba(0,0,0,.125));
     transition: 200ms;
 }
 
 .registerbtn {
-    background-color: #2d952d;
+    background-color: #5bb3d8;
     color: white;
-    font-weight: bold;
-    padding: 10px 10px;
-    margin: 1px auto;
-    border: none;
+    padding: 2px 2px;
+    margin: 5px auto;
     cursor: pointer;
-    width: 50%;
-    border-radius: 8px;
+    width: 40%;
+    border-radius: 20px;
+    border: 2px solid rgba(255,255,255,0);
 }
 
 .registerbtn:hover {
-    background-color: #05b400;
+    background-color: transparent;
+    border-color: rgba(255,255,255,1);
     transition: 200ms;
 }
 
 .date {
     width: 60%;
+    color: #797979;
 }
 
 ::placeholder {
-    color: #787878;
+    color: #797979;
 }

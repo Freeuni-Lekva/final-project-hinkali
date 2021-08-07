@@ -14,7 +14,7 @@ $(function(){
             birthday: dateL
         }, function (resp) {
             if (resp === "success") {
-                window.location = "index.jsp";
+                window.location = "/home";
             } else {
                 let msg = $("#info");
                 msg.html("Registration failed, username already in usage!");
