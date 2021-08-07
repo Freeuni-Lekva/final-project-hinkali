@@ -6,15 +6,17 @@ import java.util.List;
 
 public interface PlayerInterface {
 
+    int getID();
+
     int getPoint();
 
     void setPoint(int point);
 
-    void setShuffledDeck(List<Card> cards);
+    //void setShuffledDeck(List<Card> cards);
 
     List<Card> getHeldCards();
 
-    void setPlayerCards();
+    void setPlayerDeck();
 
     void addCardToPlayer(Card card);
 
@@ -29,5 +31,7 @@ public interface PlayerInterface {
     boolean isTurn();
 
     boolean hasEndedRound();
+
+    boolean setCardOnTable(Card c);
 
 }

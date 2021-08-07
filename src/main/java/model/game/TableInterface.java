@@ -6,8 +6,12 @@ import java.util.List;
 
 public interface TableInterface {
 
-    Subtable getSubtableForPlayer1();
+    SubTable getSubTableForPlayer(int playerId);
 
-    Subtable getSubtableForPlayer2();
+    int getPlayerPoints(int playerId);
+
+    void setPlayerPoints(int playerId, int points);
+
+    boolean setCardForPlayer(int playerId, Card c);
 
 }
