@@ -1,5 +1,6 @@
 package servlets.home;
 
+import commons.beans.UserBean;
 import dao.implementation.StatsDao;
 
 import javax.servlet.ServletException;
@@ -47,6 +48,11 @@ public class HomeServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+        if (req.getSession().getAttribute(UserBean.USER_ATTR) == null){
+            res.sendRedirect("/");
+            return;
+        }
+
         req.getRequestDispatcher("WEB-INF/home/home.jsp").forward(req,res);
     }
 }
