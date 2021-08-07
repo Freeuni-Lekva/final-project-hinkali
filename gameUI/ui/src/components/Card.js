@@ -15,10 +15,10 @@ const pickColor = (rating) => {
     }
 }
 
-const Card = ({card}) => {
+const Card = ({card, setAction, isPlayerTurn}) => {
     let pickedColor = pickColor(card.rating);
 
-    return <div className="Card" style={{backgroundColor: pickedColor}}>
+    return <div className="Card" style={{backgroundColor: pickedColor}} onClick={() => setAction({action: 'playCard', card: card})}>
         <div className="info">
             <label className="ratingLabel">
                 {card.rating}
