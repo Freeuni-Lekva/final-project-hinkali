@@ -48,7 +48,8 @@ CREATE TABLE cards (
     card_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     name CHAR(32) UNIQUE NOT NULL,
     image CHAR(64),
-    power INT
+    power INT NOT NULL,
+    position INT NOT NULL
 );
 
 CREATE TABLE decks (
@@ -82,10 +83,10 @@ VALUES ('test_username', 'Test_name', 'Test_surname', 'password'),
 
 INSERT INTO stats (userid) VALUES (1), (2), (3);
 
-INSERT INTO cards (name, image, power) VALUES ('diamond2', 'dia2.png', 2);
-INSERT INTO cards (name, image, power) VALUES ('diamond6', 'dia6.png', 6);
-INSERT INTO cards (name, image, power) VALUES ('club3', 'club3.png', 3);
-INSERT INTO cards (name, image, power) VALUES ('heart10', 'hea10.png', 10);
+INSERT INTO cards (name, image, power, position) VALUES ('diamond2', 'dia2.png', 2, 0);
+INSERT INTO cards (name, image, power, position) VALUES ('diamond6', 'dia6.png', 6, 0);
+INSERT INTO cards (name, image, power, position) VALUES ('club3', 'club3.png', 3, 0);
+INSERT INTO cards (name, image, power, position) VALUES ('heart10', 'hea10.png', 10, 0);
 INSERT INTO decks (name, image) VALUES ('test1', 'deckpic.png');
 INSERT INTO decks (name, image) VALUES ('test2', 'deckpic.png');
 INSERT INTO decks_cards VALUES (1, 1);
