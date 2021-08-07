@@ -8,16 +8,18 @@ public class Card {
     private String name;
     private String image;
     private int power;
+    private int row;
 
-    public Card(int cardId, String name, String image, int power) {
+    public Card(int cardId, String name, String image, int power, int row) {
         this.cardId = cardId;
         this.name = name;
         this.image = image;
         this.power = power;
+        this.row = row;
     }
 
-    public Card(String name, String image, int power) {
-        this(NO_ID, name, image, power);
+    public Card(String name, String image, int power, int row) {
+        this(NO_ID, name, image, power, row);
     }
 
     public int getCardId() {
@@ -51,6 +53,10 @@ public class Card {
     public void setPower(int power) {
         this.power = power;
     }
+
+    public int getRow() { return row; }
+
+    public void setRow(int row) { this.row = row; }
 
     @Override
     public boolean equals(Object o) {
