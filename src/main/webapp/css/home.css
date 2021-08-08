@@ -1,0 +1,65 @@
+html, body{
+    margin: 0;
+    padding: 0;
+    background-color: #282828;
+}
+
+table, th, td{
+}
+
+table{
+    width: 600px;
+    height: 140px;
+    background-color: #928374;
+    border-radius: 6px;
+    border: 1px solid black;
+    color:#282828;
+}
+
+.loss{
+    border-right: none;
+}
+
+.bottom_line{
+    border-bottom: none;
+}
+
+.leaderboard{
+    position: absolute;
+    left: 39%;
+    top: 25%;
+}
+
+td{
+    text-align:center;
+    border-bottom: 1px solid black;
+    border-right: 1px solid black;
+}
+
+th{
+    border-bottom: 1px solid black;
+    border-right: 1px solid black;
+}
+
+.buttons{
+    position:absolute;
+    left: 20%;
+    top: 25%;
+}
+
+.button{
+    margin-bottom: 10%;
+    width: 80px;
+    height: 40px;
+    background-color: #928374;
+    border-radius: 6px;
+    border: none;
+}
+
+.button:hover{
+    background-color: #ebdbb2;
+}
+
+input{
+    color: #282828;
+}
