@@ -72,7 +72,9 @@ public class MatchmakingQueue implements IQueue<Integer>{
     private Integer getPair(List<Integer> users, Integer originalId) {
         for (Integer userId :
                 users) {
-            if (!userId.equals(originalId)) return userId;
+            if (!userId.equals(originalId) && !pairs.containsKey(userId)){
+                return userId;
+            }
         }
 
         return -1;
@@ -87,5 +89,14 @@ public class MatchmakingQueue implements IQueue<Integer>{
     public List<Integer> getAll() {
         Set<Integer> userSet = queue.keySet();
         return new ArrayList<>(userSet);
+    }
+
+    @Override
+    public String toString() {
+        return "MatchmakingQueue{" +
+                "queue=" + queue +
+                ", pairs=" + pairs +
+                ", sessionCount=" + sessionCount +
+                '}';
     }
 }

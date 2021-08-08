@@ -42,6 +42,11 @@ public class UserWrapperDao implements UserWrapperInterface {
     }
 
     @Override
+    public UserBean getUserByUsername(String username) {
+        return userDao.getUserByUsername(username);
+    }
+
+    @Override
     public boolean removeUser(int id) {
         // delete child table first
         if (statsDao.removeStats(id)){
@@ -86,4 +91,7 @@ public class UserWrapperDao implements UserWrapperInterface {
     public boolean removeStats(int userId) {
         return false;
     }
+
+    @Override
+    public int getRankById(int userId) { return statsDao.getRankById(userId);}
 }

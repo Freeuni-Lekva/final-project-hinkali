@@ -1,9 +1,13 @@
 package servlets;
 
+import dao.implementation.DeckWrapperDAO;
 import dao.implementation.FriendDao;
 import dao.implementation.UserWrapperDao;
+import dao.interfaces.DeckWrapperInterface;
 import dao.interfaces.FriendDaoInterface;
 import dao.interfaces.UserWrapperInterface;
+import model.gameInviteHandler.GameInviteManager;
+import model.gameInviteHandler.IGameInviteManager;
 import model.matchmaking.BasicMatchmakingQueue;
 import model.matchmaking.QueryBasedMatchmaking;
 
@@ -18,6 +22,7 @@ public class ContextListener implements ServletContextListener {
         System.out.println("Context is being initialized");
 
         addMatchmakingQueue(sce);
+        addInviteManager(sce);
 
         UserWrapperInterface userWrapperDao = new UserWrapperDao();
         sce.getServletContext().setAttribute(UserWrapperDao.USER_WRAPPER_ATTR, userWrapperDao);
@@ -25,6 +30,14 @@ public class ContextListener implements ServletContextListener {
 
         FriendDaoInterface friendDao = new FriendDao();
         sce.getServletContext().setAttribute(FriendDao.FRIEND_DAO_ATTR, friendDao);
+
+        DeckWrapperInterface deckWrapperDao = new DeckWrapperDAO();
+        sce.getServletContext().setAttribute(DeckWrapperDAO.DECK_WRAPPER_ATTR, deckWrapperDao);
+    }
+
+    private void addInviteManager(ServletContextEvent sce) {
+        IGameInviteManager inviteManager = new GameInviteManager();
+        sce.getServletContext().setAttribute(IGameInviteManager.INVITE_MANAGER_ATTR, inviteManager);
     }
 
     private void addMatchmakingQueue(ServletContextEvent sce) {

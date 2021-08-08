@@ -13,6 +13,8 @@ public interface UserWrapperInterface extends UserDAOInterface, StatsDaoInterfac
 
     UserBean getUserById(int id);
 
+    UserBean getUserByUsername(String username);
+
     boolean removeUser(int id);
 
     public List<UserBean> getUsersWithFilter(Filter f);

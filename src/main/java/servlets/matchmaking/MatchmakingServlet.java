@@ -30,19 +30,20 @@ public class MatchmakingServlet extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         if (!ContextListener.TESTING){
             if(SearchServlet.handleUnauthorizedCase(req, resp)) return;
         }
 
-        MatchmakingRequest request = proccessJsonBody(req);
-        QueryBasedMatchmaking matchmaking = (QueryBasedMatchmaking) req.getServletContext().getAttribute(BasicMatchmakingQueue.MATCHMAKING_ATTR);
+        MatchmakingRequest request = processJsonBody(req);
+        QueryBasedMatchmaking matchmaking = (QueryBasedMatchmaking) req.getServletContext().getAttribute(QueryBasedMatchmaking.MATCHMAKING_ATTR);
         IResponse response = matchmaking.handleMatchmakingRequest(request);
+        System.out.println(matchmaking.getQueue().toString());
 
         resp.getWriter().println(response.toJson());
     }
 
-    private MatchmakingRequest proccessJsonBody(HttpServletRequest req) throws IOException {
+    private MatchmakingRequest processJsonBody(HttpServletRequest req) throws IOException {
         BufferedReader reader = req.getReader();
         StringBuilder sb = new StringBuilder();
         char[] charBuffer = new char[128];

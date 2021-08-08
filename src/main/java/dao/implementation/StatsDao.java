@@ -142,4 +142,23 @@ public class StatsDao implements StatsDaoInterface {
 
         return result;
     }
+
+    @Override
+    public int getRankById(int userId) {
+        Connection conn = DatabaseUtility.getConnection();
+        String get = "SELECT * FROM (SELECT ROW_NUMBER() OVER(order by points), userid FROM stats) stats WHERE userid = (?);";
+        int rank = 0;
+        try{
+            PreparedStatement preparedStatement = conn.prepareStatement(get);
+            preparedStatement.setInt(1, userId);
+            ResultSet rs = preparedStatement.executeQuery();
+            if (rs.next()) {
+                rank = rs.getInt(1);
+            }
+        } catch (SQLException ignored){}
+        finally {
+            DatabaseUtility.closeConnection(conn);
+        }
+        return rank;
+    }
 }

@@ -20,6 +20,8 @@ public interface FriendDaoInterface {
 
      boolean isFriend(int currUserId, int userToCheck);
 
-     boolean isPendingFriend(int currUserId, int userToCheck);
+     boolean isSender(int currUserId, int userToCheck);
+
+     boolean amSender(int currUserId, int userToCheck);
 
 }
