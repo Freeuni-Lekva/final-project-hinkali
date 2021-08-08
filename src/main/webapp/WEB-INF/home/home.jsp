@@ -25,6 +25,10 @@
         <input type="submit" value="Play">
     </form>
     <form method="post">
+        <input name= "buttonID" type="hidden" value=<%= HomeServlet.INVITE_BUTTON_ID%>>
+        <input type="submit" value="Invite Friend">
+    </form>
+    <form method="post">
         <input name= "buttonID" type="hidden" value=<%= HomeServlet.PROFILE_BUTTON_ID%>>
         <input type="submit" value="Profile">
     </form>
@@ -43,22 +47,24 @@
 </div>
 
 <div>
-    <%
-        int i = 0;
-        while(true){
-            if(i == stats.size())
-                break;
-            StatsBean sb = stats.get(i);
-            out.print("<ol>" + dao.getUserById(sb.getUserid()).getUsername() +
-                    " " + sb.getPoints() +
-                    " " + sb.getGamesPlayed() +
-                    " " + sb.getWins() +
-                    " " + sb.getDraws() +
-                    " " + sb.getLosses() +
-                    "</ol>");
-            i++;
-        }
-    %>
+    <ul>
+        <%
+            int i = 0;
+            while(true){
+                if(i == stats.size())
+                    break;
+                StatsBean sb = stats.get(i);
+                out.print("<ol>" + dao.getUserById(sb.getUserid()).getUsername() +
+                        " " + sb.getPoints() +
+                        " " + sb.getGamesPlayed() +
+                        " " + sb.getWins() +
+                        " " + sb.getDraws() +
+                        " " + sb.getLosses() +
+                        "</ol>");
+                i++;
+            }
+        %>
+    </ul>
 </div>
 </body>
 </html>

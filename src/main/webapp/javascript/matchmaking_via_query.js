@@ -1,23 +1,7 @@
-let sec = 0;
+let joinJson = JSON.stringify({action: 'join'});
+let leaveJson = JSON.stringify({action: 'leave'});
 
-function pad ( val ) { return val > 9 ? val : "0" + val; }
-setInterval( function(){
-    $("#seconds").html(pad(++sec%60));
-    $("#minutes").html(pad(parseInt(sec/60,10)));
-}, 1000);
-
-function redirectHome(){
-    window.location.replace("/home")
-}
-
-window.onload = function (){
-    document.getElementById("returnBtnId").addEventListener("click", redirectHome);
-};
-
-let joinJson = JSON.stringify({ action: 'join'})
-
-// temporary non-socket implementation
-function sendJoinRequest(){
+function sendJoinRequest() {
     fetch("/matchmaking", {
         method: 'POST',
         headers: {
@@ -26,12 +10,49 @@ function sendJoinRequest(){
         },
         body: joinJson
     }).then(r => r.json()).then(r => {
-        if (r.body === "created"){
-            window.location.replace("/play?gameId=" + r.gameId);
-
+        console.log(r);
+        if (r.body === "created") {
+            window.location = ("/play?gameId=" + r.gameId);
         }
-    }).then(r => console.log(r));
+    }).catch(e => console.log(e));
 }
 
-setInterval(sendJoinRequest, 3000);
+function sendLeaveRequest(redirect) {
+    fetch("/matchmaking", {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: leaveJson
+    }).then(r => {
+        console.log(r)
+        if (!!redirect) {
+            redirect()
+        }
+    }).catch(e => {
+            console.log(e)
+    });
+}
+
+function redirectHome() {
+    sendLeaveRequest(() => window.location = "/home")
+}
+
+window.onload = function () {
+    document.getElementById("returnBtnId").addEventListener("click", redirectHome);
+};
+
+setInterval(sendJoinRequest, 2000);
+
+let sec = 0;
+
+function pad(val) {
+    return val > 9 ? val : "0" + val;
+}
+
+setInterval(function () {
+    $("#seconds").html(pad(++sec % 60));
+    $("#minutes").html(pad(parseInt(sec / 60, 10)));
+}, 1000);
 

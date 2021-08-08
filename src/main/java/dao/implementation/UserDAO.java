@@ -97,6 +97,31 @@ public class UserDAO implements UserDAOInterface {
     }
 
     @Override
+    public UserBean getUserByUsername(String username) {
+        Connection conn = DatabaseUtility.getConnection();
+        UserBean result = null;
+        try {
+            String sql = "SELECT * FROM users WHERE username = ?;";
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, username);
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                int id = rs.getInt("userid");
+                String name = rs.getString("name");
+                String surname = rs.getString("surname");
+                String password = rs.getString("password");
+                Date birthday = rs.getDate("birthday");
+                result = new UserBean(id, username, name, surname, password, birthday);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DatabaseUtility.closeConnection(conn);
+        }
+        return result;
+    }
+
+    @Override
     public boolean removeUser(int id) {
         Connection conn = DatabaseUtility.getConnection();
         boolean result = false;
@@ -116,6 +141,7 @@ public class UserDAO implements UserDAOInterface {
         return result;
     }
 
+    @Override
     public List<UserBean> getUsersWithFilter(Filter f) {
         Connection conn = DatabaseUtility.getConnection();
         List<UserBean> result = new ArrayList<>();
@@ -143,6 +169,7 @@ public class UserDAO implements UserDAOInterface {
         return result;
     }
 
+    @Override
     public boolean changeUser(UserBean user) {
         Connection conn = DatabaseUtility.getConnection();
         boolean result = false;

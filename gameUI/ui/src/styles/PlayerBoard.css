@@ -1,0 +1,81 @@
+.PlayerBoard{
+    display: flex;
+    position: relative;
+    flex-direction: row;
+    width: 97%;
+    align-items: center;
+    justify-content: flex-start;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    box-shadow: inset 0 0 0.3em black;
+    border-radius: 1rem;
+}
+
+.PlayerBoard::before{
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    background-color: #494ca2;
+    opacity: 0.7;
+    border-radius: 1rem;
+}
+
+.rowList{
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    border: 0.1em solid black;
+}
+
+.rowWrapper{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.points{
+    display: flex;
+    position: relative;
+    aspect-ratio: 1/1;
+    width: 3%;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 0.3em;
+    margin-left: 1em;
+    margin-right: 1em;
+}
+
+.points:before{
+    content: '';
+    position: absolute;
+    margin: 0 auto;
+    left: 50%;
+    top: 30%;
+    width: 75%;
+    height: 75%;
+    background-color: darkred;
+    /* Rotate */
+    -webkit-transform: rotate(-45deg);
+    -moz-transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+    -o-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+    /* Rotate Origin */
+    -webkit-transform-origin: 0 100%;
+    -moz-transform-origin: 0 100%;
+    -ms-transform-origin: 0 100%;
+    -o-transform-origin: 0 100%;
+    transform-origin: 0 100%;
+    box-shadow: inset 0 0 0.2em black;
+}
+
+.pointsLabel{
+    z-index: 10;
+    color: white;
+    font-weight: bolder;
+    font-size: x-large;
+}

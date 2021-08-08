@@ -1,7 +1,7 @@
 html, body {
     margin: 0;
     padding: 0;
-    background-color: #282828;
+    background-color:#161414;
 }
 
 .search {
@@ -15,21 +15,16 @@ html, body {
     width: 100%;
     outline: none;
     border: 0;
-    border-radius: .2rem;
+    border-radius: .25rem;
     margin: 0 auto;
-    background-color:#928374;
+    background-color:#494ca2;
     text-indent: 0.8rem;
-}
-
-.searchField:focus{
-    color: black;
-    background-color: #ebdbb2;
-    transition: 200ms;
+    color: white;
 }
 
 .searchField:hover{
-    color: black;
-    background-color: #ebdbb2;
+    color: white;
+    background-image: linear-gradient(to bottom right, #494ca2, rgba(0,0,0,.125));
     transition: 200ms;
 }
 
@@ -45,9 +40,9 @@ html, body {
     height: 4em;
     position: fixed;
     display: flex;
-    background-color: #1d2021;
-    border-bottom: 0.2em solid #504945;
-    border-radius: .2rem;
+    background-image: linear-gradient(to bottom right,#222121, #1e1e1e);
+    border-bottom: 0.05em solid #febf0a;
+    border-radius: .25rem;
     justify-content: center;
 }
 
@@ -63,13 +58,14 @@ html, body {
     cursor: pointer;
     aspect-ratio: 1/1;
 
-    border: 0.2em solid #504945;
-    border-radius: .2rem;
-    background-color: #928374;
+    border: 0 solid;
+    border-radius: .25rem;
+    background-color: #494ca2;
+    background-image: none;
 }
 
 .return_link:hover{
-    background-color: #ebdbb2;
+    background-image: linear-gradient(to bottom right, #494ca2, rgba(0,0,0,.125));
     transition: 200ms;
 }
 
@@ -92,7 +88,7 @@ html, body {
 
 .info {
     text-align: center;
-    color: #d79921;
+    color: #febf0a;
 }
 
 .resultOutput {
@@ -119,29 +115,29 @@ html, body {
     text-align: left;
     align-items: center;
     justify-content: left;
-    color: #49413a;
-    background-color: #928374;
-    border: 0.2em solid #504945;
-    border-radius: .2rem;
+    border: 0 solid rgba(0,0,0,.125);
+    box-shadow: 0 1px 3px 0 #4b4b4b, 0 1px 2px 0 #929292;
+    border-radius: .25rem;
+    background-image: linear-gradient(to bottom right,#222121, #1e1e1e);
 }
 
 .svg {
     width: 1.8rem;
     height: 1.8rem;
+    background: #febf0a;
+    padding: 0.3em;
+    border: 0 solid;
+    border-radius: 2.5em;
 }
 
 .user_link_wrapper {
     text-decoration: none;
-    color: black;
+    color: #bfbfbf;
     margin-left: 0.9em;
-}
-
-.name_label {
-    color: #49413a;
 }
 
 .user:hover {
     text-decoration: underline;
-    background-color: #ebdbb2;
+    color: white;
     transition: 200ms;
 }

@@ -18,4 +18,6 @@ public interface StatsDaoInterface {
     ArrayList<StatsBean> getStatsWithDescendingPoints();
 
     boolean removeStats(int userId);
+
+    int getRankById(int userId);
 }

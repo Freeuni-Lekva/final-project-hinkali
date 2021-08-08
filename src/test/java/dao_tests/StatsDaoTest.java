@@ -34,7 +34,6 @@ public class StatsDaoTest {
     public void testGetStatsAll(){
         List<StatsBean> statsBeanList = statsDao.getStatsAll();
         assertFalse(statsBeanList.isEmpty());
-        assertEquals(3, statsBeanList.size());
         assertEquals(0, statsBeanList.get(0).getPoints());
     }
 }

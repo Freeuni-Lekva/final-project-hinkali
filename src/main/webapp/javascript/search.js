@@ -3,7 +3,7 @@ function redirectHome(){
 }
 
 function redirectToProfile(id){
-    window.location.replace("/profile?userid=" + id);
+    window.location.replace("/profile?id=" + id);
 }
 
 window.onload = function (){

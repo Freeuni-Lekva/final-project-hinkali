@@ -1,0 +1,64 @@
+:root {
+    --background-color:#161414;
+    --mainYellow-color:#febf0a;
+    --mainPurple-clor:#494ca2;
+}
+
+.UserInfo{
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+}
+
+.user {
+    display: inline-flex;
+    list-style-type: none;
+    width: 97%;
+    height: 5rem;
+    margin: 0.5rem 0 0;
+    padding: 0 0 0 0.7rem;
+    text-align: left;
+    align-items: center;
+    justify-content: left;
+    border: 0 solid rgba(0,0,0,.125);
+    border-radius: .25rem;
+    background-image: linear-gradient(to bottom right,#222121, #1e1e1e);
+    transition: 300ms;
+}
+
+.svg {
+    width: 1.8rem;
+    height: 1.8rem;
+    background: #febf0a;
+    padding: 0.3em;
+    border: 0 solid;
+    border-radius: 2.5em;
+}
+
+.user_link_wrapper {
+    text-decoration: none;
+    color: #bfbfbf;
+    margin-left: 0.9em;
+    font-size: larger;
+    transition: 200ms;
+}
+
+.user:hover {
+    font-weight: bold;
+    color: white;
+    transition: 300ms;
+}
+
+.livesLeft{
+    color: white;
+    font-size: x-large;
+    font-weight: lighter;
+    position: relative;
+    background-color: #1e1e1e;
+    border-radius: .25em;
+    width: fit-content;
+    margin-bottom: 1em;
+    margin-top: 1em;
+    padding: 0.5em 1em;
+    align-self: center;
+}
