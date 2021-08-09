@@ -85,9 +85,12 @@ public class Player implements PlayerInterface {
     }
 
     @Override
-    public void endRound() {
-        activeInRound = false;
+    public void startRound() {
+        activeInRound = true;
     }
+
+    @Override
+    public void endRound() { activeInRound = false; }
 
     @Override
     public boolean isTurn(){
@@ -100,6 +103,11 @@ public class Player implements PlayerInterface {
     }
 
     @Override
+    public void clearTable() {
+        table.clearSubTable(playerId);
+    }
+
+    @Override
     public boolean setCardOnTable(Card c){
        boolean successfulMove = table.setCardForPlayer(playerId, c);
        if(successfulMove) {
@@ -108,5 +116,4 @@ public class Player implements PlayerInterface {
        }
        return false;
     }
-
 }

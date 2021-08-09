@@ -1,5 +1,7 @@
 package model.game;
 
+import model.Card;
+
 import javax.persistence.criteria.CriteriaBuilder;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +13,8 @@ public class Game {
     private Player p2;
     private Table table;
     private int roundsLeft;
-    private List<Integer> wonRounds;
+    private int p1WinsNum;
+    private int p2WinsNum;
 
     public void init(int gameId, int player1Id, int player2Id ){
         this.gameId = gameId;
@@ -21,37 +24,62 @@ public class Game {
         p1 = new Player(player1Id, startingPlayer, table);
         p2 = new Player(player2Id, !startingPlayer, table);
         roundsLeft = 3;
-        wonRounds = new ArrayList<>();
+        p1WinsNum = 0;
+        p2WinsNum = 0;
     }
 
     public int play(){
         while(roundsLeft != 0){
+            initiateNewRound();
             playRound();
         }
-        int player1WonRounds = 0;
-        int player2WonRounds = 0;
-        for(int i =0; i < wonRounds.size(); i++){
-            if(wonRounds.get(i) == p1.getID())
-                player1WonRounds++;
-            player2WonRounds++;
-        }
-        if(player1WonRounds>player2WonRounds)
+        if(p1WinsNum>p2WinsNum)
             return p1.getID();
         return p2.getID();
+    }
+
+    private void initiateNewRound(){
+        p1.startRound();
+        p2.startRound();
+        p1.setPoint(0);
+        p2.setPoint(0);
+        p1.clearTable();
+        p2.clearTable();
     }
 
     public void playRound(){
         while(true){
             if(p1.hasEndedRound() && p2.hasEndedRound()){
                 if(p1.getPoint()> p2.getPoint())
-                    wonRounds.add(p1.getID());
+                    p1WinsNum++;
                 else
-                    wonRounds.add(p2.getID());
+                    p2WinsNum++;
                 roundsLeft --;
                 break;
             }
-            //rest of the Round logic
+            if(p1.isTurn()){
+                servePlayer(p1);
+                p1.endTurn();
+                p2.startTurn();
+            }
 
+            if(p2.isTurn()){
+                servePlayer(p2);
+                p2.endTurn();
+                p1.startTurn();
+            }
+        }
+    }
+
+    private void servePlayer(Player p){
+        while(true) {
+            Card playedCard = null; // = whatever the method will be;
+            if (p.setCardOnTable(playedCard)) {
+                p.endRound();
+                return;
+            }else{
+                //not valid card
+            }
         }
     }
 }

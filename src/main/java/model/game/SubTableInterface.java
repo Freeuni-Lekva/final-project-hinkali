@@ -17,4 +17,6 @@ public interface SubTableInterface {
     int getPlayerId();
 
     boolean isValidMove(Card c);
+
+    void clear();
 }

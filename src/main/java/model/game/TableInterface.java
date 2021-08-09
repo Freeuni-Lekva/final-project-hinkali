@@ -12,6 +12,8 @@ public interface TableInterface {
 
     void setPlayerPoints(int playerId, int points);
 
+    void clearSubTable(int playerId);
+
     boolean setCardForPlayer(int playerId, Card c);
 
 }

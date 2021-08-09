@@ -26,7 +26,11 @@ public interface PlayerInterface {
 
     void startTurn();
 
+    void startRound();
+
     void endRound();
+
+    void clearTable();
 
     boolean isTurn();
 

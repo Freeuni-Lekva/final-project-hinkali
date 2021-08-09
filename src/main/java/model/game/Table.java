@@ -33,11 +33,15 @@ public class Table implements TableInterface {
     public boolean setCardForPlayer(int playerId, Card c) {
         boolean isValidMove = getSubTableForPlayer(playerId).isValidMove(c);
         if(isValidMove){
+            getSubTableForPlayer(playerId).addCardForPlayer(c);
            //do some special powers
             return true;
         }
         return false;
     }
 
-
+    @Override
+    public void clearSubTable(int playerId){
+        getSubTableForPlayer(playerId).clear();
+    }
 }

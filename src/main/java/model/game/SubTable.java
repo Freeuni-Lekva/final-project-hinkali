@@ -37,6 +37,7 @@ public class SubTable implements SubTableInterface{
         int currRow = c.getRow();
         int temp = rowCounts.get(currRow) - 1;
         rowCounts.put(currRow, temp);
+        points += c.getPower();
         playerCards.add(c);
     }
 
@@ -53,6 +54,11 @@ public class SubTable implements SubTableInterface{
 
     @Override
     public void setPlayerPoints(int points) {this.points = points; }
+
+    @Override
+    public void clear() {
+        playerCards.clear();
+    }
 
     private void computePoints(Card c){
         points += c.getPower();
