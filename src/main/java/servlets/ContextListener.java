@@ -6,6 +6,7 @@ import dao.implementation.UserWrapperDao;
 import dao.interfaces.DeckWrapperInterface;
 import dao.interfaces.FriendDaoInterface;
 import dao.interfaces.UserWrapperInterface;
+import model.GameManager;
 import model.gameInviteHandler.GameInviteManager;
 import model.gameInviteHandler.IGameInviteManager;
 import model.matchmaking.BasicMatchmakingQueue;
@@ -33,6 +34,9 @@ public class ContextListener implements ServletContextListener {
 
         DeckWrapperInterface deckWrapperDao = new DeckWrapperDAO();
         sce.getServletContext().setAttribute(DeckWrapperDAO.DECK_WRAPPER_ATTR, deckWrapperDao);
+
+        GameManager manager = new GameManager();
+        sce.getServletContext().setAttribute(GameManager.GAME_MANAGER_ATTR, manager);
     }
 
     private void addInviteManager(ServletContextEvent sce) {
