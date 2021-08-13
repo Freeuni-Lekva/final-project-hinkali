@@ -36,16 +36,13 @@ public class LogInServlet extends HttpServlet {
         String password = req.getParameter("password");
         String state;
 
-
-
             UserBean currUser = userDao.getUser(username, password);
             UserBean userByName= userDao.getUserByUsername(username);
 
-
         if(currUser != null){
             state = SUCCESS_STR;
-            resp.sendRedirect("home");
-
+            //resp.sendRedirect("home");
+            req.getSession().setAttribute(UserBean.USER_ATTR, currUser.getId());
         }else{
             state = FAILED_STR;
         }
@@ -53,22 +50,5 @@ public class LogInServlet extends HttpServlet {
             state=PASSWORD_FAILED_STR;
         resp.getWriter().print(state);
     }
-    /*
-    boolean emptyFieldsDetector(String username, String password){
-
-        if (username.equals("")) {
-            JOptionPane.showMessageDialog(null, "Field for username is empty");
-            return false;
-        }
-        if (password.equals("")) {
-            JOptionPane.showMessageDialog(null, "Filed for password is empty");
-            return false;
-        }
-        return true;
-    }
-
-
-
-     */
 
 }

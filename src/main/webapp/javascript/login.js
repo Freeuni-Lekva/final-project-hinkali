@@ -16,10 +16,17 @@ menu.addEventListener('click', function(){
 $(function(){
     $("#login--form").on("submit", function (event) {
         event.preventDefault();
-
-        $.post("login",  function (resp) {
+        let usernameL = $("#username").val();
+        let passwordL = $("#password").val();
+        $.post("login", {
+            username: usernameL,
+            password: passwordL
+        },function (resp) {
             if(resp==="failed"){
-                window.location = "/login";
+                let msg = $("#info");
+                msg.html("Username is wrong, try again!");
+                msg.css('color', 'red');
+                $("#password").css('border-color', 'red');
             }
             else if (resp === "success") {
                 window.location = "/home";
