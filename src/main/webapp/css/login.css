@@ -1,3 +1,8 @@
+html, body {
+    background-color: #161414;
+}
+
+
 *{
     box-sizing: border-box;
     margin: 0;
@@ -6,7 +11,7 @@
 }
 
 .navbar {
-    background: #131313;
+    background: #4b4b4b;
     height: 80px;
     display: flex;
     justify-content: center;
@@ -22,6 +27,7 @@
     display: flex;
     justify-content: space-between;
     height:80px;
+    z-index:1;
     width: 100%;
     max-width: 1300px;
     margin: 0 auto;
@@ -29,11 +35,12 @@
 }
 
 #navbar__logo {
-    background-color:  #ff8177;
+    background-color:  #5bb3d8;
     background-image: linear-gradient(to top,
-    #ff0844 0%, #ffb199 100%);
+    #febf0a 0%, #5bb3d8 100%);
     background-size: 100%;
     -webkit-background-clip: text;
+    /-moz-background-clip: text;
     -webkit-text-fill-color: transparent;
     -moz-text-fill-color: transparent;
     display: flex;
@@ -55,6 +62,10 @@
     text-align:center;
 }
 
+/* */
+ .navbar__itm{
+     height:80px;
+ }
 .navbar__links{
     color: #fff;
     display: flex;
@@ -86,15 +97,21 @@
     border: none;
     outline: none;
     border-radius: 4px;
-    background: #f77062;
+    background: #5bb3d8;
     color: #fff;
 }
 .button:hover {
-    background:  #4837ff;
+    background:  #febf0a;
     transition: all 0.3s ease;
 
 }
 
+.navbar__links:hover{
+    color: #febf0a;
+    transition: all 0.3s ease;
+}
+
+/*
 @media screen and (max-width: 960px){
     .navbar__container {
         display: flex;
@@ -113,7 +130,9 @@
         width: 100%;
         position: absolute;
         top: -1000px;
-        opacity: 1;
+        opacity: 0;
+
+
         transition:  all 0.5s ease;
         height:  50vh;
         z-index:-1;
@@ -126,6 +145,7 @@
         top:100%;
         opacity: 1;
         transition:  all 0.5s ease;
+        z-index: 99;
         height:  50vh;
         front-size: 1.6rem;
     }
@@ -166,6 +186,7 @@
         justify-content: center;
         align-items:  center;
         width: 80px;
+        height:80px ;
         margin: 0;
     }
 
@@ -183,4 +204,57 @@
     #mobile-menu.is-active .bar:nth-child(3){
         transform:translateY(-8px) rotate(-45deg);
     }
+}
+*/
+
+
+
+.login__page{
+    width: 360px;
+    padding:  10% 0 0;
+    margin: auto;
+
+}
+.form{
+    position: sticky;
+    justify-content: center;
+    z-index: 1;
+    background: #febf0a;
+    max-width: 360px;
+    margin: 0 auto 100px;
+    padding: 45px;
+}
+
+.form input {
+    font-family: "Roboto", sans-serif;
+   /* outline: 1;
+
+    */
+    background: #494ca2;
+    width: 100%;
+    border: 0;
+    margin: 0 0 15px;
+    padding: 15px;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+.form button {
+    font-family: "Roboto", sans-serif;
+    text-transform: uppercase;
+    outline: 0;
+    background: #494ca2;
+    width: 100%;
+    border: 0;
+    padding: 15px;
+    color: white;
+    font-size: 14px;
+    cursor: pointer;
+
+}
+
+
+
+
+::placeholder {
+    color: #808e95;
 }

@@ -6,13 +6,19 @@
           connect="width=device-width,initial-scale=1.0" >
     <title> login</title>
     <link rel="stylesheet" href="css/login.css" >
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
+          integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/fontawesome.min.css" >
+
 </head>
 <body>
 
 <nav class="navbar">
 
     <div class="navbar__container">
-        <a href="/" id="navbar__logo">Hinkali</a>
+        <a href="" id="navbar__logo">
+            <i class="fas fa-gamepad"></i>Hinkali
+        </a>
         <div class="navbar__taggle" id="mobile-menu">
             <span class="bar"> </span>
             <span class="bar"> </span>
@@ -32,11 +38,29 @@
 </nav>
 
 
-<form method = "post" action = "./login">
-    <p>User Name:<input type = "text" name = "username"/></p>
-    <p>Password:<input type = "password" name = "password"/>
+
+
+
+<div class="login__page" >
+<div class="form" >
+<form method = "post" action = "./login" id="login--form">
+    <div class="fieled" >
+
+
+
+
+        <p>User Name:<input type = "text" placeholder="username" id="username" name = "username"/></p>
+        <p>Password:
+            <input class="password_field" type="password" id="password" name="password" placeholder="Password" required pattern=".{5,60}"
+                   title="Password incorrect"><br><br>
+    </div>
+
         <input type = "submit" value= "Login" /></p>
 </form>
+</div>
+</div>
+
+
 
 <script> src="javascript/login.js"</script>
 </body>
