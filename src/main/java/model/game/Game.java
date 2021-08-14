@@ -28,21 +28,31 @@ public class Game {
         p2WinsNum = 0;
     }
 
-    public int getP1WonRounds(){return p1WinsNum;}
+    public int getPlayerWonRounds(int id){
+        if(p1.getID() == id)
+            return p1WinsNum;
+        if(p2.getID() == id)
+            return p2WinsNum;
+        return -1;
+    }
 
-    public int getP2WonRounds(){return p2WinsNum;}
-
-    public int getP1Score(){return p1.getPoint();}
-
-    public int getP2Score(){return p2.getPoint();}
-
+    public int getPlayerScore(int id) {
+        if (p1.getID() == id)
+            return p1.getPoint();
+        if (p2.getID() == id)
+            return p2.getPoint();
+        return -1;
+    }
     public int numRoundsLeft(){return roundsLeft;}
 
-    public List<Card> getP1HeldCards(){return p1.getHeldCards();}
-
-    public List<Card> getP2HeldCards(){return p2.getHeldCards();}
-
-    public void playCard(int cardId){
+    public List<Card> getPlayerHeldCards(int id) {
+        if (p1.getID() == id)
+            return p1.getHeldCards();
+        if (p2.getID() == id)
+            return p2.getHeldCards();
+        return null;
+    }
+        public void playCard(int cardId){
         Player p = getActivePlayer();
         Card c = p.findCardInHand(cardId);
         if(c != null)
