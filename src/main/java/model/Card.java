@@ -56,7 +56,9 @@ public class Card {
         this.power = power;
     }
 
-    public void setRow( int row) {this.row = row;}
+    public int getRow() { return row; }
+
+    public void setRow(int row) { this.row = row; }
 
     @Override
     public boolean equals(Object o) {
