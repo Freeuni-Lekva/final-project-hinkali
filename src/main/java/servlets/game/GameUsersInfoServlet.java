@@ -27,27 +27,32 @@ public class GameUsersInfoServlet extends HttpServlet {
     }
 
     // TODO update mock implementation after others are finished
-    // params: none
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println("handling player info fetch request");
-        if (req.getSession().getAttribute(UserBean.USER_ATTR) == null) {
-            resp.sendRedirect("/");
-            return;
-        }
-        resp.addHeader("Access-Control-Allow-Origin", "*");
+        resp.addHeader("Access-Control-Allow-Origin", "http://localhost:3000");
         resp.addHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE, HEAD");
         resp.addHeader("Access-Control-Allow-Headers", "X-PINGOTHER, Origin, X-Requested-With, Content-Type, Accept");
         resp.addHeader("Access-Control-Max-Age", "1728000");
-
+        resp.addHeader("Access-Control-Allow-Credentials", "true");
+        System.out.println("started handling player info request");
+        if (req.getSession().getAttribute(UserBean.USER_ATTR) == null) {
+            resp.getWriter().println("unauthorized request");
+            resp.setStatus(403);
+            System.out.println("player info request unauthorized");
+            return;
+        }
         int id = (int) req.getSession().getAttribute(UserBean.USER_ATTR);
+        System.out.println("userId: " + id);
         UserWrapperInterface dao = (UserWrapperInterface) req.getServletContext().getAttribute(UserWrapperDao.USER_WRAPPER_ATTR);
         UserBean player = dao.getUserById(id);
-        UserBean opponent = new UserBean(0, "opponentName", "opponentSurname", "opponentUsername", "", null);
+        player.setPassword("");
+        UserBean opponent = new UserBean(0, "username", "name", "surname", "", null);
         ResponseWrapper response = new ResponseWrapper(player, opponent);
         GsonBuilder gsonBuilder = new GsonBuilder();
         Gson gson = gsonBuilder.create();
         String responseJson = gson.toJson(response);
+        System.out.println("sending response to client");
+        System.out.println(responseJson);
         resp.getWriter().println(responseJson);
     }
 }
