@@ -1,12 +1,8 @@
 package dao_tests;
 
 import commons.beans.UserBean;
-import dao.implementation.CardDAO;
-import dao.implementation.DeckDAO;
 import dao.implementation.DeckWrapperDAO;
 import dao.implementation.UserDAO;
-import dao.interfaces.CardDAOInterface;
-import dao.interfaces.DeckDAOInterface;
 import dao.interfaces.DeckWrapperInterface;
 import dao.interfaces.UserDAOInterface;
 import model.Card;
@@ -24,8 +20,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class DeckWrapperTest {
 
-    private final Card card1 = new Card("cardTest1", "cardTest1", 1);
-    private final Card card2 = new Card("cardTest2", "cardTest2", 2);
+    private final Card card1 = new Card("cardTest1", "cardTest1", 1, 0);
+    private final Card card2 = new Card("cardTest2", "cardTest2", 2, 0);
     private final UserBean user1 = new UserBean("wrapperTest1", "", "", "wrapperTest1", null);
     private final Deck deck1 = new Deck("deckTest1", "deckTest1", null);
     private final Deck deck2 = new Deck("deckTest2", "deckTest2", null);
