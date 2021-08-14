@@ -38,4 +38,5 @@ public interface PlayerInterface {
 
     boolean setCardOnTable(Card c);
 
+    Card findCardInHand(int id);
 }

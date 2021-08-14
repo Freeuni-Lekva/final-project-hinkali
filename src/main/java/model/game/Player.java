@@ -116,4 +116,14 @@ public class Player implements PlayerInterface {
        }
        return false;
     }
+
+    @Override
+    public Card findCardInHand(int id) {
+        for(int i = 0; i < heldCards.size(); i++){
+            if(heldCards.get(i).getCardId() == id){
+                return heldCards.get(i);
+            }
+        }
+        return null;
+    }
 }

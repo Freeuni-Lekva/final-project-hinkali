@@ -16,7 +16,7 @@ public class Game {
     private int p1WinsNum;
     private int p2WinsNum;
 
-    public void init(int gameId, int player1Id, int player2Id ){
+    public Game (int gameId, int player1Id, int player2Id ){
         this.gameId = gameId;
         Random rd = new Random();
         boolean startingPlayer = rd.nextBoolean();
@@ -28,16 +28,62 @@ public class Game {
         p2WinsNum = 0;
     }
 
-    public int play(){
-        while(roundsLeft != 0){
-            initiateNewRound();
-            playRound();
-        }
-        if(p1WinsNum>p2WinsNum)
-            return p1.getID();
-        return p2.getID();
+    public int getP1WonRounds(){return p1WinsNum;}
+
+    public int getP2WonRounds(){return p2WinsNum;}
+
+    public int getP1Score(){return p1.getPoint();}
+
+    public int getP2Score(){return p2.getPoint();}
+
+    public int numRoundsLeft(){return roundsLeft;}
+
+    public List<Card> getP1HeldCards(){return p1.getHeldCards();}
+
+    public List<Card> getP2HeldCards(){return p2.getHeldCards();}
+
+    public void playCard(int cardId){
+        Player p = getActivePlayer();
+        Card c = p.findCardInHand(cardId);
+        if(c != null)
+            p.setCardOnTable(c);
+        p.endRound();
+        switchActivePlayer();
+        newRound();
     }
 
+    public void skipRound(){
+        getActivePlayer().endRound();
+        switchActivePlayer();
+        newRound();
+    }
+
+    private void newRound(){
+        if(p1.hasEndedRound() && p2.hasEndedRound() && roundsLeft > 0){
+            if(p1.getPoint() > p2.getPoint())
+                p1WinsNum++;
+            else
+                p2WinsNum++;
+            initiateNewRound();
+            roundsLeft--;
+        }
+    }
+
+    private Player getActivePlayer(){
+        if(p1.isTurn())
+            return p1;
+        return p2;
+    }
+
+    private void switchActivePlayer(){
+        if(p1.isTurn()){
+            p1.endTurn();
+            p2.startTurn();
+        }else{
+            p2.endTurn();
+            p1.startTurn();
+        }
+    }
     private void initiateNewRound(){
         p1.startRound();
         p2.startRound();
@@ -47,39 +93,49 @@ public class Game {
         p2.clearTable();
     }
 
-    public void playRound(){
-        while(true){
-            if(p1.hasEndedRound() && p2.hasEndedRound()){
-                if(p1.getPoint()> p2.getPoint())
-                    p1WinsNum++;
-                else
-                    p2WinsNum++;
-                roundsLeft --;
-                break;
-            }
-            if(p1.isTurn()){
-                servePlayer(p1);
-                p1.endTurn();
-                p2.startTurn();
-            }
-
-            if(p2.isTurn()){
-                servePlayer(p2);
-                p2.endTurn();
-                p1.startTurn();
-            }
-        }
-    }
-
-    private void servePlayer(Player p){
-        while(true) {
-            Card playedCard = null; // = whatever the method will be;
-            if (p.setCardOnTable(playedCard)) {
-                p.endRound();
-                return;
-            }else{
-                //not valid card
-            }
-        }
-    }
+//    public int play(){
+//        while(roundsLeft != 0){
+//            initiateNewRound();
+//            playRound();
+//        }
+//        if(p1WinsNum>p2WinsNum)
+//            return p1.getID();
+//        return p2.getID();
+//    }
+//
+//    public void playRound(){
+//        while(true){
+//            if(p1.hasEndedRound() && p2.hasEndedRound()){
+//                if(p1.getPoint()> p2.getPoint())
+//                    p1WinsNum++;
+//                else
+//                    p2WinsNum++;
+//                roundsLeft --;
+//                break;
+//            }
+//            if(p1.isTurn()){
+//                servePlayer(p1);
+//                p1.endTurn();
+//                p2.startTurn();
+//            }
+//
+//            if(p2.isTurn()){
+//                servePlayer(p2);
+//                p2.endTurn();
+//                p1.startTurn();
+//            }
+//        }
+//    }
+//
+//    private void servePlayer(Player p){
+//        while(true) {
+//            Card playedCard = null; // = whatever the method will be;
+//            if (p.setCardOnTable(playedCard)) {
+//                p.endRound();
+//                return;
+//            }else{
+//                //not valid card
+//            }
+//        }
+//    }
 }
