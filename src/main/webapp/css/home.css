@@ -1,0 +1,167 @@
+html, body{
+    margin: 0;
+    padding: 0;
+    background-color: #282828;
+}
+
+table, th, td{
+}
+
+table{
+    width: 600px;
+    height: 140px;
+    background-color: #928374;
+    border-radius: 6px;
+    border: 1px solid black;
+    color:#282828;
+}
+
+.loss{
+    border-right: none;
+}
+
+.bottom_line{
+    border-bottom: none;
+}
+
+.leaderboard{
+    position: absolute;
+    left: 39%;
+    top: 25%;
+}
+
+td{
+    text-align:center;
+    border-bottom: 1px solid black;
+    border-right: 1px solid black;
+}
+
+th{
+    border-bottom: 1px solid black;
+    border-right: 1px solid black;
+}
+
+.buttons{
+    position:absolute;
+    left: 20%;
+    top: 25%;
+}
+
+.button{
+    margin-bottom: 10%;
+    width: 80px;
+    height: 40px;
+    background-color: #928374;
+    border-radius: 6px;
+    border: none;
+}
+
+.button:hover{
+    background-color: #ebdbb2;
+}
+
+input{
+    color: #282828;
+}
+html, body{
+    margin: 0;
+    padding: 0;
+    background-color: #161414;
+}
+
+table, th, td{
+}
+
+table{
+    width: 600px;
+    height: 140px;
+    background-color: #5bb3d8;
+    border-radius: 6px;
+    border: 1px solid #161414;
+    color:#ffc400;
+}
+
+.loss{
+    border-right: none;
+}
+
+.bottom_line{
+    border-bottom: none;
+}
+
+.leaderboard{
+    position: absolute;
+    left: 39%;
+    top: 25%;
+}
+
+.leaderboard_head{
+    position: absolute;
+    left:55%;
+    top:16%;
+    color:#ffc400;
+}
+
+td{
+    text-align:center;
+    border-bottom: 1px solid black;
+    border-right: 1px solid black;
+    color:#faffba;
+}
+
+th{
+    border-bottom: 1px solid black;
+    border-right: 1px solid black;
+}
+
+.buttons{
+    position:absolute;
+    left: 20%;
+    top: 25%;
+}
+
+.play_button{
+    color:darkgray;
+    background-color: green;
+    margin-bottom: 10%;
+    width: 100px;
+    height: 40px;
+    border-radius: 6px;
+    border: none;
+}
+
+.just_button{
+    color:darkgray;
+    background-color: #494ca2;
+    margin-bottom: 10%;
+    width: 100px;
+    height: 40px;
+    border-radius: 6px;
+    border: none;
+}
+
+.quit_button{
+    color:darkgray;
+    background-color: #ff1002;
+    margin-bottom: 10%;
+    width: 100px;
+    height: 40px;
+    border-radius: 6px;
+    border: none;
+}
+
+.play_button:hover{
+    background-color: forestgreen;
+}
+
+.just_button:hover{
+    background-color: #494cc9;
+}
+
+.quit_button:hover{
+    background-color: #ff2b1f;
+}
+
+input{
+    color: #282828;
+}
