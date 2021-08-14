@@ -102,6 +102,7 @@ public class Game {
         p1.clearTable();
         p2.clearTable();
     }
+}
 
 //    public int play(){
 //        while(roundsLeft != 0){
