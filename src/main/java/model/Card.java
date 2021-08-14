@@ -42,6 +42,8 @@ public class Card {
         return image;
     }
 
+    public int getRow() { return row;}
+
     public void setImage(String image) {
         this.image = image;
     }
