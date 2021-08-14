@@ -3,6 +3,8 @@ package servlets.game;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import commons.beans.UserBean;
+import dao.implementation.UserWrapperDao;
+import dao.interfaces.UserWrapperInterface;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -28,22 +30,24 @@ public class GameUsersInfoServlet extends HttpServlet {
     // params: none
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//        UserBean player = new UserBean(0, "playerName", "playerSurname", "playerUsername", "", null);
-//        UserBean opponent = new UserBean(0, "opponentName", "opponentSurname", "opponentUsername", "", null);
-//        req.getSession().setAttribute(UserBean.USER_ATTR, 0);
-
+        System.out.println("handling player info fetch request");
+        if (req.getSession().getAttribute(UserBean.USER_ATTR) == null) {
+            resp.sendRedirect("/");
+            return;
+        }
         resp.addHeader("Access-Control-Allow-Origin", "*");
-        resp.getWriter().println("hello");
+        resp.addHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE, HEAD");
+        resp.addHeader("Access-Control-Allow-Headers", "X-PINGOTHER, Origin, X-Requested-With, Content-Type, Accept");
+        resp.addHeader("Access-Control-Max-Age", "1728000");
 
-//        if (req.getSession().getAttribute(UserBean.USER_ATTR) == null){
-//            resp.sendRedirect("/");
-//            return;
-//        }
-
-//        ResponseWrapper response = new ResponseWrapper(player, opponent);
-//        GsonBuilder gsonBuilder = new GsonBuilder();
-//        Gson gson = gsonBuilder.create();
-//        String responseJson = gson.toJson(response);
-//        resp.getWriter().println(responseJson);
+        int id = (int) req.getSession().getAttribute(UserBean.USER_ATTR);
+        UserWrapperInterface dao = (UserWrapperInterface) req.getServletContext().getAttribute(UserWrapperDao.USER_WRAPPER_ATTR);
+        UserBean player = dao.getUserById(id);
+        UserBean opponent = new UserBean(0, "opponentName", "opponentSurname", "opponentUsername", "", null);
+        ResponseWrapper response = new ResponseWrapper(player, opponent);
+        GsonBuilder gsonBuilder = new GsonBuilder();
+        Gson gson = gsonBuilder.create();
+        String responseJson = gson.toJson(response);
+        resp.getWriter().println(responseJson);
     }
 }
