@@ -64,6 +64,7 @@ const usersTemplate = {
 }
 
 function App() {
+    const [needsUpdate, setNeedsUpdate] = useState(false);
     const [users, setUsers] = useState(usersTemplate);
     const [gameState, setGameState] = useState(gameStateExample);
     const [action, setAction] = useState();
@@ -76,12 +77,23 @@ function App() {
     }, []);
 
     useEffect(() => {
+        if (!needsUpdate) return
+        axios.get(ENDPOINT_PLAYER_INFO, {withCredentials: true})
+            .then(r => r.data)
+            .then(r => {
+                console.log(r)
+                //
+            })
+            .catch(e => console.error(e))
+    }, [needsUpdate]);
+
+
+    useEffect(() => {
         // TODO send fetch request to do an action
         console.log(action);
     }, [action]);
 
-    // TODO fetch data every few seconds
-    setInterval(() => void 0, 1_200);
+    setInterval(() => setNeedsUpdate(prev => true), 1_200);
 
     return (
         <div className="App">

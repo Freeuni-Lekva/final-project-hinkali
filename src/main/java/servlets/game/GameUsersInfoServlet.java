@@ -5,6 +5,7 @@ import com.google.gson.GsonBuilder;
 import commons.beans.UserBean;
 import dao.implementation.UserWrapperDao;
 import dao.interfaces.UserWrapperInterface;
+import model.GameManager;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,7 +17,7 @@ import java.io.IOException;
 @WebServlet("/game/info")
 public class GameUsersInfoServlet extends HttpServlet {
 
-    private class ResponseWrapper {
+    private static class ResponseWrapper {
         final UserBean player;
         final UserBean opponent;
 
@@ -26,7 +27,6 @@ public class GameUsersInfoServlet extends HttpServlet {
         }
     }
 
-    // TODO update mock implementation after others are finished
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.addHeader("Access-Control-Allow-Origin", "http://localhost:3000");
@@ -41,12 +41,18 @@ public class GameUsersInfoServlet extends HttpServlet {
             System.out.println("player info request unauthorized");
             return;
         }
+        // player
         int id = (int) req.getSession().getAttribute(UserBean.USER_ATTR);
         System.out.println("userId: " + id);
         UserWrapperInterface dao = (UserWrapperInterface) req.getServletContext().getAttribute(UserWrapperDao.USER_WRAPPER_ATTR);
         UserBean player = dao.getUserById(id);
         player.setPassword("");
+        // opponent
+        GameManager manager = (GameManager) req.getServletContext().getAttribute(GameManager.GAME_MANAGER_ATTR);
+        // pull out the second player
         UserBean opponent = new UserBean(0, "username", "name", "surname", "", null);
+
+        //response building
         ResponseWrapper response = new ResponseWrapper(player, opponent);
         GsonBuilder gsonBuilder = new GsonBuilder();
         Gson gson = gsonBuilder.create();
