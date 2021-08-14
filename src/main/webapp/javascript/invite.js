@@ -11,7 +11,7 @@ const fetchInvitesUrl = "/gameInvite/fetchInvites"
 
 // redirection
 const redirectToGame = (gameId) => {
-    window.location = `/play?id=${gameId}`
+    window.location = `/play?gameId=${gameId}`
 }
 
 const redirectToHome = () => {

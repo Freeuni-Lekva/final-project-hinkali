@@ -1,8 +1,12 @@
 package servlets.game;
 
 import commons.beans.UserBean;
+import dao.implementation.DeckDAO;
 import model.GameManager;
 import model.game.Game;
+import model.game.modified.Deck;
+import model.game.modified.GameModified;
+import model.game.modified.Player;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -36,7 +40,11 @@ public class PlayServlet extends HttpServlet {
         } else if (currGameUserIdsList.size() == 1 && !currGameUserIdsList.contains(userId)) {
             currGameUserIdsList.add(userId);
             List<Integer> userIds = gameUserIds.get(gameId);
-            Game game = new Game(gameId, userIds.get(0), userIds.get(1));
+            Deck p1Deck = new Deck(userIds.get(0));
+            Deck p2Deck = new Deck(userIds.get(0));
+            Player p1 = new Player(userIds.get(0), p1Deck);
+            Player p2 = new Player(userIds.get(1), p2Deck);
+            GameModified game = new GameModified(gameId, p1, p2);
             manager.getGameMap().put(gameId, game);
             for (Integer id : userIds)
                 manager.getUserGameMap().put(id, game);
@@ -45,4 +53,11 @@ public class PlayServlet extends HttpServlet {
             resp.sendRedirect("http://localhost:3000");
         } else resp.sendRedirect("home");
     }
+
+//    private Deck getDeckFromDao(Integer id, HttpServletRequest req) {
+//        DeckDAO dao = (DeckDAO) req.getServletContext().getAttribute(DeckDAO.DECK_DAO_ATTR);
+//        int userDeckId = dao.getUserDeckId(id);
+//        model.Deck deck = dao.getDeck(userDeckId);
+//        return new Deck(deck);
+//    }
 }

@@ -1,20 +1,32 @@
 import Row from "./Row";
 import '../styles/PlayerBoard.css'
+import {useEffect, useState} from "react";
 
-const PlayerBoard = ({board}) => {
+const PlayerBoard = ({board, isPlayer, total}) => {
+    const [info, setInfo] = useState([]);
+
+    // on mount
+    useEffect(() => {
+        const rows = isPlayer ? board.rows : board.rows.reverse();
+        setInfo(prev => rows)
+        console.log(board)
+    }, [board]);
+
+
+    const rowToComponent = (row) => {
+        return <li key={row.type} className="rowWrapper">
+            <Row row={row} key={row.type}/>
+        </li>
+    }
 
     return <div className="PlayerBoard">
         <div className="points">
             <label className="pointsLabel">
-                75
+                {total}
             </label>
         </div>
         <ul className="rowList">
-            {board.map(row => {
-                return <li key={row.type} className="rowWrapper">
-                    <Row row={row} key={row.type}/>
-                </li>
-            })}
+            {info.map(row => rowToComponent(row))}
         </ul>
     </div>
 }

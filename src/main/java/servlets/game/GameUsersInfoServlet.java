@@ -6,6 +6,7 @@ import commons.beans.UserBean;
 import dao.implementation.UserWrapperDao;
 import dao.interfaces.UserWrapperInterface;
 import model.GameManager;
+import model.game.modified.GameModified;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,6 +14,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @WebServlet("/game/info")
 public class GameUsersInfoServlet extends HttpServlet {
@@ -49,8 +53,13 @@ public class GameUsersInfoServlet extends HttpServlet {
         player.setPassword("");
         // opponent
         GameManager manager = (GameManager) req.getServletContext().getAttribute(GameManager.GAME_MANAGER_ATTR);
-        // pull out the second player
-        UserBean opponent = new UserBean(0, "username", "name", "surname", "", null);
+        GameModified game = manager.getUserGameMap().get(id);
+        int gameId = game.getGameId();
+        Map<Integer, List<Integer>> gameUserIds = manager.getGameUserIds();
+        List<Integer> integers = gameUserIds.get(gameId);
+        List<Integer> collect = integers.stream().filter(i -> i != id).collect(Collectors.toList());
+        UserBean opponent = dao.getUserById(collect.get(0));
+        opponent.setPassword("");
 
         //response building
         ResponseWrapper response = new ResponseWrapper(player, opponent);
