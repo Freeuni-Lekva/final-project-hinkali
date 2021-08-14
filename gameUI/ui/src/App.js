@@ -3,7 +3,7 @@ import PlayerHand from "./components/PlayerHand";
 import UserInfo from "./components/UserInfo";
 import "./styles/App.css";
 import {useEffect, useState} from "react";
-import {ENDPOINT_PLAYER_INFO} from "./resources/endpoints";
+import {ENDPOINT_GAME_STATE, ENDPOINT_PLAYER_INFO} from "./resources/endpoints";
 import axios from "axios";
 
 const gameStateExample = {
@@ -78,13 +78,14 @@ function App() {
 
     useEffect(() => {
         if (!needsUpdate) return
-        axios.get(ENDPOINT_PLAYER_INFO, {withCredentials: true})
+        axios.get(ENDPOINT_GAME_STATE, {withCredentials: true})
             .then(r => r.data)
             .then(r => {
                 console.log(r)
                 //
             })
             .catch(e => console.error(e))
+            .finally(() => setNeedsUpdate(false))
     }, [needsUpdate]);
 
 
@@ -93,7 +94,7 @@ function App() {
         console.log(action);
     }, [action]);
 
-    setInterval(() => setNeedsUpdate(prev => true), 1_200);
+    setInterval(() => setNeedsUpdate(prev => true), 2_000);
 
     return (
         <div className="App">

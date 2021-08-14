@@ -1,8 +1,8 @@
 // urls
-const generateJoinUrl = (username) =>{
+const generateJoinUrl = (username) => {
     return `/gameInvite/invite?username=${username}`;
 }
-const generateAcceptUrl = (username) =>{
+const generateAcceptUrl = (username) => {
     return `/gameInvite/accept?username=${username}`;
 }
 const awaitUrl = '/gameInvite/await'
@@ -11,7 +11,7 @@ const fetchInvitesUrl = "/gameInvite/fetchInvites"
 
 // redirection
 const redirectToGame = (gameId) => {
-    window.location = `/game?id=${gameId}`
+    window.location = `/play?id=${gameId}`
 }
 
 const redirectToHome = () => {
@@ -21,10 +21,10 @@ const redirectToHome = () => {
 const acceptInvite = (username) => {
     fetch(generateAcceptUrl(username)).then(r => r.json())
         .then(r => {
-            if (r.state === 'success'){
+            if (r.state === 'success') {
                 clearInterval(waitingInterval)
                 redirectToGame(r.gameId)
-            }else{
+            } else {
                 throw ('could not accept invite')
             }
         })
@@ -49,7 +49,7 @@ const appendListElement = (username, list) => {
 
 const updateListDisplay = (usernames) => {
     const list = document.getElementById('unorderedListId')
-    while (list.firstChild){
+    while (list.firstChild) {
         list.removeChild(list.lastChild)
     }
     usernames.map(username => {
@@ -67,7 +67,7 @@ const sendJoinRequest = () => {
     labelB.style.visibility = 'visible'
     document.getElementById('btnId').disabled = true
     fetch(url).then(r => r.json()).then(r => {
-        if (r === 'error'){
+        if (r === 'error') {
             const label = document.getElementById('statusLabelID')
             label.innerHTML = 'Error'
             label.style.visibility = 'visible'
@@ -92,7 +92,7 @@ const sendJoinRequest = () => {
 const awaitResponse = () => {
     fetch(awaitUrl).then(r => r.json()).then(r => {
         console.log(r)
-        switch (r.state){
+        switch (r.state) {
             case 'success':
                 clearInterval(waitingInterval)
                 document.getElementById('btnId').disabled = false
@@ -124,7 +124,7 @@ const fetchInvites = () => {
             const usernames = r.senders
             updateListDisplay(usernames)
         }).catch(e => {
-            console.error(e)
+        console.error(e)
     })
 }
 

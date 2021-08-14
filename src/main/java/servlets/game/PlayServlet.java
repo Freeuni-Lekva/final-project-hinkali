@@ -31,13 +31,13 @@ public class PlayServlet extends HttpServlet {
         if (currGameUserIdsList == null) {
             currGameUserIdsList = new ArrayList<>();
             currGameUserIdsList.add(userId);
-            gameUserIds.put(gameId,currGameUserIdsList);
+            gameUserIds.put(gameId, currGameUserIdsList);
             resp.sendRedirect("play?gameId=" + gameId);
         } else if (currGameUserIdsList.size() == 1 && !currGameUserIdsList.contains(userId)) {
             currGameUserIdsList.add(userId);
-            Game game = new Game(); // ------------------------------- placeholder
-            manager.getGameMap().put(gameId, game);
             List<Integer> userIds = gameUserIds.get(gameId);
+            Game game = new Game(gameId, userIds.get(0), userIds.get(1));
+            manager.getGameMap().put(gameId, game);
             for (Integer id : userIds)
                 manager.getUserGameMap().put(id, game);
             resp.sendRedirect("http://localhost:3000");

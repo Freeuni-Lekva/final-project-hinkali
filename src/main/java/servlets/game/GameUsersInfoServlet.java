@@ -58,7 +58,6 @@ public class GameUsersInfoServlet extends HttpServlet {
         Gson gson = gsonBuilder.create();
         String responseJson = gson.toJson(response);
         System.out.println("sending response to client");
-        System.out.println(responseJson);
         resp.getWriter().println(responseJson);
     }
 }
