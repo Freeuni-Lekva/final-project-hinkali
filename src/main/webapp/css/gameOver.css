@@ -1,0 +1,45 @@
+html, body{
+    margin: 0;
+    padding: 0;
+    background-color: #282828;
+}
+
+.result{
+    position: absolute;
+    left: 40%;
+    top: 20%;
+    font-size: 35px;
+    width: 300px;
+}
+
+.victory{
+    position: absolute;
+    left:2%;
+    color: green;
+}
+
+.loss{
+    color: #ff1002;
+}
+
+.draw{
+    position: absolute;
+    left: 18%;
+    color: #ffc400;
+}
+
+.button{
+    position:absolute;
+    width: 200px;
+    height:70px;
+    top:47%;
+    left:43%;
+    font-size: 50px;
+    color:darkgray;
+    background-color: #494ca2;
+    border-radius: 10px;
+}
+
+.button:hover{
+    background-color: #494cc9;
+}
