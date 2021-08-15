@@ -7,7 +7,7 @@ const Deck = ({deck}) => {
             <img className="image" src={image} alt="error"/>
         </div>
         <label className="cardsLeftCounter">
-            Cards in deck: {deck.size}
+            Cards in deck: {!!deck ? deck.cards.length : '?'}
         </label>
     </div>
 }

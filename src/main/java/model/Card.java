@@ -56,8 +56,6 @@ public class Card {
         this.power = power;
     }
 
-    public int getRow() { return row; }
-
     public void setRow(int row) { this.row = row; }
 
     @Override

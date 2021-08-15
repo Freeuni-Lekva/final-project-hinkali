@@ -1,5 +1,6 @@
 package servlets.gameInvite;
 
+import commons.beans.UserBean;
 import servlets.ContextListener;
 import servlets.search.SearchServlet;
 
@@ -14,8 +15,9 @@ import java.io.IOException;
 public class InvitePageServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        if (!ContextListener.TESTING){
-            if(SearchServlet.handleUnauthorizedCase(req, resp)) return;
+        if (req.getSession().getAttribute(UserBean.USER_ATTR) == null){
+            resp.sendRedirect("/");
+            return;
         }
 
         req.getRequestDispatcher("/invite.html").forward(req, resp);
