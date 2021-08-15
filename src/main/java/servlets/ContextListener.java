@@ -2,6 +2,7 @@ package servlets;
 
 import dao.implementation.DeckWrapperDAO;
 import dao.implementation.FriendDao;
+import dao.implementation.StatsDao;
 import dao.implementation.UserWrapperDao;
 import dao.interfaces.DeckWrapperInterface;
 import dao.interfaces.FriendDaoInterface;
@@ -37,6 +38,9 @@ public class ContextListener implements ServletContextListener {
 
         GameManager manager = new GameManager();
         sce.getServletContext().setAttribute(GameManager.GAME_MANAGER_ATTR, manager);
+
+        StatsDao statsDao = new StatsDao();
+        sce.getServletContext().setAttribute(StatsDao.STATS_DAO_ATTR, statsDao);
     }
 
     private void addInviteManager(ServletContextEvent sce) {

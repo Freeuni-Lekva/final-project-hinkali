@@ -4,6 +4,7 @@ import UserInfo from "./components/UserInfo";
 import "./styles/App.css";
 import {useEffect, useState} from "react";
 import {
+    ENDPOINT_GAME_OVER,
     ENDPOINT_GAME_STATE,
     ENDPOINT_PASS_ROUND,
     ENDPOINT_PLAY_CARD,
@@ -56,6 +57,19 @@ function App() {
             })
             .catch(e => console.error(e))
             .finally(() => setNeedsUpdate(false))
+        console.log(gameState);
+        console.log(users);
+        if(gameState.player.livesLeft ===0 || gameState.opponent.livesLeft ===0){
+            //awaitResponse(2000)
+            if(gameState.player.livesLeft > gameState.opponent.livesLeft){
+                window.location.href = ENDPOINT_GAME_OVER+ `?winner=${users.player.id}&loser=${users.opponent.id}&draw=-1`
+            } else if(gameState.player.livesLeft === users.opponent.livesLeft){
+                window.location.href = ENDPOINT_GAME_OVER+ `?winner=-1&loser=-1&draw=${users.player.id}`
+            } else{
+                window.location.href = ENDPOINT_GAME_OVER+ `?winner=${users.opponent.id}&loser=${users.player.id}&draw=-1`
+            }
+        }
+
     }, [needsUpdate]);
 
 
