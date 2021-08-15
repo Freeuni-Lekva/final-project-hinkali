@@ -42,7 +42,11 @@ function App() {
         axios.get(ENDPOINT_GAME_STATE, {withCredentials: true})
             .then(r => r.data)
             .then(r => {
-                setGameState(prev => r)
+                setGameState(prev => {
+                    r.player.livesLeft = 2;
+                    r.opponent.livesLeft = 2;
+                    return r
+                })
             })
             .catch(e => console.error(e))
             .finally(() => setNeedsUpdate(false))
@@ -57,16 +61,17 @@ function App() {
             })
             .catch(e => console.error(e))
             .finally(() => setNeedsUpdate(false))
-        console.log(gameState);
-        console.log(users);
-        if(gameState.player.livesLeft ===0 || gameState.opponent.livesLeft ===0){
-            //awaitResponse(2000)
-            if(gameState.player.livesLeft > gameState.opponent.livesLeft){
-                window.location.href = ENDPOINT_GAME_OVER+ `?winner=${users.player.id}&loser=${users.opponent.id}&draw=-1`
-            } else if(gameState.player.livesLeft === users.opponent.livesLeft){
-                window.location.href = ENDPOINT_GAME_OVER+ `?winner=-1&loser=-1&draw=${users.player.id}`
-            } else{
-                window.location.href = ENDPOINT_GAME_OVER+ `?winner=${users.opponent.id}&loser=${users.player.id}&draw=-1`
+
+        if (!!gameState && (gameState.player.livesLeft === 0 || gameState.opponent.livesLeft === 0)) {
+            //clear data
+            clearInterval(interval)
+
+            if (gameState.player.livesLeft > gameState.opponent.livesLeft) {
+                window.location.href = ENDPOINT_GAME_OVER + `?winner=${users.player.id}&loser=${users.opponent.id}&draw=-1`
+            } else if (gameState.player.livesLeft === gameState.opponent.livesLeft) {
+                window.location.href = ENDPOINT_GAME_OVER + `?winner=-1&loser=-1&draw=${users.player.id}`
+            } else {
+                window.location.href = ENDPOINT_GAME_OVER + `?winner=${users.opponent.id}&loser=${users.player.id}&draw=-1`
             }
         }
 
@@ -91,7 +96,7 @@ function App() {
         }
     }, [action]);
 
-    setInterval(() => {
+    var interval = setInterval(() => {
         if (users.player.username === '') {
             axios.get(ENDPOINT_PLAYER_INFO, {withCredentials: true})
                 .then(r => r.data)

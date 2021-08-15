@@ -9,7 +9,6 @@ const PlayerBoard = ({board, isPlayer, total}) => {
     useEffect(() => {
         const rows = isPlayer ? board.rows : board.rows.reverse();
         setInfo(prev => rows)
-        console.log(board)
     }, [board]);
 
 

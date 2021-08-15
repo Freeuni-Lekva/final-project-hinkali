@@ -7,6 +7,8 @@ import model.game.Game;
 import model.game.modified.Deck;
 import model.game.modified.GameModified;
 import model.game.modified.Player;
+import model.matchmaking.QueryBasedMatchmaking;
+import model.matchmaking.queue.IQueue;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -22,7 +24,7 @@ import java.util.Map;
 public class PlayServlet extends HttpServlet {
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected synchronized void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         if (req.getSession().getAttribute(UserBean.USER_ATTR) == null) {
             resp.sendRedirect("register");
             return;
@@ -32,6 +34,7 @@ public class PlayServlet extends HttpServlet {
         int userId = (int) req.getSession().getAttribute(UserBean.USER_ATTR);
         Map<Integer, List<Integer>> gameUserIds = manager.getGameUserIds();
         List<Integer> currGameUserIdsList = gameUserIds.get(gameId);
+        System.out.println(gameUserIds + "  -  " + currGameUserIdsList);
         if (currGameUserIdsList == null) {
             currGameUserIdsList = new ArrayList<>();
             currGameUserIdsList.add(userId);
@@ -40,6 +43,14 @@ public class PlayServlet extends HttpServlet {
         } else if (currGameUserIdsList.size() == 1 && !currGameUserIdsList.contains(userId)) {
             currGameUserIdsList.add(userId);
             List<Integer> userIds = gameUserIds.get(gameId);
+            // remove from matchmaking
+            QueryBasedMatchmaking matchmaking = (QueryBasedMatchmaking) req.getServletContext().getAttribute(QueryBasedMatchmaking.MATCHMAKING_ATTR);
+            IQueue<Integer> queue = matchmaking.getQueue();
+            for (Integer id : userIds) {
+                queue.remove(id);
+            }
+
+            // game init
             Deck p1Deck = new Deck(userIds.get(0));
             Deck p2Deck = new Deck(userIds.get(0));
             Player p1 = new Player(userIds.get(0), p1Deck);
@@ -48,6 +59,7 @@ public class PlayServlet extends HttpServlet {
             manager.getGameMap().put(gameId, game);
             for (Integer id : userIds)
                 manager.getUserGameMap().put(id, game);
+            System.out.println(gameUserIds + "  -  " + currGameUserIdsList);
             resp.sendRedirect("http://localhost:3000");
         } else if (currGameUserIdsList.contains(userId)) {
             resp.sendRedirect("http://localhost:3000");

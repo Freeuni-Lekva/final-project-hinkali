@@ -12,7 +12,7 @@ function sendJoinRequest() {
     }).then(r => r.json()).then(r => {
         console.log(r);
         if (r.body === "created") {
-            window.location = ("/play?gameId=" + r.gameId);
+            setTimeout(() => window.location = ("/play?gameId=" + r.gameId), 1000)
         }
     }).catch(e => console.log(e));
 }
@@ -31,7 +31,7 @@ function sendLeaveRequest(redirect) {
             redirect()
         }
     }).catch(e => {
-            console.log(e)
+        console.log(e)
     });
 }
 
