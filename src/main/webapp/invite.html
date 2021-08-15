@@ -4,32 +4,37 @@
     <meta charset="UTF-8">
     <title>Invite Friends</title>
     <script src="javascript/invite.js"></script>
+    <link rel="stylesheet" href="css/invite.css">
 </head>
 <body>
+    <nav class="topbar">
+    </nav>
+        <button onclick="redirectToHome()" class="return_link" id="returnBtnId">
+            <img src="resources/back.svg" class="home_svg" alt="error">
+        </button>
     <div class="sendRequestDiv">
-        <h3> Invite a friend </h3>
+        <h2> Invite a friend </h2>
         <div class="inputDiv">
             <label>
                 <input type="text" placeholder="Username..." id="inviteInputID">
             </label>
-            <button onclick="sendJoinRequest()" id="btnId">Send</button>
+            <button onclick="sendJoinRequest()" class = "sendButton" id="btnId">Send</button>
         </div>
         <div class="status">
             <br>
-            <label id="statusLabelID">
-
-            </label>
+            <h3 class="statusLabelID"  id="statusLabelID">
+            
+            </h3>
         </div>
     </div>
     <br>
-    <hr>
+   
     <br>
     <div class="acceptRequestDiv">
-        <h3> Invite Requests</h3>
+        <h2 class="invreq"> Invite Requests</h2>
         <ul id="unorderedListId">
 
         </ul>
     </div>
-
 </body>
 </html>
