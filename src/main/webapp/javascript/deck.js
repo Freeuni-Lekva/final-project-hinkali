@@ -1,4 +1,4 @@
-window.onload = function (){
+window.onload = function () {
     let decks = document.getElementsByClassName("deck");
     Array.from(decks).forEach(deck => {
         deck.addEventListener("click", () => {
@@ -8,7 +8,7 @@ window.onload = function (){
                 userId: _userId,
                 deckId: _deckId
             });
-            window.location.replace("/home");
+            setTimeout(() => window.location.replace("/home"), 1_000)
         });
     });
 };

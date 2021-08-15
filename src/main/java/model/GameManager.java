@@ -1,6 +1,7 @@
 package model;
 
 import model.game.Game;
+import model.game.modified.GameModified;
 
 import java.util.HashMap;
 import java.util.List;
@@ -10,8 +11,8 @@ public class GameManager {
 
     public static final String GAME_MANAGER_ATTR = "gameManager";
 
-    private Map<Integer, Game> gameMap; // gameId -> Game
-    private Map<Integer, Game> userGameMap; // userId -> Game
+    private Map<Integer, GameModified> gameMap; // gameId -> Game
+    private Map<Integer, GameModified> userGameMap; // userId -> Game
     private Map<Integer, List<Integer>> gameUserIds; // gameId -> user ids
 
     public GameManager() {
@@ -20,11 +21,11 @@ public class GameManager {
         gameUserIds = new HashMap<>();
     }
 
-    public Map<Integer, Game> getGameMap() {
+    public Map<Integer, GameModified> getGameMap() {
         return gameMap;
     }
 
-    public Map<Integer, Game> getUserGameMap() {
+    public Map<Integer, GameModified> getUserGameMap() {
         return userGameMap;
     }
 

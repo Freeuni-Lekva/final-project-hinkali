@@ -5,7 +5,9 @@ const Row = ({row}) => {
     return <div className="Row">
         <div className="rowInfo">
             <div className="labelContainer">
-                <label className="rowPoints">0</label>
+                <label className="rowPoints">{row.cards.reduce((curr, next) => {
+                    return curr + next.rating
+                }, 0)}</label>
             </div>
         </div>
         <ul className="cards">

@@ -1,50 +1,113 @@
 import PlayerBoard from "./components/PlayerBoard";
 import PlayerHand from "./components/PlayerHand";
 import UserInfo from "./components/UserInfo";
-import './styles/App.css'
+import "./styles/App.css";
+import {useEffect, useState} from "react";
+import {
+    ENDPOINT_GAME_STATE,
+    ENDPOINT_PASS_ROUND,
+    ENDPOINT_PLAY_CARD,
+    ENDPOINT_PLAYER_INFO
+} from "./resources/endpoints";
+import axios from "axios";
 
-const gameState = {
+const usersTemplate = {
     player: {
-        name: 'me',
-        lives: 2,
-        board: [{type: 'close', cards:[{name: 'jerardo', rating: 15}, {name: 'extra', rating: 2}]}, {type: 'mid', cards:[{name: 'middle', rating: 4}]},
-            {type: 'far', cards: [{name: 'katapult', rating: 8}]}],
-        hand: [{name: 'cardInHandA', rating: 6}, {name: 'cardInHandB', rating: 5}],
-        isPlayerTurn: false,
-        deck: {size: 10},
-        isPlayer: true,
-        livesLeft: 2
+        username: '',
+        name: '',
+        surname: ''
     },
     opponent: {
-        name: 'opponent',
-        lives: 2,
-        board: [{type: 'far', cards:[{name: 'bigu', rating: 10}]}, {type: 'mid', cards:[{name: 'smol', rating: 2}, {name: 'extrasmol', rating: 1}]},
-            {type: 'close', cards: []}],
-        deck: {size: 11},
-        isPlayer: false,
-        livesLeft: 2
+        username: '',
+        name: '',
+        surname: ''
     }
 }
 
-
 function App() {
-    return (
+    const [needsUpdate, setNeedsUpdate] = useState(false);
+    const [users, setUsers] = useState(usersTemplate);
+    const [gameState, setGameState] = useState();
+    const [action, setAction] = useState();
+
+    useEffect(() => {
+        setTimeout(() => {
+            axios.get(ENDPOINT_PLAYER_INFO, {withCredentials: true})
+                .then(r => r.data)
+                .then(r => setUsers(prev => r))
+                .catch(e => console.error(e))
+        }, 1_000)
+
+        axios.get(ENDPOINT_GAME_STATE, {withCredentials: true})
+            .then(r => r.data)
+            .then(r => {
+                setGameState(prev => r)
+            })
+            .catch(e => console.error(e))
+            .finally(() => setNeedsUpdate(false))
+    }, []);
+
+    useEffect(() => {
+        if (!needsUpdate) return
+        axios.get(ENDPOINT_GAME_STATE, {withCredentials: true})
+            .then(r => r.data)
+            .then(r => {
+                setGameState(prev => r)
+            })
+            .catch(e => console.error(e))
+            .finally(() => setNeedsUpdate(false))
+    }, [needsUpdate]);
+
+
+    useEffect(() => {
+        if (!action) return
+        console.log(action.action);
+        switch (action.action) {
+            case 'passRound':
+                axios.get(ENDPOINT_PASS_ROUND, {withCredentials: true})
+                    .then(r => console.log(r))
+                    .catch(e => console.error(e))
+                    .finally(() => setNeedsUpdate(prev => true))
+                break
+            case 'playCard':
+                axios.get(ENDPOINT_PLAY_CARD(action.card.id), {withCredentials: true})
+                    .then(r => console.log(r))
+                    .catch(e => console.error(e))
+                    .finally(() => setNeedsUpdate(prev => true))
+        }
+    }, [action]);
+
+    setInterval(() => {
+        if (users.player.username === '') {
+            axios.get(ENDPOINT_PLAYER_INFO, {withCredentials: true})
+                .then(r => r.data)
+                .then(r => setUsers(prev => r))
+                .catch(e => console.error(e))
+        }
+        setNeedsUpdate(prev => true)
+    }, 5_000);
+
+    return !!gameState ? (
         <div className="App">
-        <div className="userInfoWrapper">
-            <UserInfo user={gameState.opponent}/>
-            <UserInfo user={gameState.player}/>
-        </div>
-        <div className="gameWrapper">
-            <div className="boardWrapper">
-                <PlayerBoard board={gameState.opponent.board}/>
-                <PlayerBoard board={gameState.player.board}/>
+            <div className="userInfoWrapper">
+                <UserInfo user={gameState.opponent} actual={users.opponent}/>
+                <UserInfo user={gameState.player} actual={users.player}/>
             </div>
-            <div className="playerControlWrapper">
-                <PlayerHand hand={gameState.player.hand}/>
+            <div className="gameWrapper">
+                <div className="boardWrapper">
+                    <PlayerBoard board={gameState.opponent.board} isPlayer={false} total={gameState.opponent.total}/>
+                    <PlayerBoard board={gameState.player.board} isPlayer={true} total={gameState.player.total}/>
+                </div>
+                <div className="playerControlWrapper">
+                    <PlayerHand
+                        hand={gameState.player.hand}
+                        setAction={setAction}
+                        isPlayerTurn={gameState.player.isPlayerTurn}
+                    />
+                </div>
             </div>
         </div>
-    </div>
-  );
+    ) : <div/>;
 }
 
 export default App;

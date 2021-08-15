@@ -22,7 +22,7 @@
     <div class="topbar">
         <form method="get" class="search">
             <input type="text" name="search_field" placeholder="Who are you looking for?" class="searchField"
-                maxlength="32">
+                maxlength="32" autocomplete="off">
             <button type="submit" name="search_button" class="searchBtn">Search</button>
         </form>
     </div>

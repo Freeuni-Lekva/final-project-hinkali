@@ -22,17 +22,19 @@ import java.io.IOException;
 public class MatchmakingServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        if (!ContextListener.TESTING){
-            if(SearchServlet.handleUnauthorizedCase(req, resp)) return;
+        if (req.getSession().getAttribute(UserBean.USER_ATTR) == null){
+            resp.sendRedirect("/");
+            return;
         }
+        System.out.println(req.getSession().getAttribute(UserBean.USER_ATTR));
 
         req.getRequestDispatcher("/matchmaking.html").forward(req, resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        if (!ContextListener.TESTING){
-            if(SearchServlet.handleUnauthorizedCase(req, resp)) return;
+        if (!ContextListener.TESTING) {
+            if (SearchServlet.handleUnauthorizedCase(req, resp)) return;
         }
 
         MatchmakingRequest request = processJsonBody(req);
@@ -48,7 +50,7 @@ public class MatchmakingServlet extends HttpServlet {
         StringBuilder sb = new StringBuilder();
         char[] charBuffer = new char[128];
         int bytesRead;
-        while ( (bytesRead = reader.read(charBuffer)) != -1 ) {
+        while ((bytesRead = reader.read(charBuffer)) != -1) {
             sb.append(charBuffer, 0, bytesRead);
         }
         String receivedData = sb.toString();
@@ -57,6 +59,6 @@ public class MatchmakingServlet extends HttpServlet {
 
         MatchmakingRequest result = gson.fromJson(receivedData, MatchmakingRequest.class);
         result.setId((Integer) req.getSession().getAttribute(UserBean.USER_ATTR));
-        return  result;
+        return result;
     }
 }

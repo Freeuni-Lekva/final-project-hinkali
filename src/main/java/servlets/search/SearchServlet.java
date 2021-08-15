@@ -27,12 +27,19 @@ public class SearchServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        if(!ContextListener.TESTING)
-            if (handleUnauthorizedCase(req, resp)) return;
-        if (handleFirstRequestCase(req, resp)) return;
+        if (req.getSession().getAttribute(UserBean.USER_ATTR) == null) {
+            resp.sendRedirect("/");
+            return;
+        }
 
+        req.setAttribute("isFirstRequest", false);
         String query = getQuery(req).trim();
-        if (isInvalidQuery(query)){
+        if (isInvalidQuery(query)) {
+            if (query.isEmpty()) {
+                req.setAttribute("isFirstRequest", true);
+                req.getRequestDispatcher("/WEB-INF/search/search.jsp").forward(req, resp);
+                return;
+            }
             req.setAttribute("isInvalidQuery", true);
             req.getRequestDispatcher("/WEB-INF/search/search.jsp").forward(req, resp);
             return;
@@ -40,22 +47,22 @@ public class SearchServlet extends HttpServlet {
 
         UserDAOInterface userDao = (UserDAOInterface) req.getServletContext().getAttribute(UserDAO.USER_DAO_ATTR);
         SearchResults results = getResults(req, userDao, query);
-        addTestUsers(results);
+//        addTestUsers(results);
 
         req.setAttribute(RESULTS_ATTRIBUTE, results);
         req.getRequestDispatcher("/WEB-INF/search/search.jsp").forward(req, resp);
     }
 
     private void addTestUsers(SearchResults results) {
-        if (ContextListener.TESTING){
+        if (ContextListener.TESTING) {
             for (int i = 0; i < 20; i++) {
-                results.addEntry(new UserBean("user" + i, "name" + i * i+4, "surname", "password", null));
+                results.addEntry(new UserBean("user" + i, "name" + i * i + 4, "surname", "password", null));
             }
         }
     }
 
     public static boolean handleUnauthorizedCase(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        if (req.getSession().getAttribute(UserBean.USER_ATTR) == null){
+        if (req.getSession().getAttribute(UserBean.USER_ATTR) == null) {
             resp.sendRedirect("/");
             return true;
         }
@@ -67,7 +74,7 @@ public class SearchServlet extends HttpServlet {
     }
 
     private boolean handleFirstRequestCase(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        if(isFirstRequest(req)){
+        if (isFirstRequest(req)) {
             req.setAttribute("isFirstRequest", true);
             req.getRequestDispatcher("/WEB-INF/search/search.jsp").forward(req, resp);
             return true;

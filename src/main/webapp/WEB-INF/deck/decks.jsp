@@ -10,6 +10,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page isELIgnored="false" %>
 <%
     DeckWrapperInterface deckDao = (DeckWrapperInterface) request.getServletContext().getAttribute(DeckWrapperDAO.DECK_WRAPPER_ATTR);
     int userId = Integer.parseInt(request.getParameter("id"));
