@@ -74,7 +74,7 @@ public class ProfileServlet extends HttpServlet {
         switch (Integer.parseInt(req.getParameter("buttonType"))){
             case 1:
                 mainButton( user,  checking,  friendDao,  req,  resp);
-                break;
+                return;
             case 2:
                 currId = Integer.parseInt(req.getParameter("currId"));
                 setCorrectAttr( user,  checking,  friendDao,  req);
@@ -89,11 +89,13 @@ public class ProfileServlet extends HttpServlet {
                 currId = Integer.parseInt(req.getParameter("currId"));
                 setCorrectAttr( user,  checking,  friendDao,  req);
                 friendDao.acceptFriendRequest(currId, user);
+                req.getRequestDispatcher("/WEB-INF/profile/profile.jsp").forward(req,resp);
                 break;
             case 5:
                 currId = Integer.parseInt(req.getParameter("currId"));
                 setCorrectAttr( user,  checking,  friendDao,  req);
                 friendDao.rejectFriendRequest(currId, user);
+                req.getRequestDispatcher("/WEB-INF/profile/profile.jsp").forward(req,resp);
                 break;
         }
     }
@@ -130,17 +132,19 @@ public class ProfileServlet extends HttpServlet {
             } else{
                 req.setAttribute(ProfileServlet.GO_TO_PARAM, ProfileServlet.GO_TO_STRANGER);
                 friendDao.rejectFriendRequest(checking,user);
+                req.getRequestDispatcher("/WEB-INF/profile/profile.jsp").forward(req,resp);
             }
         }else if(friendDao.amSender(user,checking)){
             req.setAttribute(ProfileServlet.GO_TO_PARAM, ProfileServlet.GO_TO_RECEIVER);
         } else {
-            req.setAttribute(ProfileServlet.GO_TO_PARAM, ProfileServlet.GO_TO_FRIEND);
+            req.setAttribute(ProfileServlet.GO_TO_PARAM, ProfileServlet.GO_TO_RECEIVER);
             addFriendAndRefresh(user, checking,friendDao,req,resp);
         }
     }
 
     private void removeFriendAndRefresh(int user, int checking, FriendDaoInterface friendDao, HttpServletRequest req,HttpServletResponse resp) throws ServletException, IOException {
         friendDao.unfriend(user,checking);
+       // resp.sendRedirect("/profile?id=" +user);
         req.getRequestDispatcher("/WEB-INF/profile/profile.jsp").forward(req,resp);
     }
 
